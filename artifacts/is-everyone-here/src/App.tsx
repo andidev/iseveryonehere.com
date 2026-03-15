@@ -4,12 +4,22 @@ import { detectLocale, translations } from "@/lib/i18n";
 import SetupPage from "@/pages/SetupPage";
 import CheckinPage from "@/pages/CheckinPage";
 import CheckoutPage from "@/pages/CheckoutPage";
+import PrivacyPage from "@/pages/PrivacyPage";
 
 const locale = detectLocale();
 const t = translations[locale];
 
+function isPrivacyHash(hash: string) {
+  return hash === "#privacy" || hash === "#privacy/";
+}
+
 function App() {
+  const [showPrivacy, setShowPrivacy] = useState(() =>
+    isPrivacyHash(window.location.hash)
+  );
+
   const [state, setState] = useState<AppState>(() => {
+    if (isPrivacyHash(window.location.hash)) return createInitialState();
     return getStateFromUrl() ?? createInitialState();
   });
 
@@ -19,13 +29,22 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const onPopState = () => {
-      const s = getStateFromUrl();
-      if (s) setState(s);
-    };
-    window.addEventListener("popstate", onPopState);
-    return () => window.removeEventListener("popstate", onPopState);
+    function onHashChange() {
+      if (isPrivacyHash(window.location.hash)) {
+        setShowPrivacy(true);
+      } else {
+        setShowPrivacy(false);
+        const s = getStateFromUrl();
+        if (s) setState(s);
+      }
+    }
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
+
+  if (showPrivacy) {
+    return <PrivacyPage />;
+  }
 
   if (state.phase === "setup") {
     return <SetupPage state={state} t={t} onStateChange={handleStateChange} />;
