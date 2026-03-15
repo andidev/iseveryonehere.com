@@ -1,7 +1,7 @@
 import { ChevronLeft, CheckCircle2, LogOut, AlertTriangle, RefreshCw } from "lucide-react";
-import { AppState, createInitialState } from "@/lib/state";
+import { AppState } from "@/lib/state";
 import { Translations } from "@/lib/i18n";
-import ResetMenu from "@/components/ResetMenu";
+import ResetButton from "@/components/ResetButton";
 
 interface Props {
   state: AppState;
@@ -13,7 +13,7 @@ export default function CheckoutPage({ state, t, onStateChange }: Props) {
   const herePeople = state.people.filter((p) => p.status === "here");
   const leftPeople = state.people.filter((p) => p.status === "left");
   const notHerePeople = state.people.filter((p) => p.status === "not_here");
-  const allLeft = herePeople.length === 0;
+  const allLeft = herePeople.length === 0 && leftPeople.length > 0;
 
   function markLeft(id: string) {
     const updated = state.people.map((p) =>
@@ -33,6 +33,18 @@ export default function CheckoutPage({ state, t, onStateChange }: Props) {
     onStateChange({ ...state, phase: "checkin" });
   }
 
+  function handleReset() {
+    const reset = state.people.map((p) =>
+      p.status === "left" ? { ...p, status: "here" as const } : p
+    );
+    onStateChange({ ...state, people: reset });
+  }
+
+  function handleRestart() {
+    const reset = state.people.map((p) => ({ ...p, status: "pending" as const }));
+    onStateChange({ phase: "checkin", people: reset, currentIndex: 0 });
+  }
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
@@ -45,12 +57,17 @@ export default function CheckoutPage({ state, t, onStateChange }: Props) {
           {t.checkout.backToCheckin}
         </button>
         <span className="text-sm font-semibold text-foreground">{t.appName}</span>
-        <ResetMenu t={t} state={state} onStateChange={onStateChange} />
+        <ResetButton
+          t={t}
+          confirmMessage={t.checkout.resetConfirm}
+          onConfirm={handleReset}
+          disabled={leftPeople.length === 0}
+        />
       </header>
 
       <main className="flex-1 max-w-xl mx-auto w-full px-4 py-6 flex flex-col gap-6">
         {/* All gone banner */}
-        {allLeft && herePeople.length === 0 && leftPeople.length > 0 && (
+        {allLeft && (
           <div className="flex flex-col items-center gap-3 py-6 px-4 rounded-xl bg-green-50 dark:bg-green-950 border border-green-200 dark:border-green-800 text-center">
             <CheckCircle2 className="w-10 h-10 text-green-600" />
             <p className="text-lg font-bold text-green-800 dark:text-green-300">
@@ -60,11 +77,11 @@ export default function CheckoutPage({ state, t, onStateChange }: Props) {
               {t.checkout.everyoneLeftHint}
             </p>
             <button
-              onClick={() => onStateChange(createInitialState())}
+              onClick={handleRestart}
               className="mt-1 flex items-center gap-2 px-5 py-2.5 rounded-lg bg-green-600 hover:bg-green-700 text-white font-semibold text-sm transition-colors active:opacity-80"
             >
               <RefreshCw className="w-4 h-4" />
-              {t.checkout.startNewEvent}
+              {t.checkout.restart}
             </button>
           </div>
         )}
@@ -81,7 +98,7 @@ export default function CheckoutPage({ state, t, onStateChange }: Props) {
               </span>
             </div>
             <p className="text-xs text-muted-foreground -mt-1">
-              Tap a name to mark them as left
+              {t.checkout.tapToMarkLeft}
             </p>
             <ul className="flex flex-col gap-2">
               {herePeople.map((person) => (
@@ -93,9 +110,7 @@ export default function CheckoutPage({ state, t, onStateChange }: Props) {
                     <span className="text-lg font-semibold text-foreground">
                       {person.name}
                     </span>
-                    <div className="flex items-center gap-1 text-muted-foreground">
-                      <LogOut className="w-4 h-4" />
-                    </div>
+                    <LogOut className="w-4 h-4 text-muted-foreground" />
                   </button>
                 </li>
               ))}

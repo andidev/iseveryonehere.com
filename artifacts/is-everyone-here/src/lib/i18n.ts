@@ -1,21 +1,19 @@
-export type Locale = "en" | "sv";
+export type Locale = "en" | "sv" | "es";
 
 export interface Translations {
   appName: string;
   setup: {
     title: string;
-    pasteLabel: string;
-    pastePlaceholder: string;
-    addPasteButton: string;
-    addOneLabel: string;
-    addOnePlaceholder: string;
-    addOneButton: string;
+    addPersonsLabel: string;
+    addPersonsPlaceholder: string;
+    addButton: string;
     noNamesError: string;
     startCheckin: string;
     peopleList: string;
     removePerson: string;
     noPeople: string;
     noPeopleHint: string;
+    resetConfirm: string;
   };
   checkin: {
     title: string;
@@ -30,6 +28,7 @@ export interface Translations {
     allDone: string;
     allDoneHint: string;
     pending: string;
+    resetConfirm: string;
   };
   checkout: {
     title: string;
@@ -40,14 +39,12 @@ export interface Translations {
     everyoneLeftHint: string;
     backToCheckin: string;
     notHereLabel: string;
-    startNewEvent: string;
+    restart: string;
+    tapToMarkLeft: string;
+    resetConfirm: string;
   };
   reset: {
-    button: string;
-    resetStateButton: string;
     confirmTitle: string;
-    confirmFull: string;
-    confirmState: string;
     cancel: string;
     confirmYes: string;
   };
@@ -61,18 +58,16 @@ const en: Translations = {
   appName: "Is Everyone Here",
   setup: {
     title: "Add Participants",
-    pasteLabel: "Paste a list (one name per line)",
-    pastePlaceholder: "Alice\nBob\nCharlie\n...",
-    addPasteButton: "Add from list",
-    addOneLabel: "Add one person",
-    addOnePlaceholder: "Name",
-    addOneButton: "Add",
+    addPersonsLabel: "Add persons",
+    addPersonsPlaceholder: "Type a name, or paste a list (one name per line)",
+    addButton: "Add",
     noNamesError: "Please enter at least one name.",
     startCheckin: "Start Check-In",
     peopleList: "Participants",
     removePerson: "Remove",
     noPeople: "No participants yet.",
     noPeopleHint: "Add names above to get started.",
+    resetConfirm: "This will clear the entire participants list. This cannot be undone.",
   },
   checkin: {
     title: "Check-In",
@@ -87,6 +82,7 @@ const en: Translations = {
     allDone: "All done!",
     allDoneHint: "Everyone has been marked.",
     pending: "pending",
+    resetConfirm: "This will reset all check-in statuses back to pending. Names will be kept.",
   },
   checkout: {
     title: "Check-Out",
@@ -97,14 +93,12 @@ const en: Translations = {
     everyoneLeftHint: "All participants have been checked out.",
     backToCheckin: "Back to Check-In",
     notHereLabel: "Not here",
-    startNewEvent: "Start New Event",
+    restart: "Restart",
+    tapToMarkLeft: "Tap a name to mark them as left",
+    resetConfirm: "This will move everyone back to 'still here'. The left list will be cleared.",
   },
   reset: {
-    button: "Reset Everything",
-    resetStateButton: "Reset Status Only",
     confirmTitle: "Are you sure?",
-    confirmFull: "This will clear all participants and all status. You will start fresh. This cannot be undone.",
-    confirmState: "This will reset the HERE / NOT HERE / LEFT status for all participants. Names will be kept. This cannot be undone.",
     cancel: "Cancel",
     confirmYes: "Yes, reset",
   },
@@ -118,18 +112,16 @@ const sv: Translations = {
   appName: "Är alla här",
   setup: {
     title: "Lägg till deltagare",
-    pasteLabel: "Klistra in en lista (ett namn per rad)",
-    pastePlaceholder: "Alice\nBob\nCarlos\n...",
-    addPasteButton: "Lägg till från lista",
-    addOneLabel: "Lägg till en person",
-    addOnePlaceholder: "Namn",
-    addOneButton: "Lägg till",
+    addPersonsLabel: "Lägg till personer",
+    addPersonsPlaceholder: "Skriv ett namn, eller klistra in en lista (ett namn per rad)",
+    addButton: "Lägg till",
     noNamesError: "Ange minst ett namn.",
     startCheckin: "Starta incheckning",
     peopleList: "Deltagare",
     removePerson: "Ta bort",
     noPeople: "Inga deltagare ännu.",
     noPeopleHint: "Lägg till namn ovan för att komma igång.",
+    resetConfirm: "Detta raderar hela deltagarlistan. Det går inte att ångra.",
   },
   checkin: {
     title: "Incheckning",
@@ -144,6 +136,7 @@ const sv: Translations = {
     allDone: "Alla klara!",
     allDoneHint: "Alla har markerats.",
     pending: "väntande",
+    resetConfirm: "Detta återställer alla incheckningsstatus till väntande. Namnen behålls.",
   },
   checkout: {
     title: "Utcheckning",
@@ -154,14 +147,12 @@ const sv: Translations = {
     everyoneLeftHint: "Alla deltagare har checkats ut.",
     backToCheckin: "Tillbaka till incheckning",
     notHereLabel: "Inte här",
-    startNewEvent: "Starta nytt evenemang",
+    restart: "Starta om",
+    tapToMarkLeft: "Tryck på ett namn för att markera som lämnat",
+    resetConfirm: "Detta flyttar alla tillbaka till 'fortfarande här'. Lämnat-listan rensas.",
   },
   reset: {
-    button: "Återställ allt",
-    resetStateButton: "Återställ status",
     confirmTitle: "Är du säker?",
-    confirmFull: "Detta raderar alla deltagare och all status. Du börjar om från början. Det går inte att ångra.",
-    confirmState: "Detta återställer HÄR / INTE HÄR / HAR LÄMNAT-status för alla deltagare. Namnen behålls. Det går inte att ångra.",
     cancel: "Avbryt",
     confirmYes: "Ja, återställ",
   },
@@ -171,10 +162,65 @@ const sv: Translations = {
   },
 };
 
-export const translations: Record<Locale, Translations> = { en, sv };
+const es: Translations = {
+  appName: "¿Están todos aquí?",
+  setup: {
+    title: "Agregar participantes",
+    addPersonsLabel: "Agregar personas",
+    addPersonsPlaceholder: "Escribe un nombre, o pega una lista (un nombre por línea)",
+    addButton: "Agregar",
+    noNamesError: "Por favor ingresa al menos un nombre.",
+    startCheckin: "Iniciar registro",
+    peopleList: "Participantes",
+    removePerson: "Eliminar",
+    noPeople: "Aún no hay participantes.",
+    noPeopleHint: "Agrega nombres arriba para comenzar.",
+    resetConfirm: "Esto eliminará toda la lista de participantes. No se puede deshacer.",
+  },
+  checkin: {
+    title: "Registro",
+    hereButton: "PRESENTE",
+    notHereButton: "AUSENTE",
+    previous: "Anterior",
+    next: "Siguiente",
+    progressOf: "de",
+    done: "Listo",
+    goToCheckout: "Ir a salida",
+    backToSetup: "Volver a configuración",
+    allDone: "¡Todos listos!",
+    allDoneHint: "Todos han sido marcados.",
+    pending: "pendiente",
+    resetConfirm: "Esto restablecerá todos los estados de registro a pendiente. Los nombres se conservarán.",
+  },
+  checkout: {
+    title: "Salida",
+    hereLabel: "Todavía aquí",
+    leftLabel: "Se fue",
+    noOneLeft: "Nadie se ha ido aún.",
+    everyoneLeft: "¡Todos se fueron!",
+    everyoneLeftHint: "Todos los participantes han salido.",
+    backToCheckin: "Volver al registro",
+    notHereLabel: "No estuvo",
+    restart: "Reiniciar",
+    tapToMarkLeft: "Toca un nombre para marcarlo como salido",
+    resetConfirm: "Esto moverá a todos de vuelta a 'todavía aquí'. La lista de salidos se borrará.",
+  },
+  reset: {
+    confirmTitle: "¿Estás seguro?",
+    cancel: "Cancelar",
+    confirmYes: "Sí, restablecer",
+  },
+  common: {
+    person: "persona",
+    persons: "personas",
+  },
+};
+
+export const translations: Record<Locale, Translations> = { en, sv, es };
 
 export function detectLocale(): Locale {
   const lang = navigator.language?.toLowerCase() ?? "en";
   if (lang.startsWith("sv")) return "sv";
+  if (lang.startsWith("es")) return "es";
   return "en";
 }

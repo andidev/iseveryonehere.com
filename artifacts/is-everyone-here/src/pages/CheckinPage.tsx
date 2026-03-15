@@ -1,7 +1,7 @@
 import { CheckCircle2, XCircle, ChevronLeft, ChevronRight, Settings, ArrowRight } from "lucide-react";
 import { AppState, PersonStatus } from "@/lib/state";
 import { Translations } from "@/lib/i18n";
-import ResetMenu from "@/components/ResetMenu";
+import ResetButton from "@/components/ResetButton";
 
 interface Props {
   state: AppState;
@@ -20,7 +20,6 @@ export default function CheckinPage({ state, t, onStateChange }: Props) {
     const updated = people.map((p, i) =>
       i === currentIndex ? { ...p, status } : p
     );
-    // Auto-advance if there's a next person
     const nextIndex =
       currentIndex < people.length - 1 ? currentIndex + 1 : currentIndex;
     onStateChange({ ...state, people: updated, currentIndex: nextIndex });
@@ -41,14 +40,12 @@ export default function CheckinPage({ state, t, onStateChange }: Props) {
     onStateChange({ ...state, phase: "setup" });
   }
 
-  const handledCount = people.filter((p) => p.status !== "pending").length;
+  function handleReset() {
+    const reset = people.map((p) => ({ ...p, status: "pending" as const }));
+    onStateChange({ ...state, people: reset, currentIndex: 0 });
+  }
 
-  const statusColors: Record<PersonStatus, string> = {
-    pending: "text-muted-foreground",
-    here: "text-green-600",
-    not_here: "text-red-500",
-    left: "text-blue-500",
-  };
+  const handledCount = people.filter((p) => p.status !== "pending").length;
 
   const statusIcon = (status: PersonStatus) => {
     if (status === "here") return <CheckCircle2 className="w-4 h-4 text-green-600" />;
@@ -70,7 +67,11 @@ export default function CheckinPage({ state, t, onStateChange }: Props) {
         <span className="text-xs text-muted-foreground font-medium">
           {handledCount} / {people.length}
         </span>
-        <ResetMenu t={t} state={state} onStateChange={onStateChange} />
+        <ResetButton
+          t={t}
+          confirmMessage={t.checkin.resetConfirm}
+          onConfirm={handleReset}
+        />
       </header>
 
       {/* Progress bar */}
@@ -115,11 +116,6 @@ export default function CheckinPage({ state, t, onStateChange }: Props) {
             <p className="text-4xl font-bold text-foreground leading-tight break-words">
               {current.name}
             </p>
-            {current.status !== "pending" && (
-              <p className={`mt-2 text-sm font-medium ${statusColors[current.status]}`}>
-                {current.status === "here" ? t.checkin.hereButton : t.checkin.notHereButton}
-              </p>
-            )}
           </div>
         </div>
 

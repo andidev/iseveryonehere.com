@@ -1,8 +1,8 @@
-import { useState, useRef } from "react";
-import { Plus, Trash2, Users, ClipboardList, ChevronRight } from "lucide-react";
+import { useState } from "react";
+import { Plus, Trash2, Users, ChevronRight } from "lucide-react";
 import { AppState, Person, generateId } from "@/lib/state";
 import { Translations } from "@/lib/i18n";
-import ResetMenu from "@/components/ResetMenu";
+import ResetButton from "@/components/ResetButton";
 
 interface Props {
   state: AppState;
@@ -11,41 +11,25 @@ interface Props {
 }
 
 export default function SetupPage({ state, t, onStateChange }: Props) {
-  const [pasteText, setPasteText] = useState("");
-  const [singleName, setSingleName] = useState("");
-  const [pasteError, setPasteError] = useState("");
-  const singleInputRef = useRef<HTMLInputElement>(null);
+  const [inputText, setInputText] = useState("");
+  const [error, setError] = useState("");
 
-  function addFromPaste() {
-    const names = pasteText
+  function addPersons() {
+    const names = inputText
       .split("\n")
       .map((n) => n.trim())
       .filter((n) => n.length > 0);
     if (names.length === 0) {
-      setPasteError(t.setup.noNamesError);
+      setError(t.setup.noNamesError);
       return;
     }
-    setPasteError("");
+    setError("");
     const existing = new Set(state.people.map((p) => p.name.toLowerCase()));
     const newPeople: Person[] = names
       .filter((n) => !existing.has(n.toLowerCase()))
       .map((name) => ({ id: generateId(), name, status: "pending" }));
     onStateChange({ ...state, people: [...state.people, ...newPeople] });
-    setPasteText("");
-  }
-
-  function addSingle() {
-    const name = singleName.trim();
-    if (!name) return;
-    const exists = state.people.some(
-      (p) => p.name.toLowerCase() === name.toLowerCase()
-    );
-    if (!exists) {
-      const newPerson: Person = { id: generateId(), name, status: "pending" };
-      onStateChange({ ...state, people: [...state.people, newPerson] });
-    }
-    setSingleName("");
-    singleInputRef.current?.focus();
+    setInputText("");
   }
 
   function removePerson(id: string) {
@@ -60,6 +44,10 @@ export default function SetupPage({ state, t, onStateChange }: Props) {
     onStateChange({ ...state, phase: "checkin", currentIndex: 0 });
   }
 
+  function handleReset() {
+    onStateChange({ phase: "setup", people: [], currentIndex: 0 });
+  }
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
@@ -68,61 +56,44 @@ export default function SetupPage({ state, t, onStateChange }: Props) {
           <Users className="w-5 h-5 text-primary" />
           <h1 className="text-lg font-bold text-foreground">{t.appName}</h1>
         </div>
-        <ResetMenu t={t} state={state} onStateChange={onStateChange} />
+        <ResetButton
+          t={t}
+          confirmMessage={t.setup.resetConfirm}
+          onConfirm={handleReset}
+          disabled={state.people.length === 0}
+        />
       </header>
 
       <main className="flex-1 max-w-xl mx-auto w-full px-4 py-6 flex flex-col gap-6">
-        {/* Paste section */}
+        {/* Add persons section */}
         <section className="flex flex-col gap-3">
           <label className="text-sm font-semibold text-foreground">
-            {t.setup.pasteLabel}
+            {t.setup.addPersonsLabel}
           </label>
           <textarea
             className="w-full min-h-[120px] rounded-lg border border-border bg-card text-foreground px-3 py-2 text-sm resize-y focus:outline-none focus:ring-2 focus:ring-ring"
-            placeholder={t.setup.pastePlaceholder}
-            value={pasteText}
+            placeholder={t.setup.addPersonsPlaceholder}
+            value={inputText}
             onChange={(e) => {
-              setPasteText(e.target.value);
-              setPasteError("");
+              setInputText(e.target.value);
+              setError("");
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey && !inputText.includes("\n")) {
+                e.preventDefault();
+                addPersons();
+              }
             }}
           />
-          {pasteError && (
-            <p className="text-destructive text-xs">{pasteError}</p>
-          )}
+          {error && <p className="text-destructive text-xs">{error}</p>}
           <button
-            onClick={addFromPaste}
-            disabled={!pasteText.trim()}
-            className="flex items-center gap-2 justify-center w-full py-2.5 rounded-lg bg-secondary text-secondary-foreground font-medium text-sm disabled:opacity-40 active:opacity-80 transition-opacity"
+            onClick={addPersons}
+            disabled={!inputText.trim()}
+            className="flex items-center gap-2 justify-center w-full py-3 rounded-lg bg-secondary text-secondary-foreground font-medium text-sm disabled:opacity-40 active:opacity-80 transition-opacity"
           >
-            <ClipboardList className="w-4 h-4" />
-            {t.setup.addPasteButton}
+            <Plus className="w-4 h-4" />
+            {t.setup.addButton}
           </button>
-        </section>
-
-        {/* Single add */}
-        <section className="flex flex-col gap-3">
-          <label className="text-sm font-semibold text-foreground">
-            {t.setup.addOneLabel}
-          </label>
-          <div className="flex gap-2">
-            <input
-              ref={singleInputRef}
-              type="text"
-              className="flex-1 rounded-lg border border-border bg-card text-foreground px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-              placeholder={t.setup.addOnePlaceholder}
-              value={singleName}
-              onChange={(e) => setSingleName(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && addSingle()}
-            />
-            <button
-              onClick={addSingle}
-              disabled={!singleName.trim()}
-              className="flex items-center gap-1 px-4 py-2.5 rounded-lg bg-secondary text-secondary-foreground font-medium text-sm disabled:opacity-40 active:opacity-80 transition-opacity"
-            >
-              <Plus className="w-4 h-4" />
-              {t.setup.addOneButton}
-            </button>
-          </div>
         </section>
 
         {/* People list */}
@@ -132,7 +103,8 @@ export default function SetupPage({ state, t, onStateChange }: Props) {
               {t.setup.peopleList}
             </h2>
             <span className="text-xs text-muted-foreground">
-              {state.people.length} {state.people.length === 1 ? t.common.person : t.common.persons}
+              {state.people.length}{" "}
+              {state.people.length === 1 ? t.common.person : t.common.persons}
             </span>
           </div>
 
