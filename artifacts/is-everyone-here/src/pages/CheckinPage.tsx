@@ -1,0 +1,184 @@
+import { CheckCircle2, XCircle, ChevronLeft, ChevronRight, Settings, ArrowRight } from "lucide-react";
+import { AppState, PersonStatus } from "@/lib/state";
+import { Translations } from "@/lib/i18n";
+import ResetMenu from "@/components/ResetMenu";
+
+interface Props {
+  state: AppState;
+  t: Translations;
+  onStateChange: (state: AppState) => void;
+}
+
+export default function CheckinPage({ state, t, onStateChange }: Props) {
+  const { people, currentIndex } = state;
+  const current = people[currentIndex];
+  const prev = currentIndex > 0 ? people[currentIndex - 1] : null;
+  const next = currentIndex < people.length - 1 ? people[currentIndex + 1] : null;
+  const allHandled = people.every((p) => p.status !== "pending");
+
+  function markCurrent(status: PersonStatus) {
+    const updated = people.map((p, i) =>
+      i === currentIndex ? { ...p, status } : p
+    );
+    // Auto-advance if there's a next person
+    const nextIndex =
+      currentIndex < people.length - 1 ? currentIndex + 1 : currentIndex;
+    onStateChange({ ...state, people: updated, currentIndex: nextIndex });
+  }
+
+  function goTo(index: number) {
+    const currentHandled = people[currentIndex].status !== "pending";
+    if (index > currentIndex && !currentHandled) return;
+    if (index < 0 || index >= people.length) return;
+    onStateChange({ ...state, currentIndex: index });
+  }
+
+  function goToCheckout() {
+    onStateChange({ ...state, phase: "checkout" });
+  }
+
+  function backToSetup() {
+    onStateChange({ ...state, phase: "setup" });
+  }
+
+  const handledCount = people.filter((p) => p.status !== "pending").length;
+
+  const statusColors: Record<PersonStatus, string> = {
+    pending: "text-muted-foreground",
+    here: "text-green-600",
+    not_here: "text-red-500",
+    left: "text-blue-500",
+  };
+
+  const statusIcon = (status: PersonStatus) => {
+    if (status === "here") return <CheckCircle2 className="w-4 h-4 text-green-600" />;
+    if (status === "not_here") return <XCircle className="w-4 h-4 text-red-500" />;
+    return null;
+  };
+
+  return (
+    <div className="min-h-screen bg-background flex flex-col">
+      {/* Header */}
+      <header className="sticky top-0 z-10 bg-background border-b border-border px-4 py-3 flex items-center justify-between">
+        <button
+          onClick={backToSetup}
+          className="flex items-center gap-1 text-muted-foreground text-sm hover:text-foreground transition-colors"
+        >
+          <Settings className="w-4 h-4" />
+          {t.checkin.backToSetup}
+        </button>
+        <span className="text-xs text-muted-foreground font-medium">
+          {handledCount} / {people.length}
+        </span>
+        <ResetMenu t={t} state={state} onStateChange={onStateChange} />
+      </header>
+
+      {/* Progress bar */}
+      <div className="w-full h-1 bg-muted">
+        <div
+          className="h-full bg-primary transition-all duration-300"
+          style={{ width: `${(handledCount / people.length) * 100}%` }}
+        />
+      </div>
+
+      <main className="flex-1 flex flex-col items-center justify-center px-4 py-6 gap-6 select-none">
+        {allHandled && (
+          <div className="text-center mb-2">
+            <p className="text-2xl font-bold text-foreground">{t.checkin.allDone}</p>
+            <p className="text-sm text-muted-foreground">{t.checkin.allDoneHint}</p>
+          </div>
+        )}
+
+        {/* Previous person */}
+        {prev ? (
+          <button
+            onClick={() => goTo(currentIndex - 1)}
+            className="w-full max-w-sm flex items-center justify-between px-5 py-3 rounded-xl bg-muted/50 border border-border text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+          >
+            <ChevronLeft className="w-4 h-4" />
+            <div className="flex items-center gap-2">
+              {statusIcon(prev.status)}
+              <span className="text-base font-medium">{prev.name}</span>
+            </div>
+            <ChevronLeft className="w-4 h-4 opacity-0" />
+          </button>
+        ) : (
+          <div className="h-14 w-full max-w-sm" />
+        )}
+
+        {/* Current person */}
+        <div className="w-full max-w-sm flex flex-col items-center gap-2">
+          <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">
+            {t.checkin.title}
+          </p>
+          <div className="w-full text-center px-4 py-6 rounded-2xl bg-card border-2 border-primary shadow-lg">
+            <p className="text-4xl font-bold text-foreground leading-tight break-words">
+              {current.name}
+            </p>
+            {current.status !== "pending" && (
+              <p className={`mt-2 text-sm font-medium ${statusColors[current.status]}`}>
+                {current.status === "here" ? t.checkin.hereButton : t.checkin.notHereButton}
+              </p>
+            )}
+          </div>
+        </div>
+
+        {/* Action buttons */}
+        <div className="w-full max-w-sm flex gap-3">
+          <button
+            onClick={() => markCurrent("not_here")}
+            className={`flex-1 py-5 rounded-xl font-bold text-xl transition-all active:scale-95 flex flex-col items-center gap-1
+              ${current.status === "not_here"
+                ? "bg-red-500 text-white ring-4 ring-red-300"
+                : "bg-red-100 text-red-600 dark:bg-red-950 dark:text-red-400"
+              }`}
+          >
+            <XCircle className="w-7 h-7" />
+            {t.checkin.notHereButton}
+          </button>
+          <button
+            onClick={() => markCurrent("here")}
+            className={`flex-1 py-5 rounded-xl font-bold text-xl transition-all active:scale-95 flex flex-col items-center gap-1
+              ${current.status === "here"
+                ? "bg-green-500 text-white ring-4 ring-green-300"
+                : "bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-400"
+              }`}
+          >
+            <CheckCircle2 className="w-7 h-7" />
+            {t.checkin.hereButton}
+          </button>
+        </div>
+
+        {/* Next person */}
+        {next ? (
+          <button
+            onClick={() => goTo(currentIndex + 1)}
+            disabled={current.status === "pending"}
+            className="w-full max-w-sm flex items-center justify-between px-5 py-3 rounded-xl bg-muted/50 border border-border text-muted-foreground hover:text-foreground hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+          >
+            <ChevronRight className="w-4 h-4 opacity-0" />
+            <div className="flex items-center gap-2">
+              {statusIcon(next.status)}
+              <span className="text-base font-medium">{next.name}</span>
+            </div>
+            <ChevronRight className="w-4 h-4" />
+          </button>
+        ) : (
+          <div className="h-14 w-full max-w-sm" />
+        )}
+      </main>
+
+      {/* Go to checkout */}
+      <div className="sticky bottom-0 bg-background border-t border-border px-4 py-4">
+        <button
+          onClick={goToCheckout}
+          disabled={!allHandled}
+          className="w-full max-w-xl mx-auto flex items-center justify-center gap-2 py-4 rounded-xl bg-primary text-primary-foreground font-bold text-lg disabled:opacity-40 active:opacity-80 transition-opacity"
+        >
+          {t.checkin.goToCheckout}
+          <ArrowRight className="w-5 h-5" />
+        </button>
+      </div>
+    </div>
+  );
+}
