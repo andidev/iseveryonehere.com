@@ -15,6 +15,7 @@ export interface Translations {
     noPeopleHint: string;
     resetConfirm: string;
     alreadyAdded: string;
+    sortByName: string;
   };
   checkin: {
     title: string;
@@ -73,6 +74,7 @@ const en: Translations = {
     noPeopleHint: "Add names above to get started.",
     resetConfirm: "This will clear the entire participants list. This cannot be undone.",
     alreadyAdded: "Already in the list",
+    sortByName: "Sort A–Z",
   },
   checkin: {
     title: "Check-In",
@@ -131,6 +133,7 @@ const sv: Translations = {
     noPeopleHint: "Lägg till namn ovan för att komma igång.",
     resetConfirm: "Detta raderar hela deltagarlistan. Det går inte att ångra.",
     alreadyAdded: "Redan i listan",
+    sortByName: "Sortera A–Ö",
   },
   checkin: {
     title: "Incheckning",
@@ -189,6 +192,7 @@ const es: Translations = {
     noPeopleHint: "Agrega nombres arriba para comenzar.",
     resetConfirm: "Esto eliminará toda la lista de participantes. No se puede deshacer.",
     alreadyAdded: "Ya está en la lista",
+    sortByName: "Ordenar A–Z",
   },
   checkin: {
     title: "Registro",

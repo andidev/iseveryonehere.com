@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Plus, Trash2, Users, ChevronRight } from "lucide-react";
+import { Plus, Trash2, Users, ChevronRight, ArrowUpAZ, GripVertical } from "lucide-react";
 import { AppState, Person, generateId } from "@/lib/state";
 import { Translations } from "@/lib/i18n";
 import ResetButton from "@/components/ResetButton";
@@ -11,11 +11,27 @@ interface Props {
   onStateChange: (state: AppState) => void;
 }
 
+function capitalizeName(name: string): string {
+  return name
+    .split(" ")
+    .map((w) => (w ? w.charAt(0).toUpperCase() + w.slice(1) : w))
+    .join(" ");
+}
+
+function isSorted(people: Person[]): boolean {
+  for (let i = 1; i < people.length; i++) {
+    if (people[i].name.localeCompare(people[i - 1].name) < 0) return false;
+  }
+  return true;
+}
+
 export default function SetupPage({ state, t, onStateChange }: Props) {
   const [inputText, setInputText] = useState("");
   const [error, setError] = useState("");
   const [dupMessage, setDupMessage] = useState("");
+  const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
   const dupTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const dragIndexRef = useRef<number | null>(null);
 
   function showDup(names: string[]) {
     if (dupTimerRef.current) clearTimeout(dupTimerRef.current);
@@ -26,7 +42,7 @@ export default function SetupPage({ state, t, onStateChange }: Props) {
   function addPersons() {
     const names = inputText
       .split("\n")
-      .map((n) => n.trim())
+      .map((n) => capitalizeName(n.trim()))
       .filter((n) => n.length > 0);
     if (names.length === 0) {
       setError(t.setup.noNamesError);
@@ -40,13 +56,8 @@ export default function SetupPage({ state, t, onStateChange }: Props) {
       .map((name) => ({ id: generateId(), name, status: "pending" }));
 
     if (dups.length > 0) showDup(dups);
-    if (newPeople.length > 0) {
-      onStateChange({ ...state, people: [...state.people, ...newPeople] });
-      setInputText("");
-    } else {
-      // All were dups — clear input anyway
-      setInputText("");
-    }
+    onStateChange({ ...state, people: [...state.people, ...newPeople] });
+    setInputText("");
   }
 
   function removePerson(id: string) {
@@ -54,6 +65,13 @@ export default function SetupPage({ state, t, onStateChange }: Props) {
       ...state,
       people: state.people.filter((p) => p.id !== id),
     });
+  }
+
+  function sortPeople() {
+    const sorted = [...state.people].sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
+    onStateChange({ ...state, people: sorted });
   }
 
   function startCheckin() {
@@ -64,6 +82,37 @@ export default function SetupPage({ state, t, onStateChange }: Props) {
   function handleReset() {
     onStateChange({ phase: "setup", people: [], currentIndex: 0 });
   }
+
+  // Drag-and-drop handlers
+  function onDragStart(index: number) {
+    dragIndexRef.current = index;
+  }
+
+  function onDragOver(e: React.DragEvent, index: number) {
+    e.preventDefault();
+    setDragOverIndex(index);
+  }
+
+  function onDrop(targetIndex: number) {
+    const fromIndex = dragIndexRef.current;
+    if (fromIndex === null || fromIndex === targetIndex) {
+      setDragOverIndex(null);
+      return;
+    }
+    const people = [...state.people];
+    const [moved] = people.splice(fromIndex, 1);
+    people.splice(targetIndex, 0, moved);
+    dragIndexRef.current = null;
+    setDragOverIndex(null);
+    onStateChange({ ...state, people });
+  }
+
+  function onDragEnd() {
+    dragIndexRef.current = null;
+    setDragOverIndex(null);
+  }
+
+  const sorted = state.people.length < 2 || isSorted(state.people);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -125,10 +174,21 @@ export default function SetupPage({ state, t, onStateChange }: Props) {
             <h2 className="text-sm font-semibold text-foreground">
               {t.setup.peopleList}
             </h2>
-            <span className="text-xs text-muted-foreground">
-              {state.people.length}{" "}
-              {state.people.length === 1 ? t.common.person : t.common.persons}
-            </span>
+            <div className="flex items-center gap-2">
+              {!sorted && (
+                <button
+                  onClick={sortPeople}
+                  className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <ArrowUpAZ className="w-3.5 h-3.5" />
+                  {t.setup.sortByName}
+                </button>
+              )}
+              <span className="text-xs text-muted-foreground">
+                {state.people.length}{" "}
+                {state.people.length === 1 ? t.common.person : t.common.persons}
+              </span>
+            </div>
           </div>
 
           {state.people.length === 0 ? (
@@ -139,15 +199,28 @@ export default function SetupPage({ state, t, onStateChange }: Props) {
             </div>
           ) : (
             <ul className="flex flex-col gap-1">
-              {state.people.map((person) => (
+              {state.people.map((person, index) => (
                 <li
                   key={person.id}
-                  className="flex items-center justify-between px-3 py-2.5 rounded-lg bg-card border border-border"
+                  draggable
+                  onDragStart={() => onDragStart(index)}
+                  onDragOver={(e) => onDragOver(e, index)}
+                  onDrop={() => onDrop(index)}
+                  onDragEnd={onDragEnd}
+                  className={`flex items-center justify-between px-3 py-2.5 rounded-lg bg-card border transition-colors cursor-grab active:cursor-grabbing select-none
+                    ${dragOverIndex === index && dragIndexRef.current !== index
+                      ? "border-primary bg-primary/5"
+                      : "border-border"
+                    }`}
                 >
-                  <span className="text-sm text-foreground">{person.name}</span>
+                  <div className="flex items-center gap-2 flex-1 min-w-0">
+                    <GripVertical className="w-4 h-4 text-muted-foreground/40 flex-shrink-0" />
+                    <span className="text-sm text-foreground truncate">{person.name}</span>
+                  </div>
                   <button
                     onClick={() => removePerson(person.id)}
-                    className="p-1 rounded text-muted-foreground hover:text-destructive transition-colors"
+                    onMouseDown={(e) => e.stopPropagation()}
+                    className="p-1 rounded text-muted-foreground hover:text-destructive transition-colors flex-shrink-0"
                     aria-label={t.setup.removePerson}
                   >
                     <Trash2 className="w-4 h-4" />
