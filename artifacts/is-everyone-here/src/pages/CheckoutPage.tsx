@@ -122,31 +122,6 @@ export default function CheckoutPage({ state, t, onStateChange }: Props) {
           </section>
         )}
 
-        {/* Not here section */}
-        {notHerePeople.length > 0 && (
-          <section className="flex flex-col gap-2">
-            <div className="flex items-center gap-2">
-              <AlertTriangle className="w-4 h-4 text-amber-500" />
-              <h2 className="text-sm font-semibold text-muted-foreground">
-                {t.checkout.notHereLabel}
-              </h2>
-              <span className="text-xs bg-amber-100 dark:bg-amber-900 text-amber-700 dark:text-amber-300 rounded-full px-2 py-0.5 font-medium">
-                {notHerePeople.length}
-              </span>
-            </div>
-            <ul className="flex flex-col gap-1">
-              {notHerePeople.map((person) => (
-                <li
-                  key={person.id}
-                  className="flex items-center px-3 py-2.5 rounded-lg bg-muted/30 border border-border/50"
-                >
-                  <span className="text-sm text-muted-foreground">{person.name}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-
         {/* Left section — subtle */}
         {leftPeople.length > 0 && (
           <section className="flex flex-col gap-2">
@@ -170,6 +145,31 @@ export default function CheckoutPage({ state, t, onStateChange }: Props) {
                     </span>
                     <CheckCircle2 className="w-4 h-4 text-green-500" />
                   </button>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {/* Not here section — always at the bottom */}
+        {notHerePeople.length > 0 && (
+          <section className="flex flex-col gap-2">
+            <div className="flex items-center gap-2">
+              <AlertTriangle className="w-4 h-4 text-amber-500" />
+              <h2 className="text-sm font-semibold text-muted-foreground">
+                {t.checkout.notHereLabel}
+              </h2>
+              <span className="text-xs bg-amber-100 dark:bg-amber-900 text-amber-700 dark:text-amber-300 rounded-full px-2 py-0.5 font-medium">
+                {notHerePeople.length}
+              </span>
+            </div>
+            <ul className="flex flex-col gap-1">
+              {notHerePeople.map((person) => (
+                <li
+                  key={person.id}
+                  className="flex items-center px-3 py-2.5 rounded-lg bg-muted/30 border border-border/50"
+                >
+                  <span className="text-sm text-muted-foreground">{person.name}</span>
                 </li>
               ))}
             </ul>
