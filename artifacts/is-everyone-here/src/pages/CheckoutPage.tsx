@@ -59,7 +59,7 @@ export default function CheckoutPage({ state, t, onStateChange }: Props) {
         </button>
         <span className="text-sm font-semibold text-foreground">{t.appName}</span>
         <div className="flex items-center gap-1">
-          <ShareButton t={t} />
+          <ShareButton t={t} state={state} />
           <ResetButton
             t={t}
             confirmMessage={t.checkout.resetConfirm}

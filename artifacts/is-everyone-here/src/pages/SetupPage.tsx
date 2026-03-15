@@ -123,7 +123,7 @@ export default function SetupPage({ state, t, onStateChange }: Props) {
           <h1 className="text-lg font-bold text-foreground">{t.appName}</h1>
         </div>
         <div className="flex items-center gap-1">
-          <ShareButton t={t} />
+          <ShareButton t={t} state={state} />
           <ResetButton
             t={t}
             confirmMessage={t.setup.resetConfirm}

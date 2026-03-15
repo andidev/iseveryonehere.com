@@ -54,8 +54,11 @@ export interface Translations {
     person: string;
     persons: string;
     share: string;
-    copied: string;
-    shareText: string;
+    shareModalTitle: string;
+    shareList: string;
+    shareListHint: string;
+    shareWithStatus: string;
+    shareWithStatusHint: string;
   };
 }
 
@@ -113,8 +116,11 @@ const en: Translations = {
     person: "person",
     persons: "persons",
     share: "Share",
-    copied: "Copied!",
-    shareText: "Check the attendance status here:",
+    shareModalTitle: "What do you want to share?",
+    shareList: "Share the list",
+    shareListHint: "Names only, no check-in statuses",
+    shareWithStatus: "Share with current statuses",
+    shareWithStatusHint: "Full attendance state included",
   },
 };
 
@@ -172,8 +178,11 @@ const sv: Translations = {
     person: "person",
     persons: "personer",
     share: "Dela",
-    copied: "Kopierat!",
-    shareText: "Se närvaron här:",
+    shareModalTitle: "Vad vill du dela?",
+    shareList: "Dela listan",
+    shareListHint: "Endast namn, inga incheckningsstatusar",
+    shareWithStatus: "Dela med aktuella statusar",
+    shareWithStatusHint: "Fullständig närvaro inkluderas",
   },
 };
 
@@ -231,8 +240,11 @@ const es: Translations = {
     person: "persona",
     persons: "personas",
     share: "Compartir",
-    copied: "¡Copiado!",
-    shareText: "Consulta la asistencia aquí:",
+    shareModalTitle: "¿Qué quieres compartir?",
+    shareList: "Compartir la lista",
+    shareListHint: "Solo nombres, sin estados de registro",
+    shareWithStatus: "Compartir con estados actuales",
+    shareWithStatusHint: "Incluye el estado completo de asistencia",
   },
 };
 

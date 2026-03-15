@@ -69,7 +69,7 @@ export default function CheckinPage({ state, t, onStateChange }: Props) {
           {handledCount} / {people.length}
         </span>
         <div className="flex items-center gap-1">
-          <ShareButton t={t} />
+          <ShareButton t={t} state={state} />
           <ResetButton
             t={t}
             confirmMessage={t.checkin.resetConfirm}
