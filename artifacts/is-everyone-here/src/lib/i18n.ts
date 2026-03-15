@@ -40,6 +40,7 @@ export interface Translations {
     everyoneLeftHint: string;
     backToCheckin: string;
     notHereLabel: string;
+    startNewEvent: string;
   };
   reset: {
     button: string;
@@ -96,6 +97,7 @@ const en: Translations = {
     everyoneLeftHint: "All participants have been checked out.",
     backToCheckin: "Back to Check-In",
     notHereLabel: "Not here",
+    startNewEvent: "Start New Event",
   },
   reset: {
     button: "Reset Everything",
@@ -152,6 +154,7 @@ const sv: Translations = {
     everyoneLeftHint: "Alla deltagare har checkats ut.",
     backToCheckin: "Tillbaka till incheckning",
     notHereLabel: "Inte här",
+    startNewEvent: "Starta nytt evenemang",
   },
   reset: {
     button: "Återställ allt",

@@ -1,5 +1,5 @@
-import { ChevronLeft, CheckCircle2, LogOut, AlertTriangle } from "lucide-react";
-import { AppState } from "@/lib/state";
+import { ChevronLeft, CheckCircle2, LogOut, AlertTriangle, RefreshCw } from "lucide-react";
+import { AppState, createInitialState } from "@/lib/state";
 import { Translations } from "@/lib/i18n";
 import ResetMenu from "@/components/ResetMenu";
 
@@ -51,7 +51,7 @@ export default function CheckoutPage({ state, t, onStateChange }: Props) {
       <main className="flex-1 max-w-xl mx-auto w-full px-4 py-6 flex flex-col gap-6">
         {/* All gone banner */}
         {allLeft && herePeople.length === 0 && leftPeople.length > 0 && (
-          <div className="flex flex-col items-center gap-2 py-6 px-4 rounded-xl bg-green-50 dark:bg-green-950 border border-green-200 dark:border-green-800 text-center">
+          <div className="flex flex-col items-center gap-3 py-6 px-4 rounded-xl bg-green-50 dark:bg-green-950 border border-green-200 dark:border-green-800 text-center">
             <CheckCircle2 className="w-10 h-10 text-green-600" />
             <p className="text-lg font-bold text-green-800 dark:text-green-300">
               {t.checkout.everyoneLeft}
@@ -59,6 +59,13 @@ export default function CheckoutPage({ state, t, onStateChange }: Props) {
             <p className="text-sm text-green-700 dark:text-green-400">
               {t.checkout.everyoneLeftHint}
             </p>
+            <button
+              onClick={() => onStateChange(createInitialState())}
+              className="mt-1 flex items-center gap-2 px-5 py-2.5 rounded-lg bg-green-600 hover:bg-green-700 text-white font-semibold text-sm transition-colors active:opacity-80"
+            >
+              <RefreshCw className="w-4 h-4" />
+              {t.checkout.startNewEvent}
+            </button>
           </div>
         )}
 

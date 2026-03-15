@@ -1,5 +1,5 @@
 import { deflate, inflate } from "pako";
-import { fromBase64, toBase64 } from "js-base64";
+import { toBase64, toUint8Array } from "js-base64";
 
 export type PersonStatus = "pending" | "here" | "not_here" | "left";
 
@@ -25,7 +25,7 @@ export function encodeState(state: AppState): string {
 
 export function decodeState(hash: string): AppState | null {
   try {
-    const compressed = fromBase64(hash);
+    const compressed = toUint8Array(hash);
     const json = inflate(compressed, { to: "string" });
     return JSON.parse(json) as AppState;
   } catch {
