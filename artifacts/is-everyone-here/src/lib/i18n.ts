@@ -14,6 +14,7 @@ export interface Translations {
     noPeople: string;
     noPeopleHint: string;
     resetConfirm: string;
+    alreadyAdded: string;
   };
   checkin: {
     title: string;
@@ -51,6 +52,9 @@ export interface Translations {
   common: {
     person: string;
     persons: string;
+    share: string;
+    copied: string;
+    shareText: string;
   };
 }
 
@@ -68,6 +72,7 @@ const en: Translations = {
     noPeople: "No participants yet.",
     noPeopleHint: "Add names above to get started.",
     resetConfirm: "This will clear the entire participants list. This cannot be undone.",
+    alreadyAdded: "Already in the list",
   },
   checkin: {
     title: "Check-In",
@@ -105,6 +110,9 @@ const en: Translations = {
   common: {
     person: "person",
     persons: "persons",
+    share: "Share",
+    copied: "Copied!",
+    shareText: "Check the attendance status here:",
   },
 };
 
@@ -122,6 +130,7 @@ const sv: Translations = {
     noPeople: "Inga deltagare ännu.",
     noPeopleHint: "Lägg till namn ovan för att komma igång.",
     resetConfirm: "Detta raderar hela deltagarlistan. Det går inte att ångra.",
+    alreadyAdded: "Redan i listan",
   },
   checkin: {
     title: "Incheckning",
@@ -159,6 +168,9 @@ const sv: Translations = {
   common: {
     person: "person",
     persons: "personer",
+    share: "Dela",
+    copied: "Kopierat!",
+    shareText: "Se närvaron här:",
   },
 };
 
@@ -176,6 +188,7 @@ const es: Translations = {
     noPeople: "Aún no hay participantes.",
     noPeopleHint: "Agrega nombres arriba para comenzar.",
     resetConfirm: "Esto eliminará toda la lista de participantes. No se puede deshacer.",
+    alreadyAdded: "Ya está en la lista",
   },
   checkin: {
     title: "Registro",
@@ -213,6 +226,9 @@ const es: Translations = {
   common: {
     person: "persona",
     persons: "personas",
+    share: "Compartir",
+    copied: "¡Copiado!",
+    shareText: "Consulta la asistencia aquí:",
   },
 };
 

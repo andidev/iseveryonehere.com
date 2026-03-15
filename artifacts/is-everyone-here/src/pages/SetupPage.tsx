@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Plus, Trash2, Users, ChevronRight } from "lucide-react";
 import { AppState, Person, generateId } from "@/lib/state";
 import { Translations } from "@/lib/i18n";
 import ResetButton from "@/components/ResetButton";
+import ShareButton from "@/components/ShareButton";
 
 interface Props {
   state: AppState;
@@ -13,6 +14,14 @@ interface Props {
 export default function SetupPage({ state, t, onStateChange }: Props) {
   const [inputText, setInputText] = useState("");
   const [error, setError] = useState("");
+  const [dupMessage, setDupMessage] = useState("");
+  const dupTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  function showDup(names: string[]) {
+    if (dupTimerRef.current) clearTimeout(dupTimerRef.current);
+    setDupMessage(`${t.setup.alreadyAdded}: ${names.join(", ")}`);
+    dupTimerRef.current = setTimeout(() => setDupMessage(""), 3000);
+  }
 
   function addPersons() {
     const names = inputText
@@ -25,11 +34,19 @@ export default function SetupPage({ state, t, onStateChange }: Props) {
     }
     setError("");
     const existing = new Set(state.people.map((p) => p.name.toLowerCase()));
+    const dups = names.filter((n) => existing.has(n.toLowerCase()));
     const newPeople: Person[] = names
       .filter((n) => !existing.has(n.toLowerCase()))
       .map((name) => ({ id: generateId(), name, status: "pending" }));
-    onStateChange({ ...state, people: [...state.people, ...newPeople] });
-    setInputText("");
+
+    if (dups.length > 0) showDup(dups);
+    if (newPeople.length > 0) {
+      onStateChange({ ...state, people: [...state.people, ...newPeople] });
+      setInputText("");
+    } else {
+      // All were dups — clear input anyway
+      setInputText("");
+    }
   }
 
   function removePerson(id: string) {
@@ -56,12 +73,15 @@ export default function SetupPage({ state, t, onStateChange }: Props) {
           <Users className="w-5 h-5 text-primary" />
           <h1 className="text-lg font-bold text-foreground">{t.appName}</h1>
         </div>
-        <ResetButton
-          t={t}
-          confirmMessage={t.setup.resetConfirm}
-          onConfirm={handleReset}
-          disabled={state.people.length === 0}
-        />
+        <div className="flex items-center gap-1">
+          <ShareButton t={t} />
+          <ResetButton
+            t={t}
+            confirmMessage={t.setup.resetConfirm}
+            onConfirm={handleReset}
+            disabled={state.people.length === 0}
+          />
+        </div>
       </header>
 
       <main className="flex-1 max-w-xl mx-auto w-full px-4 py-6 flex flex-col gap-6">
@@ -86,6 +106,9 @@ export default function SetupPage({ state, t, onStateChange }: Props) {
             }}
           />
           {error && <p className="text-destructive text-xs">{error}</p>}
+          {dupMessage && (
+            <p className="text-amber-600 dark:text-amber-400 text-xs">{dupMessage}</p>
+          )}
           <button
             onClick={addPersons}
             disabled={!inputText.trim()}

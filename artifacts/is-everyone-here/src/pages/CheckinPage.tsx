@@ -1,7 +1,8 @@
-import { CheckCircle2, XCircle, ChevronLeft, ChevronRight, Settings, ArrowRight } from "lucide-react";
+import { CheckCircle2, XCircle, ChevronLeft, ChevronRight, Settings } from "lucide-react";
 import { AppState, PersonStatus } from "@/lib/state";
 import { Translations } from "@/lib/i18n";
 import ResetButton from "@/components/ResetButton";
+import ShareButton from "@/components/ShareButton";
 
 interface Props {
   state: AppState;
@@ -14,12 +15,16 @@ export default function CheckinPage({ state, t, onStateChange }: Props) {
   const current = people[currentIndex];
   const prev = currentIndex > 0 ? people[currentIndex - 1] : null;
   const next = currentIndex < people.length - 1 ? people[currentIndex + 1] : null;
-  const allHandled = people.every((p) => p.status !== "pending");
 
   function markCurrent(status: PersonStatus) {
     const updated = people.map((p, i) =>
       i === currentIndex ? { ...p, status } : p
     );
+    const allNowHandled = updated.every((p) => p.status !== "pending");
+    if (allNowHandled) {
+      onStateChange({ ...state, people: updated, phase: "checkout" });
+      return;
+    }
     const nextIndex =
       currentIndex < people.length - 1 ? currentIndex + 1 : currentIndex;
     onStateChange({ ...state, people: updated, currentIndex: nextIndex });
@@ -30,10 +35,6 @@ export default function CheckinPage({ state, t, onStateChange }: Props) {
     if (index > currentIndex && !currentHandled) return;
     if (index < 0 || index >= people.length) return;
     onStateChange({ ...state, currentIndex: index });
-  }
-
-  function goToCheckout() {
-    onStateChange({ ...state, phase: "checkout" });
   }
 
   function backToSetup() {
@@ -67,11 +68,14 @@ export default function CheckinPage({ state, t, onStateChange }: Props) {
         <span className="text-xs text-muted-foreground font-medium">
           {handledCount} / {people.length}
         </span>
-        <ResetButton
-          t={t}
-          confirmMessage={t.checkin.resetConfirm}
-          onConfirm={handleReset}
-        />
+        <div className="flex items-center gap-1">
+          <ShareButton t={t} />
+          <ResetButton
+            t={t}
+            confirmMessage={t.checkin.resetConfirm}
+            onConfirm={handleReset}
+          />
+        </div>
       </header>
 
       {/* Progress bar */}
@@ -83,13 +87,6 @@ export default function CheckinPage({ state, t, onStateChange }: Props) {
       </div>
 
       <main className="flex-1 flex flex-col items-center justify-center px-4 py-6 gap-6 select-none">
-        {allHandled && (
-          <div className="text-center mb-2">
-            <p className="text-2xl font-bold text-foreground">{t.checkin.allDone}</p>
-            <p className="text-sm text-muted-foreground">{t.checkin.allDoneHint}</p>
-          </div>
-        )}
-
         {/* Previous person */}
         {prev ? (
           <button
@@ -163,18 +160,6 @@ export default function CheckinPage({ state, t, onStateChange }: Props) {
           <div className="h-14 w-full max-w-sm" />
         )}
       </main>
-
-      {/* Go to checkout */}
-      <div className="sticky bottom-0 bg-background border-t border-border px-4 py-4">
-        <button
-          onClick={goToCheckout}
-          disabled={!allHandled}
-          className="w-full max-w-xl mx-auto flex items-center justify-center gap-2 py-4 rounded-xl bg-primary text-primary-foreground font-bold text-lg disabled:opacity-40 active:opacity-80 transition-opacity"
-        >
-          {t.checkin.goToCheckout}
-          <ArrowRight className="w-5 h-5" />
-        </button>
-      </div>
     </div>
   );
 }

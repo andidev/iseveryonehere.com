@@ -2,6 +2,7 @@ import { ChevronLeft, CheckCircle2, LogOut, AlertTriangle, RefreshCw } from "luc
 import { AppState } from "@/lib/state";
 import { Translations } from "@/lib/i18n";
 import ResetButton from "@/components/ResetButton";
+import ShareButton from "@/components/ShareButton";
 
 interface Props {
   state: AppState;
@@ -57,12 +58,15 @@ export default function CheckoutPage({ state, t, onStateChange }: Props) {
           {t.checkout.backToCheckin}
         </button>
         <span className="text-sm font-semibold text-foreground">{t.appName}</span>
-        <ResetButton
-          t={t}
-          confirmMessage={t.checkout.resetConfirm}
-          onConfirm={handleReset}
-          disabled={leftPeople.length === 0}
-        />
+        <div className="flex items-center gap-1">
+          <ShareButton t={t} />
+          <ResetButton
+            t={t}
+            confirmMessage={t.checkout.resetConfirm}
+            onConfirm={handleReset}
+            disabled={leftPeople.length === 0}
+          />
+        </div>
       </header>
 
       <main className="flex-1 max-w-xl mx-auto w-full px-4 py-6 flex flex-col gap-6">
