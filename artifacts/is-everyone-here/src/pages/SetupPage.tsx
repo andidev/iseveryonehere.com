@@ -233,7 +233,7 @@ export default function SetupPage({ state, t, onStateChange }: Props) {
       </main>
 
       {/* Start button */}
-      <div className="sticky bottom-0 bg-background border-t border-border px-4 py-4">
+      <div className="sticky bottom-0 bg-background border-t border-border px-4 py-4 flex flex-col items-center gap-3">
         <button
           onClick={startCheckin}
           disabled={state.people.length === 0}
@@ -242,6 +242,12 @@ export default function SetupPage({ state, t, onStateChange }: Props) {
           {t.setup.startCheckin}
           <ChevronRight className="w-5 h-5" />
         </button>
+        <a
+          href="#privacy"
+          className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+        >
+          Privacy Policy
+        </a>
       </div>
     </div>
   );
