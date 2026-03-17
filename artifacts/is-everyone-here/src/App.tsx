@@ -43,7 +43,7 @@ function App() {
   }, []);
 
   if (showPrivacy) {
-    return <PrivacyPage />;
+    return <PrivacyPage t={t} />;
   }
 
   if (state.phase === "setup") {
