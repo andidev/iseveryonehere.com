@@ -63,6 +63,16 @@ export default function ExportButton({ people, t, appName }: Props) {
     setOpen(false);
   }
 
+  function handleClipboardValues() {
+    const rows = buildRows(people);
+    const body = rows.map((r) => r.attendedLabel).join("\n");
+    navigator.clipboard.writeText(`${isoDate}\n${body}`).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+    setOpen(false);
+  }
+
   function handleCSV() {
     const rows = buildRows(people);
     const header = `${co.exportColName},${isoDate}`;
@@ -112,6 +122,14 @@ export default function ExportButton({ people, t, appName }: Props) {
           >
             <Clipboard className="w-4 h-4 text-muted-foreground shrink-0" />
             {co.exportClipboard}
+          </button>
+          <div className="border-t border-border" />
+          <button
+            onClick={handleClipboardValues}
+            className="w-full flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-muted transition-colors text-left"
+          >
+            <Clipboard className="w-4 h-4 text-muted-foreground shrink-0" />
+            {co.exportClipboardValues}
           </button>
           <div className="border-t border-border" />
           <button
