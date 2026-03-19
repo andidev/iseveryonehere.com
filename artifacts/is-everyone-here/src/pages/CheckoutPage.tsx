@@ -4,6 +4,7 @@ import { Locale, Translations } from "@/lib/i18n";
 import ResetButton from "@/components/ResetButton";
 import ShareButton from "@/components/ShareButton";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import ExportButton from "@/components/ExportButton";
 
 interface Props {
   state: AppState;
@@ -84,13 +85,16 @@ export default function CheckoutPage({ state, t, locale, onLocaleChange, onState
             <p className="text-sm text-green-700 dark:text-green-400">
               {t.checkout.everyoneLeftHint}
             </p>
-            <button
-              onClick={handleRestart}
-              className="mt-1 flex items-center gap-2 px-5 py-2.5 rounded-lg bg-green-600 hover:bg-green-700 text-white font-semibold text-sm transition-colors active:opacity-80"
-            >
-              <RefreshCw className="w-4 h-4" />
-              {t.checkout.restart}
-            </button>
+            <div className="flex items-center gap-3 mt-1 flex-wrap justify-center">
+              <ExportButton people={state.people} t={t} />
+              <button
+                onClick={handleRestart}
+                className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-green-600 hover:bg-green-700 text-white font-semibold text-sm transition-colors active:opacity-80"
+              >
+                <RefreshCw className="w-4 h-4" />
+                {t.checkout.restart}
+              </button>
+            </div>
           </div>
         )}
 
