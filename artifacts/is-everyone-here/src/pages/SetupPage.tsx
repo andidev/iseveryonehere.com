@@ -246,7 +246,7 @@ export default function SetupPage({ state, t, onStateChange }: Props) {
           href="#privacy"
           className="text-xs text-muted-foreground hover:text-foreground transition-colors"
         >
-          Privacy Policy
+          {t.privacy.title}
         </a>
       </div>
     </div>
