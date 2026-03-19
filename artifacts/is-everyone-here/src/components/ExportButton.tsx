@@ -82,7 +82,10 @@ export default function ExportButton({ people, t, appName }: Props) {
 
   function handleJSON() {
     const rows = buildRows(people);
-    const data = rows.map((r) => ({ name: r.name, [isoDate]: r.attended }));
+    const data = {
+      date: isoDate,
+      attendance: rows.map((r) => ({ name: r.name, attended: r.attended })),
+    };
     downloadFile(
       JSON.stringify(data, null, 2),
       buildFilename(appName, "json"),
