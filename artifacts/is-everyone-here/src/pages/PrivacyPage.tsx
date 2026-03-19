@@ -6,8 +6,11 @@ interface Props {
 }
 
 function goBack() {
-  window.location.hash = "";
-  window.history.back();
+  if (window.history.length > 1) {
+    window.history.back();
+  } else {
+    window.location.hash = "";
+  }
 }
 
 export default function PrivacyPage({ t }: Props) {
