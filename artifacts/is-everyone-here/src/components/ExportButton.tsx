@@ -42,6 +42,7 @@ export default function ExportButton({ people, t, appName }: Props) {
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const isoDate = new Date().toISOString().slice(0, 10);
 
   useEffect(() => {
     function onClickOutside(e: MouseEvent) {
@@ -53,7 +54,7 @@ export default function ExportButton({ people, t, appName }: Props) {
 
   function handleClipboard() {
     const rows = buildRows(people);
-    const header = `${co.exportColName}\t${co.exportColAttended}`;
+    const header = `${co.exportColName}\t${isoDate}`;
     const body = rows.map((r) => `${r.name}\t${r.attendedLabel}`).join("\n");
     navigator.clipboard.writeText(`${header}\n${body}`).then(() => {
       setCopied(true);
@@ -64,7 +65,7 @@ export default function ExportButton({ people, t, appName }: Props) {
 
   function handleCSV() {
     const rows = buildRows(people);
-    const header = `${co.exportColName},${co.exportColAttended}`;
+    const header = `${co.exportColName},${isoDate}`;
     const body = rows
       .map((r) => {
         const safeName = /[,"\n]/.test(r.name) ? `"${r.name.replace(/"/g, '""')}"` : r.name;
@@ -81,7 +82,7 @@ export default function ExportButton({ people, t, appName }: Props) {
 
   function handleJSON() {
     const rows = buildRows(people);
-    const data = rows.map((r) => ({ name: r.name, attended: r.attended }));
+    const data = rows.map((r) => ({ name: r.name, [isoDate]: r.attended }));
     downloadFile(
       JSON.stringify(data, null, 2),
       buildFilename(appName, "json"),
