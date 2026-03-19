@@ -6,9 +6,11 @@ import { Translations } from "@/lib/i18n";
 interface Props {
   people: Person[];
   t: Translations;
+  appName: string;
+  locale: string;
 }
 
-function buildRows(people: Person[], t: Translations) {
+function buildRows(people: Person[]) {
   return people.map((p) => ({
     name: p.name,
     attended: p.status === "left" || p.status === "here",
@@ -16,8 +18,25 @@ function buildRows(people: Person[], t: Translations) {
   }));
 }
 
+function buildFilename(appName: string, locale: string, ext: string): string {
+  const base = appName.replace(/[?？]$/, "").trimEnd();
+  const now = new Date();
+  const datePart = new Intl.DateTimeFormat(locale, {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  }).format(now);
+  const timePart = new Intl.DateTimeFormat(locale, {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).format(now).replace(":", ".");
+  const safeDate = datePart.replace(/[/\\:*?"<>|]/g, "-").replace(/\s+/g, " ").trim();
+  return `${base} ${safeDate} ${timePart}.${ext}`;
+}
+
 function downloadFile(content: string, filename: string, mimeType: string) {
-  const blob = new Blob([content], { type: mimeType });
+  const blob = new Blob(["\uFEFF" + content], { type: mimeType });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
@@ -26,7 +45,7 @@ function downloadFile(content: string, filename: string, mimeType: string) {
   URL.revokeObjectURL(url);
 }
 
-export default function ExportButton({ people, t }: Props) {
+export default function ExportButton({ people, t, appName, locale }: Props) {
   const co = t.checkout;
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -41,7 +60,7 @@ export default function ExportButton({ people, t }: Props) {
   }, []);
 
   function handleClipboard() {
-    const rows = buildRows(people, t);
+    const rows = buildRows(people);
     const header = `${co.exportColName}\t${co.exportColAttended}`;
     const body = rows.map((r) => `${r.name}\t${r.attendedLabel}`).join("\n");
     navigator.clipboard.writeText(`${header}\n${body}`).then(() => {
@@ -52,22 +71,30 @@ export default function ExportButton({ people, t }: Props) {
   }
 
   function handleCSV() {
-    const rows = buildRows(people, t);
+    const rows = buildRows(people);
     const header = `${co.exportColName},${co.exportColAttended}`;
     const body = rows
       .map((r) => {
-        const safeName = r.name.includes(",") ? `"${r.name}"` : r.name;
+        const safeName = /[,"\n]/.test(r.name) ? `"${r.name.replace(/"/g, '""')}"` : r.name;
         return `${safeName},${r.attendedLabel}`;
       })
       .join("\n");
-    downloadFile(`${header}\n${body}`, "attendance.csv", "text/csv;charset=utf-8;");
+    downloadFile(
+      `${header}\n${body}`,
+      buildFilename(appName, locale, "csv"),
+      "text/csv;charset=utf-8;"
+    );
     setOpen(false);
   }
 
   function handleJSON() {
-    const rows = buildRows(people, t);
+    const rows = buildRows(people);
     const data = rows.map((r) => ({ name: r.name, attended: r.attended }));
-    downloadFile(JSON.stringify(data, null, 2), "attendance.json", "application/json");
+    downloadFile(
+      JSON.stringify(data, null, 2),
+      buildFilename(appName, locale, "json"),
+      "application/json"
+    );
     setOpen(false);
   }
 
@@ -77,11 +104,7 @@ export default function ExportButton({ people, t }: Props) {
         onClick={() => setOpen((o) => !o)}
         className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white dark:bg-zinc-800 border border-green-300 dark:border-green-700 text-green-700 dark:text-green-300 font-semibold text-sm hover:bg-green-50 dark:hover:bg-zinc-700 transition-colors active:opacity-80"
       >
-        {copied ? (
-          <Check className="w-4 h-4" />
-        ) : (
-          <Download className="w-4 h-4" />
-        )}
+        {copied ? <Check className="w-4 h-4" /> : <Download className="w-4 h-4" />}
         {copied ? co.exportCopied : co.export}
       </button>
 

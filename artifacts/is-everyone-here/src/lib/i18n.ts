@@ -56,6 +56,7 @@ export interface Translations {
     exportJSON: string;
     exportColName: string;
     exportColAttended: string;
+    restartConfirm: string;
   };
   reset: {
     confirmTitle: string;
@@ -147,6 +148,7 @@ const en: Translations = {
     exportJSON: "Download JSON",
     exportColName: "Name",
     exportColAttended: "Attended",
+    restartConfirm: "This will clear all statuses and start a fresh check-in.",
   },
   reset: { confirmTitle: "Are you sure?", cancel: "Cancel", confirmYes: "Yes, reset" },
   common: {
@@ -216,6 +218,7 @@ const sv: Translations = {
     exportJSON: "Ladda ner JSON",
     exportColName: "Namn",
     exportColAttended: "Närvaro",
+    restartConfirm: "Detta rensar alla statusar och startar en ny incheckning.",
   },
   reset: { confirmTitle: "Är du säker?", cancel: "Avbryt", confirmYes: "Ja, återställ" },
   common: {
@@ -285,6 +288,7 @@ const es: Translations = {
     exportJSON: "Descargar JSON",
     exportColName: "Nombre",
     exportColAttended: "Asistió",
+    restartConfirm: "Esto borrará todos los estados e iniciará un nuevo registro.",
   },
   reset: { confirmTitle: "¿Estás seguro?", cancel: "Cancelar", confirmYes: "Sí, restablecer" },
   common: {
@@ -354,6 +358,7 @@ const fr: Translations = {
     exportJSON: "Télécharger JSON",
     exportColName: "Nom",
     exportColAttended: "Présent",
+    restartConfirm: "Cela effacera tous les statuts et démarrera un nouveau pointage.",
   },
   reset: { confirmTitle: "Êtes-vous sûr ?", cancel: "Annuler", confirmYes: "Oui, réinitialiser" },
   common: {
@@ -423,6 +428,7 @@ const de: Translations = {
     exportJSON: "JSON herunterladen",
     exportColName: "Name",
     exportColAttended: "Anwesend",
+    restartConfirm: "Dadurch werden alle Status zurückgesetzt und ein neues Einchecken gestartet.",
   },
   reset: { confirmTitle: "Bist du sicher?", cancel: "Abbrechen", confirmYes: "Ja, zurücksetzen" },
   common: {
@@ -492,6 +498,7 @@ const it: Translations = {
     exportJSON: "Scarica JSON",
     exportColName: "Nome",
     exportColAttended: "Presente",
+    restartConfirm: "Questo cancellerà tutti gli stati e avvierà un nuovo check-in.",
   },
   reset: { confirmTitle: "Sei sicuro?", cancel: "Annulla", confirmYes: "Sì, reimposta" },
   common: {
@@ -561,6 +568,7 @@ const pt: Translations = {
     exportJSON: "Baixar JSON",
     exportColName: "Nome",
     exportColAttended: "Presente",
+    restartConfirm: "Isso limpará todos os status e iniciará um novo registro.",
   },
   reset: { confirmTitle: "Tem a certeza?", cancel: "Cancelar", confirmYes: "Sim, repor" },
   common: {
@@ -630,6 +638,7 @@ const nl: Translations = {
     exportJSON: "JSON downloaden",
     exportColName: "Naam",
     exportColAttended: "Aanwezig",
+    restartConfirm: "Dit wist alle statussen en start een nieuwe check-in.",
   },
   reset: { confirmTitle: "Weet je het zeker?", cancel: "Annuleren", confirmYes: "Ja, resetten" },
   common: {
@@ -699,6 +708,7 @@ const pl: Translations = {
     exportJSON: "Pobierz JSON",
     exportColName: "Imię",
     exportColAttended: "Obecny",
+    restartConfirm: "To wyczyści wszystkie statusy i rozpocznie nowy check-in.",
   },
   reset: { confirmTitle: "Jesteś pewny?", cancel: "Anuluj", confirmYes: "Tak, resetuj" },
   common: {
@@ -768,6 +778,7 @@ const cs: Translations = {
     exportJSON: "Stáhnout JSON",
     exportColName: "Jméno",
     exportColAttended: "Přítomen",
+    restartConfirm: "Tím se vymažou všechny stavy a spustí se nové přihlášení.",
   },
   reset: { confirmTitle: "Jste si jisti?", cancel: "Zrušit", confirmYes: "Ano, resetovat" },
   common: {
@@ -837,6 +848,7 @@ const hu: Translations = {
     exportJSON: "JSON letöltése",
     exportColName: "Név",
     exportColAttended: "Jelen volt",
+    restartConfirm: "Ez törli az összes státuszt, és új bejelentkezést indít.",
   },
   reset: { confirmTitle: "Biztos benne?", cancel: "Mégse", confirmYes: "Igen, visszaállítás" },
   common: {
@@ -906,6 +918,7 @@ const ro: Translations = {
     exportJSON: "Descărcați JSON",
     exportColName: "Nume",
     exportColAttended: "Prezent",
+    restartConfirm: "Aceasta va șterge toate statusurile și va porni o nouă înregistrare.",
   },
   reset: { confirmTitle: "Ești sigur?", cancel: "Anulează", confirmYes: "Da, resetează" },
   common: {
@@ -975,6 +988,7 @@ const bg: Translations = {
     exportJSON: "Изтегляне на JSON",
     exportColName: "Име",
     exportColAttended: "Присъстващ",
+    restartConfirm: "Това ще изчисти всички статуси и ще стартира ново влизане.",
   },
   reset: { confirmTitle: "Сигурни ли сте?", cancel: "Отказ", confirmYes: "Да, нулирай" },
   common: {
@@ -1044,6 +1058,7 @@ const hr: Translations = {
     exportJSON: "Preuzmi JSON",
     exportColName: "Ime",
     exportColAttended: "Prisutan",
+    restartConfirm: "Ovo će obrisati sve statuse i pokrenuti novu prijavu.",
   },
   reset: { confirmTitle: "Jeste li sigurni?", cancel: "Odustani", confirmYes: "Da, poništi" },
   common: {
@@ -1113,6 +1128,7 @@ const el: Translations = {
     exportJSON: "Λήψη JSON",
     exportColName: "Όνομα",
     exportColAttended: "Παρών",
+    restartConfirm: "Αυτό θα διαγράψει όλες τις καταστάσεις και θα ξεκινήσει νέο check-in.",
   },
   reset: { confirmTitle: "Είστε σίγουροι;", cancel: "Ακύρωση", confirmYes: "Ναι, επαναφορά" },
   common: {
@@ -1182,6 +1198,7 @@ const fi: Translations = {
     exportJSON: "Lataa JSON",
     exportColName: "Nimi",
     exportColAttended: "Paikalla",
+    restartConfirm: "Tämä tyhjentää kaikki tilat ja käynnistää uuden kirjautumisen.",
   },
   reset: { confirmTitle: "Oletko varma?", cancel: "Peruuta", confirmYes: "Kyllä, nollaa" },
   common: {
@@ -1251,6 +1268,7 @@ const da: Translations = {
     exportJSON: "Download JSON",
     exportColName: "Navn",
     exportColAttended: "Til stede",
+    restartConfirm: "Dette nulstiller alle statusser og starter en ny check-in.",
   },
   reset: { confirmTitle: "Er du sikker?", cancel: "Annuller", confirmYes: "Ja, nulstil" },
   common: {
@@ -1320,6 +1338,7 @@ const no: Translations = {
     exportJSON: "Last ned JSON",
     exportColName: "Navn",
     exportColAttended: "Til stede",
+    restartConfirm: "Dette nullstiller alle statuser og starter en ny innsjekking.",
   },
   reset: { confirmTitle: "Er du sikker?", cancel: "Avbryt", confirmYes: "Ja, tilbakestill" },
   common: {
@@ -1389,6 +1408,7 @@ const uk: Translations = {
     exportJSON: "Завантажити JSON",
     exportColName: "Ім'я",
     exportColAttended: "Присутній",
+    restartConfirm: "Це очистить усі статуси та розпочне новий процес реєстрації.",
   },
   reset: { confirmTitle: "Ви впевнені?", cancel: "Скасувати", confirmYes: "Так, скинути" },
   common: {
@@ -1458,6 +1478,7 @@ const ru: Translations = {
     exportJSON: "Скачать JSON",
     exportColName: "Имя",
     exportColAttended: "Присутствовал",
+    restartConfirm: "Это очистит все статусы и запустит новый процесс регистрации.",
   },
   reset: { confirmTitle: "Вы уверены?", cancel: "Отмена", confirmYes: "Да, сбросить" },
   common: {
@@ -1527,6 +1548,7 @@ const tr: Translations = {
     exportJSON: "JSON indir",
     exportColName: "Ad",
     exportColAttended: "Katıldı",
+    restartConfirm: "Bu, tüm durumları temizleyecek ve yeni bir giriş başlatacak.",
   },
   reset: { confirmTitle: "Emin misiniz?", cancel: "İptal", confirmYes: "Evet, sıfırla" },
   common: {
@@ -1590,6 +1612,7 @@ const sk: Translations = {
     exportJSON: "Stiahnuť JSON",
     exportColName: "Meno",
     exportColAttended: "Prítomný",
+    restartConfirm: "Tým sa vymažú všetky stavy a spustí sa nové prihlásenie.",
   },
   reset: { confirmTitle: "Ste si istí?", cancel: "Zrušiť", confirmYes: "Áno, obnoviť" },
   common: {
@@ -1653,6 +1676,7 @@ const sl: Translations = {
     exportJSON: "Prenesi JSON",
     exportColName: "Ime",
     exportColAttended: "Prisoten",
+    restartConfirm: "To bo počistilo vse statuse in začelo novo prijavo.",
   },
   reset: { confirmTitle: "Ste prepričani?", cancel: "Prekliči", confirmYes: "Da, ponastavi" },
   common: {
@@ -1716,6 +1740,7 @@ const lt: Translations = {
     exportJSON: "Atsisiųsti JSON",
     exportColName: "Vardas",
     exportColAttended: "Dalyvavo",
+    restartConfirm: "Tai išvalys visus statusus ir pradės naują registraciją.",
   },
   reset: { confirmTitle: "Ar tikrai?", cancel: "Atšaukti", confirmYes: "Taip, atstatyti" },
   common: {
@@ -1779,6 +1804,7 @@ const lv: Translations = {
     exportJSON: "Lejupielādēt JSON",
     exportColName: "Vārds",
     exportColAttended: "Klāt esošs",
+    restartConfirm: "Tas notīrīs visus statusus un sāks jaunu reģistrāciju.",
   },
   reset: { confirmTitle: "Vai esat pārliecināts?", cancel: "Atcelt", confirmYes: "Jā, atiestatīt" },
   common: {
@@ -1842,6 +1868,7 @@ const et: Translations = {
     exportJSON: "Laadi alla JSON",
     exportColName: "Nimi",
     exportColAttended: "Kohal",
+    restartConfirm: "See kustutab kõik staatused ja käivitab uue registreerimise.",
   },
   reset: { confirmTitle: "Oled kindel?", cancel: "Tühista", confirmYes: "Jah, lähtesta" },
   common: {
@@ -1905,6 +1932,7 @@ const sr: Translations = {
     exportJSON: "Преузми JSON",
     exportColName: "Име",
     exportColAttended: "Присутан",
+    restartConfirm: "Ово ће обрисати све статусе и покренути нову пријаву.",
   },
   reset: { confirmTitle: "Da li ste sigurni?", cancel: "Odustani", confirmYes: "Da, poništi" },
   common: {
@@ -1968,6 +1996,7 @@ const zh: Translations = {
     exportJSON: "下载 JSON",
     exportColName: "姓名",
     exportColAttended: "是否出席",
+    restartConfirm: "这将清除所有状态并开始新一轮签到。",
   },
   reset: { confirmTitle: "确定吗？", cancel: "取消", confirmYes: "是，重置" },
   common: {
@@ -2031,6 +2060,7 @@ const ja: Translations = {
     exportJSON: "JSONをダウンロード",
     exportColName: "氏名",
     exportColAttended: "出席",
+    restartConfirm: "これですべてのステータスがリセットされ、新しいチェックインが開始されます。",
   },
   reset: { confirmTitle: "よろしいですか？", cancel: "キャンセル", confirmYes: "はい、リセット" },
   common: {
@@ -2094,6 +2124,7 @@ const ko: Translations = {
     exportJSON: "JSON 다운로드",
     exportColName: "이름",
     exportColAttended: "참석",
+    restartConfirm: "이렇게 하면 모든 상태가 초기화되고 새로운 체크인이 시작됩니다.",
   },
   reset: { confirmTitle: "확실합니까?", cancel: "취소", confirmYes: "예, 초기화" },
   common: {
@@ -2157,6 +2188,7 @@ const hi: Translations = {
     exportJSON: "JSON डाउनलोड करें",
     exportColName: "नाम",
     exportColAttended: "उपस्थित",
+    restartConfirm: "इससे सभी स्थितियां साफ़ हो जाएंगी और एक नया चेक-इन शुरू होगा।",
   },
   reset: { confirmTitle: "क्या आप सुनिश्चित हैं?", cancel: "रद्द करें", confirmYes: "हाँ, रीसेट करें" },
   common: {
@@ -2220,6 +2252,7 @@ const ar: Translations = {
     exportJSON: "تحميل JSON",
     exportColName: "الاسم",
     exportColAttended: "حضر",
+    restartConfirm: "سيؤدي هذا إلى مسح جميع الحالات وبدء تسجيل حضور جديد.",
   },
   reset: { confirmTitle: "هل أنت متأكد؟", cancel: "إلغاء", confirmYes: "نعم، إعادة تعيين" },
   common: {
@@ -2283,6 +2316,7 @@ const th: Translations = {
     exportJSON: "ดาวน์โหลด JSON",
     exportColName: "ชื่อ",
     exportColAttended: "เข้าร่วม",
+    restartConfirm: "การกระทำนี้จะล้างสถานะทั้งหมดและเริ่มการเช็คอินใหม่",
   },
   reset: { confirmTitle: "แน่ใจหรือไม่?", cancel: "ยกเลิก", confirmYes: "ใช่ รีเซ็ต" },
   common: {
@@ -2346,6 +2380,7 @@ const vi: Translations = {
     exportJSON: "Tải JSON",
     exportColName: "Tên",
     exportColAttended: "Có mặt",
+    restartConfirm: "Điều này sẽ xóa tất cả trạng thái và bắt đầu điểm danh mới.",
   },
   reset: { confirmTitle: "Bạn có chắc không?", cancel: "Hủy", confirmYes: "Có, đặt lại" },
   common: {
@@ -2409,6 +2444,7 @@ const id: Translations = {
     exportJSON: "Unduh JSON",
     exportColName: "Nama",
     exportColAttended: "Hadir",
+    restartConfirm: "Ini akan menghapus semua status dan memulai check-in baru.",
   },
   reset: { confirmTitle: "Apakah Anda yakin?", cancel: "Batal", confirmYes: "Ya, reset" },
   common: {
@@ -2472,6 +2508,7 @@ const ms: Translations = {
     exportJSON: "Muat turun JSON",
     exportColName: "Nama",
     exportColAttended: "Hadir",
+    restartConfirm: "Ini akan memadam semua status dan memulakan daftar masuk baharu.",
   },
   reset: { confirmTitle: "Adakah anda pasti?", cancel: "Batal", confirmYes: "Ya, tetapkan semula" },
   common: {
@@ -2535,6 +2572,7 @@ const bn: Translations = {
     exportJSON: "JSON ডাউনলোড করুন",
     exportColName: "নাম",
     exportColAttended: "উপস্থিত",
+    restartConfirm: "এটি সমস্ত স্ট্যাটাস মুছে দেবে এবং একটি নতুন চেক-ইন শুরু করবে।",
   },
   reset: { confirmTitle: "আপনি কি নিশ্চিত?", cancel: "বাতিল", confirmYes: "হ্যাঁ, রিসেট করুন" },
   common: {
@@ -2598,6 +2636,7 @@ const tl: Translations = {
     exportJSON: "I-download ang JSON",
     exportColName: "Pangalan",
     exportColAttended: "Dumalo",
+    restartConfirm: "Mae-clear ang lahat ng status at magsisimula ng bagong check-in.",
   },
   reset: { confirmTitle: "Sigurado ka ba?", cancel: "Kanselahin", confirmYes: "Oo, i-reset" },
   common: {

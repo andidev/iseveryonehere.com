@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ChevronLeft, CheckCircle2, LogOut, AlertTriangle, RefreshCw } from "lucide-react";
 import { AppState } from "@/lib/state";
 import { Locale, Translations } from "@/lib/i18n";
@@ -19,6 +20,7 @@ export default function CheckoutPage({ state, t, locale, onLocaleChange, onState
   const leftPeople = state.people.filter((p) => p.status === "left");
   const notHerePeople = state.people.filter((p) => p.status === "not_here");
   const allLeft = herePeople.length === 0 && leftPeople.length > 0;
+  const [restartModal, setRestartModal] = useState(false);
 
   function markLeft(id: string) {
     const updated = state.people.map((p) =>
@@ -48,6 +50,7 @@ export default function CheckoutPage({ state, t, locale, onLocaleChange, onState
   function handleRestart() {
     const reset = state.people.map((p) => ({ ...p, status: "pending" as const }));
     onStateChange({ phase: "checkin", people: reset, currentIndex: 0 });
+    setRestartModal(false);
   }
 
   return (
@@ -86,14 +89,42 @@ export default function CheckoutPage({ state, t, locale, onLocaleChange, onState
               {t.checkout.everyoneLeftHint}
             </p>
             <div className="flex items-center gap-3 mt-1 flex-wrap justify-center">
-              <ExportButton people={state.people} t={t} />
+              <ExportButton people={state.people} t={t} appName={t.appName} locale={locale} />
               <button
-                onClick={handleRestart}
+                onClick={() => setRestartModal(true)}
                 className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-green-600 hover:bg-green-700 text-white font-semibold text-sm transition-colors active:opacity-80"
               >
                 <RefreshCw className="w-4 h-4" />
                 {t.checkout.restart}
               </button>
+            </div>
+          </div>
+        )}
+
+        {/* Restart confirm modal */}
+        {restartModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div
+              className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+              onClick={() => setRestartModal(false)}
+            />
+            <div className="relative z-10 bg-card border border-border rounded-2xl shadow-xl max-w-sm w-full p-6 flex flex-col gap-4">
+              <h2 className="text-lg font-bold text-foreground">{t.reset.confirmTitle}</h2>
+              <p className="text-sm text-muted-foreground">{t.checkout.restartConfirm}</p>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setRestartModal(false)}
+                  className="flex-1 py-2.5 rounded-lg border border-border text-foreground text-sm font-medium hover:bg-muted transition-colors"
+                >
+                  {t.reset.cancel}
+                </button>
+                <button
+                  onClick={handleRestart}
+                  className="flex-1 py-2.5 rounded-lg bg-destructive text-destructive-foreground text-sm font-medium hover:opacity-90 transition-opacity"
+                >
+                  {t.reset.confirmYes}
+                </button>
+              </div>
             </div>
           </div>
         )}
