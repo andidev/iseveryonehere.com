@@ -1,16 +1,19 @@
 import { CheckCircle2, XCircle, ChevronLeft, ChevronRight, Settings } from "lucide-react";
 import { AppState, PersonStatus } from "@/lib/state";
-import { Translations } from "@/lib/i18n";
+import { Locale, Translations } from "@/lib/i18n";
 import ResetButton from "@/components/ResetButton";
 import ShareButton from "@/components/ShareButton";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 interface Props {
   state: AppState;
   t: Translations;
+  locale: Locale;
+  onLocaleChange: (locale: Locale) => void;
   onStateChange: (state: AppState) => void;
 }
 
-export default function CheckinPage({ state, t, onStateChange }: Props) {
+export default function CheckinPage({ state, t, locale, onLocaleChange, onStateChange }: Props) {
   const { people, currentIndex } = state;
   const current = people[currentIndex];
   const prev = currentIndex > 0 ? people[currentIndex - 1] : null;
@@ -69,6 +72,7 @@ export default function CheckinPage({ state, t, onStateChange }: Props) {
           {handledCount} / {people.length}
         </span>
         <div className="flex items-center gap-1">
+          <LanguageSwitcher currentLocale={locale} onLocaleChange={onLocaleChange} />
           <ShareButton t={t} state={state} />
           <ResetButton
             t={t}

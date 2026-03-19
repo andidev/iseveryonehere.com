@@ -1,13 +1,16 @@
 import { useState, useRef } from "react";
 import { Plus, Trash2, Users, ChevronRight, ArrowUpAZ, GripVertical } from "lucide-react";
 import { AppState, Person, generateId } from "@/lib/state";
-import { Translations } from "@/lib/i18n";
+import { Locale, Translations } from "@/lib/i18n";
 import ResetButton from "@/components/ResetButton";
 import ShareButton from "@/components/ShareButton";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 interface Props {
   state: AppState;
   t: Translations;
+  locale: Locale;
+  onLocaleChange: (locale: Locale) => void;
   onStateChange: (state: AppState) => void;
 }
 
@@ -25,7 +28,7 @@ function isSorted(people: Person[]): boolean {
   return true;
 }
 
-export default function SetupPage({ state, t, onStateChange }: Props) {
+export default function SetupPage({ state, t, locale, onLocaleChange, onStateChange }: Props) {
   const [inputText, setInputText] = useState("");
   const [error, setError] = useState("");
   const [dupMessage, setDupMessage] = useState("");
@@ -123,6 +126,7 @@ export default function SetupPage({ state, t, onStateChange }: Props) {
           <h1 className="text-lg font-bold text-foreground">{t.appName}</h1>
         </div>
         <div className="flex items-center gap-1">
+          <LanguageSwitcher currentLocale={locale} onLocaleChange={onLocaleChange} />
           <ShareButton t={t} state={state} />
           <ResetButton
             t={t}

@@ -2362,16 +2362,42 @@ export const translations: Record<Locale, Translations> = {
   th, vi, id, ms, bn, tl,
 };
 
-export function detectLocale(): Locale {
+const LOCALE_MAP: Record<string, Locale> = {
+  en: "en", sv: "sv", es: "es", fr: "fr", de: "de", it: "it", pt: "pt",
+  nl: "nl", pl: "pl", cs: "cs", hu: "hu", ro: "ro", bg: "bg", hr: "hr",
+  el: "el", fi: "fi", da: "da", no: "no", nb: "no", nn: "no",
+  uk: "uk", ru: "ru", tr: "tr", sk: "sk", sl: "sl", lt: "lt", lv: "lv",
+  et: "et", sr: "sr", zh: "zh", ja: "ja", ko: "ko", hi: "hi", ar: "ar",
+  th: "th", vi: "vi", id: "id", ms: "ms", bn: "bn", tl: "tl", fil: "tl",
+};
+
+const VALID_LOCALES = new Set<string>(Object.values(LOCALE_MAP));
+
+const LOCALE_STORAGE_KEY = "ieh-locale";
+
+export function getBrowserLocale(): Locale {
   const lang = (navigator.language ?? "en").toLowerCase();
-  const map: Record<string, Locale> = {
-    en: "en", sv: "sv", es: "es", fr: "fr", de: "de", it: "it", pt: "pt",
-    nl: "nl", pl: "pl", cs: "cs", hu: "hu", ro: "ro", bg: "bg", hr: "hr",
-    el: "el", fi: "fi", da: "da", no: "no", nb: "no", nn: "no",
-    uk: "uk", ru: "ru", tr: "tr", sk: "sk", sl: "sl", lt: "lt", lv: "lv",
-    et: "et", sr: "sr", zh: "zh", ja: "ja", ko: "ko", hi: "hi", ar: "ar",
-    th: "th", vi: "vi", id: "id", ms: "ms", bn: "bn", tl: "tl", fil: "tl",
-  };
-  const prefix = lang.split("-")[0];
-  return map[prefix] ?? "en";
+  return LOCALE_MAP[lang.split("-")[0]] ?? "en";
+}
+
+export function getStoredLocale(): Locale | null {
+  try {
+    const stored = localStorage.getItem(LOCALE_STORAGE_KEY);
+    if (stored && VALID_LOCALES.has(stored)) return stored as Locale;
+  } catch {}
+  return null;
+}
+
+export function setStoredLocale(locale: Locale | null): void {
+  try {
+    if (locale === null) {
+      localStorage.removeItem(LOCALE_STORAGE_KEY);
+    } else {
+      localStorage.setItem(LOCALE_STORAGE_KEY, locale);
+    }
+  } catch {}
+}
+
+export function detectLocale(): Locale {
+  return getStoredLocale() ?? getBrowserLocale();
 }

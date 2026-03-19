@@ -1,8 +1,11 @@
 import { ArrowLeft } from "lucide-react";
-import { Translations } from "@/lib/i18n";
+import { Locale, Translations } from "@/lib/i18n";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 interface Props {
   t: Translations;
+  locale: Locale;
+  onLocaleChange: (locale: Locale) => void;
 }
 
 function goBack() {
@@ -13,11 +16,11 @@ function goBack() {
   }
 }
 
-export default function PrivacyPage({ t }: Props) {
+export default function PrivacyPage({ t, locale, onLocaleChange }: Props) {
   const p = t.privacy;
   return (
     <div className="min-h-screen bg-background">
-      <header className="sticky top-0 z-10 bg-background border-b border-border px-4 py-3 flex items-center gap-3">
+      <header className="sticky top-0 z-10 bg-background border-b border-border px-4 py-3 flex items-center justify-between gap-3">
         <button
           onClick={goBack}
           className="flex items-center gap-1 text-muted-foreground text-sm hover:text-foreground transition-colors"
@@ -25,6 +28,7 @@ export default function PrivacyPage({ t }: Props) {
           <ArrowLeft className="w-4 h-4" />
           {p.back}
         </button>
+        <LanguageSwitcher currentLocale={locale} onLocaleChange={onLocaleChange} />
       </header>
 
       <main className="max-w-2xl mx-auto px-5 py-10 flex flex-col gap-8 text-foreground">

@@ -1,16 +1,19 @@
 import { ChevronLeft, CheckCircle2, LogOut, AlertTriangle, RefreshCw } from "lucide-react";
 import { AppState } from "@/lib/state";
-import { Translations } from "@/lib/i18n";
+import { Locale, Translations } from "@/lib/i18n";
 import ResetButton from "@/components/ResetButton";
 import ShareButton from "@/components/ShareButton";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 interface Props {
   state: AppState;
   t: Translations;
+  locale: Locale;
+  onLocaleChange: (locale: Locale) => void;
   onStateChange: (state: AppState) => void;
 }
 
-export default function CheckoutPage({ state, t, onStateChange }: Props) {
+export default function CheckoutPage({ state, t, locale, onLocaleChange, onStateChange }: Props) {
   const herePeople = state.people.filter((p) => p.status === "here");
   const leftPeople = state.people.filter((p) => p.status === "left");
   const notHerePeople = state.people.filter((p) => p.status === "not_here");
@@ -59,6 +62,7 @@ export default function CheckoutPage({ state, t, onStateChange }: Props) {
         </button>
         <span className="text-sm font-semibold text-foreground">{t.appName}</span>
         <div className="flex items-center gap-1">
+          <LanguageSwitcher currentLocale={locale} onLocaleChange={onLocaleChange} />
           <ShareButton t={t} state={state} />
           <ResetButton
             t={t}

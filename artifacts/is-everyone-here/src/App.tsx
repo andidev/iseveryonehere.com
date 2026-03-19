@@ -1,19 +1,25 @@
 import { useState, useEffect, useCallback } from "react";
 import { AppState, getStateFromUrl, saveStateToUrl, createInitialState } from "@/lib/state";
-import { detectLocale, translations } from "@/lib/i18n";
+import {
+  Locale,
+  detectLocale,
+  translations,
+  getBrowserLocale,
+  setStoredLocale,
+} from "@/lib/i18n";
 import SetupPage from "@/pages/SetupPage";
 import CheckinPage from "@/pages/CheckinPage";
 import CheckoutPage from "@/pages/CheckoutPage";
 import PrivacyPage from "@/pages/PrivacyPage";
-
-const locale = detectLocale();
-const t = translations[locale];
 
 function isPrivacyHash(hash: string) {
   return hash === "#privacy" || hash === "#privacy/";
 }
 
 function App() {
+  const [locale, setLocale] = useState<Locale>(detectLocale);
+  const t = translations[locale];
+
   const [showPrivacy, setShowPrivacy] = useState(() =>
     isPrivacyHash(window.location.hash)
   );
@@ -26,6 +32,12 @@ function App() {
   const handleStateChange = useCallback((newState: AppState) => {
     setState(newState);
     saveStateToUrl(newState);
+  }, []);
+
+  const handleLocaleChange = useCallback((newLocale: Locale) => {
+    const browserLocale = getBrowserLocale();
+    setStoredLocale(newLocale === browserLocale ? null : newLocale);
+    setLocale(newLocale);
   }, []);
 
   useEffect(() => {
@@ -43,16 +55,40 @@ function App() {
   }, []);
 
   if (showPrivacy) {
-    return <PrivacyPage t={t} />;
+    return <PrivacyPage t={t} locale={locale} onLocaleChange={handleLocaleChange} />;
   }
 
   if (state.phase === "setup") {
-    return <SetupPage state={state} t={t} onStateChange={handleStateChange} />;
+    return (
+      <SetupPage
+        state={state}
+        t={t}
+        locale={locale}
+        onLocaleChange={handleLocaleChange}
+        onStateChange={handleStateChange}
+      />
+    );
   }
   if (state.phase === "checkin") {
-    return <CheckinPage state={state} t={t} onStateChange={handleStateChange} />;
+    return (
+      <CheckinPage
+        state={state}
+        t={t}
+        locale={locale}
+        onLocaleChange={handleLocaleChange}
+        onStateChange={handleStateChange}
+      />
+    );
   }
-  return <CheckoutPage state={state} t={t} onStateChange={handleStateChange} />;
+  return (
+    <CheckoutPage
+      state={state}
+      t={t}
+      locale={locale}
+      onLocaleChange={handleLocaleChange}
+      onStateChange={handleStateChange}
+    />
+  );
 }
 
 export default App;
