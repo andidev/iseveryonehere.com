@@ -57,11 +57,15 @@ export default function LanguageSwitcher({ currentLocale, onLocaleChange }: Prop
         className="appearance-none pl-7 pr-2 py-1.5 text-sm rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring cursor-pointer max-w-[7rem]"
         aria-label="Select language"
       >
-        {(Object.keys(LOCALE_NAMES) as Locale[]).map((locale) => (
-          <option key={locale} value={locale}>
-            {LOCALE_NAMES[locale]}
-          </option>
-        ))}
+        {(Object.keys(LOCALE_NAMES) as Locale[])
+          .sort((a, b) =>
+            LOCALE_NAMES[a].localeCompare(LOCALE_NAMES[b], undefined, { sensitivity: "base" })
+          )
+          .map((locale) => (
+            <option key={locale} value={locale}>
+              {LOCALE_NAMES[locale]}
+            </option>
+          ))}
       </select>
     </div>
   );
