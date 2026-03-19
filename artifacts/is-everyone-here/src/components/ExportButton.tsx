@@ -7,7 +7,6 @@ interface Props {
   people: Person[];
   t: Translations;
   appName: string;
-  locale: string;
 }
 
 function buildRows(people: Person[]) {
@@ -18,21 +17,14 @@ function buildRows(people: Person[]) {
   }));
 }
 
-function buildFilename(appName: string, locale: string, ext: string): string {
-  const base = appName.replace(/[?？]$/, "").trimEnd();
+function buildFilename(appName: string, ext: string): string {
+  const base = appName
+    .replace(/^[¿¡]+/, "")
+    .replace(/[?？!！]$/, "")
+    .trim();
   const now = new Date();
-  const datePart = new Intl.DateTimeFormat(locale, {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  }).format(now);
-  const timePart = new Intl.DateTimeFormat(locale, {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  }).format(now).replace(":", ".");
-  const safeDate = datePart.replace(/[/\\:*?"<>|]/g, "-").replace(/\s+/g, " ").trim();
-  return `${base} ${safeDate} ${timePart}.${ext}`;
+  const iso = now.toISOString().slice(0, 10);
+  return `${base} ${iso}.${ext}`;
 }
 
 function downloadFile(content: string, filename: string, mimeType: string) {
@@ -45,7 +37,7 @@ function downloadFile(content: string, filename: string, mimeType: string) {
   URL.revokeObjectURL(url);
 }
 
-export default function ExportButton({ people, t, appName, locale }: Props) {
+export default function ExportButton({ people, t, appName }: Props) {
   const co = t.checkout;
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -81,7 +73,7 @@ export default function ExportButton({ people, t, appName, locale }: Props) {
       .join("\n");
     downloadFile(
       `${header}\n${body}`,
-      buildFilename(appName, locale, "csv"),
+      buildFilename(appName, "csv"),
       "text/csv;charset=utf-8;"
     );
     setOpen(false);
@@ -92,7 +84,7 @@ export default function ExportButton({ people, t, appName, locale }: Props) {
     const data = rows.map((r) => ({ name: r.name, attended: r.attended }));
     downloadFile(
       JSON.stringify(data, null, 2),
-      buildFilename(appName, locale, "json"),
+      buildFilename(appName, "json"),
       "application/json"
     );
     setOpen(false);

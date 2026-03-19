@@ -89,7 +89,7 @@ export default function CheckoutPage({ state, t, locale, onLocaleChange, onState
               {t.checkout.everyoneLeftHint}
             </p>
             <div className="flex items-center gap-3 mt-1 flex-wrap justify-center">
-              <ExportButton people={state.people} t={t} appName={t.appName} locale={locale} />
+              <ExportButton people={state.people} t={t} appName={t.appName} />
               <button
                 onClick={() => setRestartModal(true)}
                 className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-green-600 hover:bg-green-700 text-white font-semibold text-sm transition-colors active:opacity-80"
