@@ -90,7 +90,7 @@ export interface Translations {
 }
 
 const en: Translations = {
-  appName: "Is Everyone Here",
+  appName: "Is Everyone Here?",
   setup: {
     title: "Add Participants",
     addPersonsLabel: "Add persons",
@@ -165,7 +165,7 @@ const en: Translations = {
 };
 
 const sv: Translations = {
-  appName: "Är alla här",
+  appName: "Är alla här?",
   setup: {
     title: "Lägg till deltagare",
     addPersonsLabel: "Lägg till personer",
