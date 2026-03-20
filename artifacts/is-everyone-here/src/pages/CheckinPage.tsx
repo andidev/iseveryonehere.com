@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { CheckCircle2, XCircle, Users, ChevronRight } from "lucide-react";
+import { CheckCircle2, XCircle, Users, ChevronRight, LogOut } from "lucide-react";
 import { AppState, PersonStatus } from "@/lib/state";
 import { Locale, Translations } from "@/lib/i18n";
 import ResetButton from "@/components/ResetButton";
@@ -151,8 +151,11 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
                     <span className="text-base font-medium text-foreground">
                       {person.name}
                     </span>
-                    {(person.status === "here" || person.status === "left") && (
+                    {person.status === "here" && (
                       <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
+                    )}
+                    {person.status === "left" && (
+                      <LogOut className="w-4 h-4 text-primary shrink-0" />
                     )}
                     {person.status === "not_here" && (
                       <XCircle className="w-4 h-4 text-red-400 shrink-0" />
