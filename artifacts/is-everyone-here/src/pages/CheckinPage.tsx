@@ -21,6 +21,7 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
 
   const handledCount = people.filter((p) => p.status !== "pending").length;
   const allDone = people.every((p) => p.status !== "pending");
+  const checkoutStarted = people.some((p) => p.status === "left");
 
   useEffect(() => {
     const first = people.find((p) => p.status === "pending");
@@ -185,7 +186,7 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
               onClick={goToCheckout}
               className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-primary hover:bg-primary/90 text-white font-bold text-lg transition-colors active:opacity-80 shadow-lg"
             >
-              {t.checkin.goToCheckout}
+              {checkoutStarted ? t.setup.continueCheckout : t.checkin.goToCheckout}
               <ChevronRight className="w-5 h-5" />
             </button>
           ) : (
