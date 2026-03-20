@@ -115,7 +115,7 @@ export default function ExportButton({ people, t, appName }: Props) {
       </button>
 
       {open && (
-        <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-52 rounded-xl border border-border bg-card shadow-lg overflow-hidden z-20">
+        <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-64 rounded-xl border border-border bg-card shadow-lg overflow-hidden z-20">
           <button
             onClick={handleClipboard}
             className="w-full flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-muted transition-colors text-left"
