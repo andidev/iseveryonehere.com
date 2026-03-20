@@ -32,47 +32,55 @@ export default function HeaderOverflowMenu({
   }, []);
 
   return (
-    <div ref={ref} className="relative">
-      <button
-        onClick={() => setOpen((o) => !o)}
-        className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-        aria-label="More options"
-      >
-        <MoreVertical className="w-4 h-4" />
-      </button>
+    <div ref={ref} className="flex items-center gap-1">
+      {/* Language switcher inline on desktop */}
+      <div className="hidden sm:block">
+        <LanguageSwitcher currentLocale={currentLocale} onLocaleChange={onLocaleChange} />
+      </div>
 
-      {open && (
-        <div className="absolute right-0 top-full mt-1 w-56 rounded-xl border border-border bg-card shadow-lg overflow-hidden z-30">
-          {/* Language row */}
-          <div className="flex items-center px-4 py-3 border-b border-border">
-            <LanguageSwitcher
-              currentLocale={currentLocale}
-              onLocaleChange={(l) => { onLocaleChange(l); setOpen(false); }}
-            />
-          </div>
+      {/* Three-dot menu */}
+      <div className="relative">
+        <button
+          onClick={() => setOpen((o) => !o)}
+          className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+          aria-label="More options"
+        >
+          <MoreVertical className="w-4 h-4" />
+        </button>
 
-          {/* Participants row */}
-          {onBackToSetup && (
-            <button
-              onClick={() => { onBackToSetup(); setOpen(false); }}
-              className="w-full flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-muted transition-colors text-left"
+        {open && (
+          <div className="absolute right-0 top-full mt-1 w-56 rounded-xl border border-border bg-card shadow-lg overflow-hidden z-30">
+            {/* Language row — mobile only */}
+            <div className="flex items-center px-4 py-3 border-b border-border sm:hidden">
+              <LanguageSwitcher
+                currentLocale={currentLocale}
+                onLocaleChange={(l) => { onLocaleChange(l); setOpen(false); }}
+              />
+            </div>
+
+            {/* Participants row */}
+            {onBackToSetup && (
+              <button
+                onClick={() => { onBackToSetup(); setOpen(false); }}
+                className="w-full flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-muted transition-colors text-left"
+              >
+                <Users className="w-4 h-4 text-muted-foreground shrink-0" />
+                {backToSetupLabel}
+              </button>
+            )}
+
+            {/* Privacy Policy row */}
+            <a
+              href="#privacy"
+              onClick={() => setOpen(false)}
+              className="w-full flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-muted transition-colors border-t border-border"
             >
-              <Users className="w-4 h-4 text-muted-foreground shrink-0" />
-              {backToSetupLabel}
-            </button>
-          )}
-
-          {/* Privacy Policy row */}
-          <a
-            href="#privacy"
-            onClick={() => setOpen(false)}
-            className="w-full flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-muted transition-colors border-t border-border"
-          >
-            <Lock className="w-4 h-4 text-muted-foreground shrink-0" />
-            {privacyLabel}
-          </a>
-        </div>
-      )}
+              <Lock className="w-4 h-4 text-muted-foreground shrink-0" />
+              {privacyLabel}
+            </a>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
