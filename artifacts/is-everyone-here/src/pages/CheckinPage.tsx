@@ -161,7 +161,7 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
                       <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
                     )}
                     {person.status === "left" && (
-                      <LogOut className="w-4 h-4 text-primary shrink-0" />
+                      <LogOut className="w-4 h-4 shrink-0" style={{ color: "#adafb4" }} />
                     )}
                     {person.status === "not_here" && (
                       <XCircle className="w-4 h-4 text-red-400 shrink-0" />
