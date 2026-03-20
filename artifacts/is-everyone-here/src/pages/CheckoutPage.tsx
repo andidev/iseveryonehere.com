@@ -69,10 +69,7 @@ export default function CheckoutPage({ state, t, locale, onLocaleChange, onState
             <ChevronLeft className="w-4 h-4" />
             <span className="hidden sm:inline">{t.checkout.backToCheckin}</span>
           </button>
-          <div className="flex items-center gap-2">
-            <img src={`${import.meta.env.BASE_URL}favicon.svg`} alt="" className="w-6 h-6 rounded-md" />
-            <span className="text-sm font-semibold text-foreground">{t.appName}</span>
-          </div>
+          <span className="text-sm font-semibold text-foreground">{t.checkout.title}</span>
           <div className="flex items-center gap-1">
             <ShareButton t={t} state={state} />
             <ResetButton
