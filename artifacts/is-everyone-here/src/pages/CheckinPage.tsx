@@ -66,41 +66,39 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <header className="sticky top-0 z-10 bg-background border-b border-border px-4 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Users className="w-5 h-5 text-primary" />
-          <h1 className="text-lg font-bold text-foreground">{t.appName}</h1>
-        </div>
-        <div className="flex items-center gap-1">
-          <ShareButton t={t} state={state} />
-          <ResetButton
-            t={t}
-            confirmMessage={t.checkin.resetConfirm}
-            onConfirm={handleReset}
+      <div className="sticky top-0 z-10 bg-background border-b border-border">
+        <header className="px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Users className="w-5 h-5 text-primary" />
+            <h1 className="text-lg font-bold text-foreground">{t.appName}</h1>
+          </div>
+          <div className="flex items-center gap-1">
+            <ShareButton t={t} state={state} />
+            <ResetButton
+              t={t}
+              confirmMessage={t.checkin.resetConfirm}
+              onConfirm={handleReset}
+            />
+            <HeaderOverflowMenu
+              currentLocale={locale}
+              onLocaleChange={onLocaleChange}
+              onBackToSetup={backToSetup}
+              backToSetupLabel={t.setup.peopleList}
+            />
+          </div>
+        </header>
+        <div className="w-full h-1 bg-muted">
+          <div
+            className="h-full bg-primary transition-all duration-300"
+            style={{ width: `${(handledCount / people.length) * 100}%` }}
           />
-          <HeaderOverflowMenu
-            currentLocale={locale}
-            onLocaleChange={onLocaleChange}
-            onBackToSetup={backToSetup}
-            backToSetupLabel={t.setup.peopleList}
-          />
         </div>
-      </header>
-
-      <div className="w-full h-1 bg-muted">
-        <div
-          className="h-full bg-primary transition-all duration-300"
-          style={{ width: `${(handledCount / people.length) * 100}%` }}
-        />
       </div>
 
       <div className="px-4 pt-3 pb-1 flex justify-between items-center max-w-xl mx-auto w-full">
         <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">
           {t.checkin.title}
         </p>
-        <span className="text-xs text-muted-foreground font-medium tabular-nums">
-          {handledCount} / {people.length}
-        </span>
       </div>
 
       <main className="max-w-xl mx-auto w-full px-4 pt-[40vh] pb-[50vh]">
@@ -180,9 +178,9 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
         </ul>
       </main>
 
-      {allDone && (
-        <div className="fixed bottom-0 left-0 right-0 z-20 p-4 bg-gradient-to-t from-background via-background to-transparent pb-6">
-          <div className="max-w-xl mx-auto">
+      <div className="fixed bottom-0 left-0 right-0 z-20 p-4 pb-6 bg-gradient-to-t from-background via-background to-transparent">
+        <div className="max-w-xl mx-auto">
+          {allDone ? (
             <button
               onClick={goToCheckout}
               className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-primary hover:bg-primary/90 text-white font-bold text-lg transition-colors active:opacity-80 shadow-lg"
@@ -190,9 +188,14 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
               {t.checkin.goToCheckout}
               <ChevronRight className="w-5 h-5" />
             </button>
-          </div>
+          ) : (
+            <div className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-muted text-muted-foreground font-semibold text-base">
+              <span className="tabular-nums">{handledCount} / {people.length}</span>
+              <span>{t.checkin.title}</span>
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 }
