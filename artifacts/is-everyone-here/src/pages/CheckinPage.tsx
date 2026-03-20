@@ -96,12 +96,6 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
         </div>
       </div>
 
-      <div className="px-4 pt-3 pb-1 flex justify-between items-center max-w-xl mx-auto w-full">
-        <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">
-          {t.checkin.title}
-        </p>
-      </div>
-
       <main className="max-w-xl mx-auto w-full px-4 pt-[40vh] pb-[50vh]">
         <ul className="flex flex-col gap-2">
           {people.map((person) => {
