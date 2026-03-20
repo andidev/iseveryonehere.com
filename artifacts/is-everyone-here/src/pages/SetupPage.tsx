@@ -137,7 +137,7 @@ export default function SetupPage({ state, t, locale, onLocaleChange, onStateCha
       {/* Header */}
       <header className="sticky top-0 z-10 bg-background border-b border-border px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Users className="w-5 h-5 text-primary" />
+          <img src={`${import.meta.env.BASE_URL}favicon.svg`} alt="" className="w-6 h-6 rounded-md" />
           <h1 className="text-lg font-bold text-foreground">{t.appName}</h1>
         </div>
         <div className="flex items-center gap-1">
