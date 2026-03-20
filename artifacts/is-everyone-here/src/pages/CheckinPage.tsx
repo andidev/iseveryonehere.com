@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { CheckCircle2, XCircle, Users } from "lucide-react";
+import { CheckCircle2, XCircle, Users, ChevronRight } from "lucide-react";
 import { AppState, PersonStatus } from "@/lib/state";
 import { Locale, Translations } from "@/lib/i18n";
 import ResetButton from "@/components/ResetButton";
@@ -20,10 +20,11 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
   const itemRefs = useRef<Record<string, HTMLLIElement | null>>({});
 
   const handledCount = people.filter((p) => p.status !== "pending").length;
+  const allDone = people.every((p) => p.status !== "pending");
 
   useEffect(() => {
     const first = people.find((p) => p.status === "pending");
-    const id = first?.id ?? people[0]?.id ?? null;
+    const id = first?.id ?? null;
     setSelectedId(id);
   }, []);
 
@@ -35,14 +36,19 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
 
   function mark(id: string, status: PersonStatus) {
     const updated = people.map((p) => (p.id === id ? { ...p, status } : p));
-    const allDone = updated.every((p) => p.status !== "pending");
-    if (allDone) {
-      onStateChange({ ...state, people: updated, phase: "checkout" });
+    const nowAllDone = updated.every((p) => p.status !== "pending");
+    if (nowAllDone) {
+      onStateChange({ ...state, people: updated });
+      setSelectedId(null);
       return;
     }
     const nextPending = updated.find((p) => p.status === "pending");
     onStateChange({ ...state, people: updated });
     setSelectedId(nextPending?.id ?? null);
+  }
+
+  function goToCheckout() {
+    onStateChange({ ...state, phase: "checkout" });
   }
 
   function backToSetup() {
@@ -158,6 +164,20 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
           })}
         </ul>
       </main>
+
+      {allDone && (
+        <div className="fixed bottom-0 left-0 right-0 z-20 p-4 bg-gradient-to-t from-background via-background to-transparent pb-6">
+          <div className="max-w-xl mx-auto">
+            <button
+              onClick={goToCheckout}
+              className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-primary hover:bg-primary/90 text-white font-bold text-lg transition-colors active:opacity-80 shadow-lg"
+            >
+              {t.checkin.goToCheckout}
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
