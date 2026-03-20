@@ -1,4 +1,5 @@
-import { CheckCircle2, XCircle, ChevronLeft, ChevronRight, Users } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { CheckCircle2, XCircle, Users } from "lucide-react";
 import { AppState, PersonStatus } from "@/lib/state";
 import { Locale, Translations } from "@/lib/i18n";
 import ResetButton from "@/components/ResetButton";
@@ -14,30 +15,34 @@ interface Props {
 }
 
 export default function CheckinPage({ state, t, locale, onLocaleChange, onStateChange }: Props) {
-  const { people, currentIndex } = state;
-  const current = people[currentIndex];
-  const prev = currentIndex > 0 ? people[currentIndex - 1] : null;
-  const next = currentIndex < people.length - 1 ? people[currentIndex + 1] : null;
+  const { people } = state;
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const itemRefs = useRef<Record<string, HTMLLIElement | null>>({});
 
-  function markCurrent(status: PersonStatus) {
-    const updated = people.map((p, i) =>
-      i === currentIndex ? { ...p, status } : p
-    );
-    const allNowHandled = updated.every((p) => p.status !== "pending");
-    if (allNowHandled) {
+  const handledCount = people.filter((p) => p.status !== "pending").length;
+
+  useEffect(() => {
+    const first = people.find((p) => p.status === "pending");
+    const id = first?.id ?? people[0]?.id ?? null;
+    setSelectedId(id);
+  }, []);
+
+  useEffect(() => {
+    if (selectedId && itemRefs.current[selectedId]) {
+      itemRefs.current[selectedId]!.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [selectedId]);
+
+  function mark(id: string, status: PersonStatus) {
+    const updated = people.map((p) => (p.id === id ? { ...p, status } : p));
+    const allDone = updated.every((p) => p.status !== "pending");
+    if (allDone) {
       onStateChange({ ...state, people: updated, phase: "checkout" });
       return;
     }
-    const nextIndex =
-      currentIndex < people.length - 1 ? currentIndex + 1 : currentIndex;
-    onStateChange({ ...state, people: updated, currentIndex: nextIndex });
-  }
-
-  function goTo(index: number) {
-    const currentHandled = people[currentIndex].status !== "pending";
-    if (index > currentIndex && !currentHandled) return;
-    if (index < 0 || index >= people.length) return;
-    onStateChange({ ...state, currentIndex: index });
+    const nextPending = updated.find((p) => p.status === "pending");
+    onStateChange({ ...state, people: updated });
+    setSelectedId(nextPending?.id ?? null);
   }
 
   function backToSetup() {
@@ -47,19 +52,11 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
   function handleReset() {
     const reset = people.map((p) => ({ ...p, status: "pending" as const }));
     onStateChange({ ...state, people: reset, currentIndex: 0 });
+    setSelectedId(reset[0]?.id ?? null);
   }
-
-  const handledCount = people.filter((p) => p.status !== "pending").length;
-
-  const statusIcon = (status: PersonStatus) => {
-    if (status === "here") return <CheckCircle2 className="w-4 h-4 text-primary" />;
-    if (status === "not_here") return <XCircle className="w-4 h-4 text-red-500" />;
-    return null;
-  };
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      {/* Header */}
       <header className="sticky top-0 z-10 bg-background border-b border-border px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Users className="w-5 h-5 text-primary" />
@@ -81,7 +78,6 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
         </div>
       </header>
 
-      {/* Progress bar */}
       <div className="w-full h-1 bg-muted">
         <div
           className="h-full bg-primary transition-all duration-300"
@@ -89,84 +85,78 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
         />
       </div>
 
-      <main className="flex-1 flex flex-col items-center justify-center px-4 py-6 gap-6 select-none">
-        {/* Previous person */}
-        {prev ? (
-          <button
-            onClick={() => goTo(currentIndex - 1)}
-            className="w-full max-w-sm flex items-center justify-between px-5 py-3 rounded-xl bg-muted/50 border border-border text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-          >
-            <ChevronLeft className="w-4 h-4" />
-            <div className="flex items-center gap-2">
-              {statusIcon(prev.status)}
-              <span className="text-base font-medium">{prev.name}</span>
-            </div>
-            <ChevronLeft className="w-4 h-4 opacity-0" />
-          </button>
-        ) : (
-          <div className="h-14 w-full max-w-sm" />
-        )}
+      <div className="px-4 pt-3 pb-1 flex justify-between items-center max-w-xl mx-auto w-full">
+        <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">
+          {t.checkin.title}
+        </p>
+        <span className="text-xs text-muted-foreground font-medium tabular-nums">
+          {handledCount} / {people.length}
+        </span>
+      </div>
 
-        {/* Current person */}
-        <div className="w-full max-w-sm flex flex-col items-center gap-2">
-          <div className="w-full flex items-center justify-between">
-            <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">
-              {t.checkin.title}
-            </p>
-            <span className="text-xs text-muted-foreground font-medium tabular-nums">
-              {handledCount} / {people.length}
-            </span>
-          </div>
-          <div className="w-full text-center px-4 py-6 rounded-2xl bg-card border-2 border-primary shadow-lg">
-            <p className="text-4xl font-bold text-foreground leading-tight break-words">
-              {current.name}
-            </p>
-          </div>
-        </div>
+      <main className="flex-1 max-w-xl mx-auto w-full px-4 pb-[50vh]">
+        <ul className="flex flex-col gap-2 pt-1">
+          {people.map((person) => {
+            const isSelected = person.id === selectedId;
 
-        {/* Action buttons */}
-        <div className="w-full max-w-sm flex gap-3">
-          <button
-            onClick={() => markCurrent("not_here")}
-            className={`flex-1 py-5 rounded-xl font-bold text-xl transition-all active:scale-95 flex flex-col items-center gap-1 text-white
-              ${current.status === "not_here"
-                ? "bg-red-400 ring-2 ring-red-300/60"
-                : "bg-red-400/80 dark:bg-red-500/60"
-              }`}
-          >
-            <XCircle className="w-7 h-7" />
-            {t.checkin.notHereButton}
-          </button>
-          <button
-            onClick={() => markCurrent("here")}
-            className={`flex-1 py-5 rounded-xl font-bold text-xl transition-all active:scale-95 flex flex-col items-center gap-1 text-white
-              ${current.status === "here"
-                ? "bg-primary ring-4 ring-primary/40"
-                : "bg-primary/70 dark:bg-primary/50"
-              }`}
-          >
-            <CheckCircle2 className="w-7 h-7" />
-            {t.checkin.hereButton}
-          </button>
-        </div>
-
-        {/* Next person */}
-        {next ? (
-          <button
-            onClick={() => goTo(currentIndex + 1)}
-            disabled={current.status === "pending"}
-            className="w-full max-w-sm flex items-center justify-between px-5 py-3 rounded-xl bg-muted/50 border border-border text-muted-foreground hover:text-foreground hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-          >
-            <ChevronRight className="w-4 h-4 opacity-0" />
-            <div className="flex items-center gap-2">
-              {statusIcon(next.status)}
-              <span className="text-base font-medium">{next.name}</span>
-            </div>
-            <ChevronRight className="w-4 h-4" />
-          </button>
-        ) : (
-          <div className="h-14 w-full max-w-sm" />
-        )}
+            return (
+              <li
+                key={person.id}
+                ref={(el) => { itemRefs.current[person.id] = el; }}
+              >
+                {isSelected ? (
+                  <div className="rounded-2xl bg-card border-2 border-primary shadow-lg p-4 flex flex-col gap-3">
+                    <p className="text-2xl font-bold text-foreground text-center leading-tight break-words">
+                      {person.name}
+                    </p>
+                    <div className="flex gap-3">
+                      <button
+                        onClick={() => mark(person.id, "not_here")}
+                        className={`flex-1 py-4 rounded-xl font-bold text-lg transition-all active:scale-95 flex flex-col items-center gap-1 text-white
+                          ${person.status === "not_here"
+                            ? "bg-red-400 ring-2 ring-red-300/60"
+                            : "bg-red-400/80 dark:bg-red-500/60"
+                          }`}
+                      >
+                        <XCircle className="w-6 h-6" />
+                        {t.checkin.notHereButton}
+                      </button>
+                      <button
+                        onClick={() => mark(person.id, "here")}
+                        className={`flex-1 py-4 rounded-xl font-bold text-lg transition-all active:scale-95 flex flex-col items-center gap-1 text-white
+                          ${person.status === "here"
+                            ? "bg-primary ring-4 ring-primary/40"
+                            : "bg-primary/70 dark:bg-primary/50"
+                          }`}
+                      >
+                        <CheckCircle2 className="w-6 h-6" />
+                        {t.checkin.hereButton}
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => setSelectedId(person.id)}
+                    className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-card border border-border hover:bg-muted/50 transition-colors text-left"
+                  >
+                    <span className="text-base font-medium text-foreground">
+                      {person.name}
+                    </span>
+                    {person.status === "here" && (
+                      <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
+                    )}
+                    {person.status === "not_here" && (
+                      <XCircle className="w-4 h-4 text-red-400 shrink-0" />
+                    )}
+                    {person.status === "pending" && (
+                      <span className="w-4 h-4 shrink-0" />
+                    )}
+                  </button>
+                )}
+              </li>
+            );
+          })}
+        </ul>
       </main>
     </div>
   );
