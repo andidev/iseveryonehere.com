@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronLeft, CheckCircle2, LogOut, XCircle, RefreshCw } from "lucide-react";
+import { ChevronLeft, CheckCircle2, LogOut, XCircle, RefreshCw, Settings } from "lucide-react";
 import { AppState } from "@/lib/state";
 import { Locale, Translations } from "@/lib/i18n";
 import ResetButton from "@/components/ResetButton";
@@ -40,6 +40,10 @@ export default function CheckoutPage({ state, t, locale, onLocaleChange, onState
     onStateChange({ ...state, phase: "checkin" });
   }
 
+  function backToSetup() {
+    onStateChange({ ...state, phase: "setup" });
+  }
+
   function handleReset() {
     const reset = state.people.map((p) =>
       p.status === "left" ? { ...p, status: "here" as const } : p
@@ -74,6 +78,13 @@ export default function CheckoutPage({ state, t, locale, onLocaleChange, onState
             onConfirm={handleReset}
             disabled={leftPeople.length === 0}
           />
+          <button
+            onClick={backToSetup}
+            className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+            aria-label={t.checkin.backToSetup}
+          >
+            <Settings className="w-4 h-4" />
+          </button>
         </div>
       </header>
 

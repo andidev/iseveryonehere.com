@@ -1,4 +1,4 @@
-import { CheckCircle2, XCircle, ChevronLeft, ChevronRight, Settings } from "lucide-react";
+import { CheckCircle2, XCircle, ChevronLeft, ChevronRight, Settings, Users } from "lucide-react";
 import { AppState, PersonStatus } from "@/lib/state";
 import { Locale, Translations } from "@/lib/i18n";
 import ResetButton from "@/components/ResetButton";
@@ -61,13 +61,10 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
       <header className="sticky top-0 z-10 bg-background border-b border-border px-4 py-3 flex items-center justify-between">
-        <button
-          onClick={backToSetup}
-          className="flex items-center gap-1 text-muted-foreground text-sm hover:text-foreground transition-colors"
-        >
-          <Settings className="w-4 h-4" />
-          {t.checkin.backToSetup}
-        </button>
+        <div className="flex items-center gap-2">
+          <Users className="w-5 h-5 text-primary" />
+          <h1 className="text-lg font-bold text-foreground">{t.appName}</h1>
+        </div>
         <span className="text-xs text-muted-foreground font-medium">
           {handledCount} / {people.length}
         </span>
@@ -79,6 +76,13 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
             confirmMessage={t.checkin.resetConfirm}
             onConfirm={handleReset}
           />
+          <button
+            onClick={backToSetup}
+            className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+            aria-label={t.checkin.backToSetup}
+          >
+            <Settings className="w-4 h-4" />
+          </button>
         </div>
       </header>
 
