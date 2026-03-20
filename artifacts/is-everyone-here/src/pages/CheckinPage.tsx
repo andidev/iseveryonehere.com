@@ -35,7 +35,9 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
   }, [selectedId]);
 
   function mark(id: string, status: PersonStatus) {
-    const updated = people.map((p) => (p.id === id ? { ...p, status } : p));
+    const current = people.find((p) => p.id === id);
+    const newStatus: PersonStatus = current?.status === status ? "pending" : status;
+    const updated = people.map((p) => (p.id === id ? { ...p, status: newStatus } : p));
     const nowAllDone = updated.every((p) => p.status !== "pending");
     if (nowAllDone) {
       onStateChange({ ...state, people: updated });
@@ -44,6 +46,7 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
     }
     const nextPending = updated.find((p) => p.status === "pending");
     onStateChange({ ...state, people: updated });
+    if (newStatus === "pending") return;
     setSelectedId(nextPending?.id ?? null);
   }
 
