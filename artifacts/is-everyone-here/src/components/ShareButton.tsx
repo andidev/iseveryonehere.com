@@ -22,13 +22,21 @@ export default function ShareButton({ t, state }: Props) {
       currentIndex: 0,
       people: state.people.map((p) => ({ ...p, status: "pending" })),
     };
-    await navigator.share({ title: t.appName, url: buildUrl(listState) });
-    setOpen(false);
+    try {
+      await navigator.share({ title: t.appName, url: buildUrl(listState) });
+      setOpen(false);
+    } catch (e) {
+      if (e instanceof Error && e.name !== "AbortError") throw e;
+    }
   }
 
   async function shareWithStatus() {
-    await navigator.share({ title: t.appName, url: buildUrl(state) });
-    setOpen(false);
+    try {
+      await navigator.share({ title: t.appName, url: buildUrl(state) });
+      setOpen(false);
+    } catch (e) {
+      if (e instanceof Error && e.name !== "AbortError") throw e;
+    }
   }
 
   return (
