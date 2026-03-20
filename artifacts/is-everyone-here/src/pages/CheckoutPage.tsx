@@ -177,7 +177,7 @@ export default function CheckoutPage({ state, t, locale, onLocaleChange, onState
               <h2 className="text-sm font-semibold text-muted-foreground">
                 {t.checkout.leftLabel}
               </h2>
-              <span className="text-xs bg-muted text-muted-foreground rounded-full px-2 py-0.5 font-medium">
+              <span className="text-xs bg-primary/10 text-primary rounded-full px-2 py-0.5 font-medium">
                 {leftPeople.length}
               </span>
             </div>
