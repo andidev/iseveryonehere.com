@@ -123,7 +123,6 @@ export default function ExportButton({ people, t, appName }: Props) {
             <Clipboard className="w-4 h-4 text-muted-foreground shrink-0" />
             {co.exportClipboard}
           </button>
-          <div className="border-t border-border" />
           <button
             onClick={handleClipboardValues}
             className="w-full flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-muted transition-colors text-left"
@@ -139,7 +138,6 @@ export default function ExportButton({ people, t, appName }: Props) {
             <FileText className="w-4 h-4 text-muted-foreground shrink-0" />
             {co.exportCSV}
           </button>
-          <div className="border-t border-border" />
           <button
             onClick={handleJSON}
             className="w-full flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-muted transition-colors text-left"
