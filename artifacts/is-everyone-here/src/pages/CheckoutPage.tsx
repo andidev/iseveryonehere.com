@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { ChevronLeft, CheckCircle2, LogOut, XCircle, RefreshCw, Settings } from "lucide-react";
+import { ChevronLeft, CheckCircle2, LogOut, XCircle, RefreshCw } from "lucide-react";
 import { AppState } from "@/lib/state";
 import { Locale, Translations } from "@/lib/i18n";
 import ResetButton from "@/components/ResetButton";
 import ShareButton from "@/components/ShareButton";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
+import HeaderOverflowMenu from "@/components/HeaderOverflowMenu";
 import ExportButton from "@/components/ExportButton";
 
 interface Props {
@@ -70,7 +70,12 @@ export default function CheckoutPage({ state, t, locale, onLocaleChange, onState
         </button>
         <span className="text-sm font-semibold text-foreground">{t.appName}</span>
         <div className="flex items-center gap-1">
-          <LanguageSwitcher currentLocale={locale} onLocaleChange={onLocaleChange} />
+          <HeaderOverflowMenu
+            currentLocale={locale}
+            onLocaleChange={onLocaleChange}
+            onBackToSetup={backToSetup}
+            backToSetupLabel={t.checkin.backToSetup}
+          />
           <ShareButton t={t} state={state} />
           <ResetButton
             t={t}
@@ -78,13 +83,6 @@ export default function CheckoutPage({ state, t, locale, onLocaleChange, onState
             onConfirm={handleReset}
             disabled={leftPeople.length === 0}
           />
-          <button
-            onClick={backToSetup}
-            className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-            aria-label={t.checkin.backToSetup}
-          >
-            <Settings className="w-4 h-4" />
-          </button>
         </div>
       </header>
 

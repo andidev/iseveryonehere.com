@@ -4,7 +4,7 @@ import { AppState, Person, generateId } from "@/lib/state";
 import { Locale, Translations } from "@/lib/i18n";
 import ResetButton from "@/components/ResetButton";
 import ShareButton from "@/components/ShareButton";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
+import HeaderOverflowMenu from "@/components/HeaderOverflowMenu";
 
 interface Props {
   state: AppState;
@@ -141,7 +141,7 @@ export default function SetupPage({ state, t, locale, onLocaleChange, onStateCha
           <h1 className="text-lg font-bold text-foreground">{t.appName}</h1>
         </div>
         <div className="flex items-center gap-1">
-          <LanguageSwitcher currentLocale={locale} onLocaleChange={onLocaleChange} />
+          <HeaderOverflowMenu currentLocale={locale} onLocaleChange={onLocaleChange} />
           <ShareButton t={t} state={state} />
           <ResetButton
             t={t}

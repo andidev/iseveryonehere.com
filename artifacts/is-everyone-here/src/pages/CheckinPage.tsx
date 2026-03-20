@@ -1,9 +1,9 @@
-import { CheckCircle2, XCircle, ChevronLeft, ChevronRight, Settings, Users } from "lucide-react";
+import { CheckCircle2, XCircle, ChevronLeft, ChevronRight, Users } from "lucide-react";
 import { AppState, PersonStatus } from "@/lib/state";
 import { Locale, Translations } from "@/lib/i18n";
 import ResetButton from "@/components/ResetButton";
 import ShareButton from "@/components/ShareButton";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
+import HeaderOverflowMenu from "@/components/HeaderOverflowMenu";
 
 interface Props {
   state: AppState;
@@ -69,20 +69,18 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
           {handledCount} / {people.length}
         </span>
         <div className="flex items-center gap-1">
-          <LanguageSwitcher currentLocale={locale} onLocaleChange={onLocaleChange} />
+          <HeaderOverflowMenu
+            currentLocale={locale}
+            onLocaleChange={onLocaleChange}
+            onBackToSetup={backToSetup}
+            backToSetupLabel={t.checkin.backToSetup}
+          />
           <ShareButton t={t} state={state} />
           <ResetButton
             t={t}
             confirmMessage={t.checkin.resetConfirm}
             onConfirm={handleReset}
           />
-          <button
-            onClick={backToSetup}
-            className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-            aria-label={t.checkin.backToSetup}
-          >
-            <Settings className="w-4 h-4" />
-          </button>
         </div>
       </header>
 
