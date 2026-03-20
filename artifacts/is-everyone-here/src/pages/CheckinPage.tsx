@@ -65,9 +65,6 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
           <Users className="w-5 h-5 text-primary" />
           <h1 className="text-lg font-bold text-foreground">{t.appName}</h1>
         </div>
-        <span className="text-xs text-muted-foreground font-medium">
-          {handledCount} / {people.length}
-        </span>
         <div className="flex items-center gap-1">
           <ShareButton t={t} state={state} />
           <ResetButton
@@ -112,9 +109,14 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
 
         {/* Current person */}
         <div className="w-full max-w-sm flex flex-col items-center gap-2">
-          <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">
-            {t.checkin.title}
-          </p>
+          <div className="w-full flex items-center justify-between">
+            <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">
+              {t.checkin.title}
+            </p>
+            <span className="text-xs text-muted-foreground font-medium tabular-nums">
+              {handledCount} / {people.length}
+            </span>
+          </div>
           <div className="w-full text-center px-4 py-6 rounded-2xl bg-card border-2 border-primary shadow-lg">
             <p className="text-4xl font-bold text-foreground leading-tight break-words">
               {current.name}
