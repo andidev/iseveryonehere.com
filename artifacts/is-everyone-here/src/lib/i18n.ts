@@ -141,7 +141,7 @@ const en: Translations = {
     noOneLeft: "No one has left yet.",
     everyoneLeft: "Everyone has left!",
     everyoneLeftHint: "All participants have been checked out.",
-    backToCheckin: "Back to Check-In",
+    backToCheckin: "Check-In",
     notHereLabel: "Not here",
     restart: "Restart",
     tapToMarkLeft: "Tap a name to mark them as left",
