@@ -148,7 +148,7 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
                     onClick={() => setSelectedId(person.id)}
                     className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-card border border-border hover:bg-muted/50 transition-colors text-left"
                   >
-                    <span className={`text-base font-medium ${person.status === "left" ? "line-through text-muted-foreground" : "text-foreground"}`}>
+                    <span className={`text-base font-medium text-foreground ${person.status === "left" ? "line-through" : ""}`}>
                       {person.name}
                     </span>
                     {person.status === "here" && (
