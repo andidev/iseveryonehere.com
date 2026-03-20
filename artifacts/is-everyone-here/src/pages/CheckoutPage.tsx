@@ -66,7 +66,6 @@ export default function CheckoutPage({ state, t, locale, onLocaleChange, onState
           className="flex items-center gap-1 text-muted-foreground text-sm hover:text-foreground transition-colors"
         >
           <ChevronLeft className="w-4 h-4" />
-          {t.checkout.backToCheckin}
         </button>
         <span className="text-sm font-semibold text-foreground">{t.appName}</span>
         <div className="flex items-center gap-1">
