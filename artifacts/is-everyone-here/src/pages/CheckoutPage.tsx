@@ -2,7 +2,6 @@ import { useState } from "react";
 import { ChevronLeft, CheckCircle2, LogOut, RefreshCw } from "lucide-react";
 import { AppState } from "@/lib/state";
 import { Locale, Translations } from "@/lib/i18n";
-import ResetButton from "@/components/ResetButton";
 import ShareButton from "@/components/ShareButton";
 import HeaderOverflowMenu from "@/components/HeaderOverflowMenu";
 import ExportButton from "@/components/ExportButton";
@@ -44,14 +43,15 @@ export default function CheckoutPage({ state, t, locale, onLocaleChange, onState
     onStateChange({ ...state, phase: "setup" });
   }
 
-  function handleReset() {
+  function handleRestartCheckout() {
     const reset = state.people.map((p) =>
       p.status === "left" ? { ...p, status: "here" as const } : p
     );
     onStateChange({ ...state, people: reset });
+    setRestartModal(false);
   }
 
-  function handleRestart() {
+  function handleRestartCheckin() {
     const reset = state.people.map((p) => ({ ...p, status: "pending" as const }));
     onStateChange({ phase: "checkin", people: reset, currentIndex: 0 });
     setRestartModal(false);
@@ -72,12 +72,13 @@ export default function CheckoutPage({ state, t, locale, onLocaleChange, onState
           <span className="text-sm font-semibold text-foreground">{t.appName}</span>
           <div className="flex items-center gap-1">
             <ShareButton t={t} state={state} />
-            <ResetButton
-              t={t}
-              confirmMessage={t.checkout.resetConfirm}
-              onConfirm={handleReset}
-              disabled={leftPeople.length === 0}
-            />
+            <button
+              onClick={() => setRestartModal(true)}
+              className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+              aria-label="Restart"
+            >
+              <RefreshCw className="w-4 h-4" />
+            </button>
             <HeaderOverflowMenu
               currentLocale={locale}
               onLocaleChange={onLocaleChange}
@@ -128,18 +129,24 @@ export default function CheckoutPage({ state, t, locale, onLocaleChange, onState
             <div className="relative z-10 bg-card border border-border rounded-2xl shadow-xl max-w-sm w-full p-6 flex flex-col gap-4">
               <h2 className="text-lg font-bold text-foreground">{t.reset.confirmTitle}</h2>
               <p className="text-sm text-muted-foreground">{t.checkout.restartConfirm}</p>
-              <div className="flex gap-3">
+              <div className="flex flex-col gap-2">
                 <button
-                  onClick={() => setRestartModal(false)}
-                  className="flex-1 py-2.5 rounded-lg border border-border text-foreground text-sm font-medium hover:bg-muted transition-colors"
+                  onClick={handleRestartCheckin}
+                  className="w-full py-2.5 rounded-lg bg-destructive text-destructive-foreground text-sm font-medium hover:opacity-90 transition-opacity"
                 >
-                  {t.reset.cancel}
+                  {t.checkout.restartCheckin}
                 </button>
                 <button
-                  onClick={handleRestart}
-                  className="flex-1 py-2.5 rounded-lg bg-destructive text-destructive-foreground text-sm font-medium hover:opacity-90 transition-opacity"
+                  onClick={handleRestartCheckout}
+                  className="w-full py-2.5 rounded-lg bg-muted text-foreground text-sm font-medium hover:bg-muted/80 transition-colors"
                 >
-                  {t.reset.confirmYes}
+                  {t.checkout.restartCheckout}
+                </button>
+                <button
+                  onClick={() => setRestartModal(false)}
+                  className="w-full py-2.5 rounded-lg border border-border text-muted-foreground text-sm font-medium hover:bg-muted transition-colors"
+                >
+                  {t.reset.cancel}
                 </button>
               </div>
             </div>
