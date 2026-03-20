@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronLeft, CheckCircle2, LogOut, XCircle, RefreshCw } from "lucide-react";
+import { ChevronLeft, CheckCircle2, LogOut, RefreshCw } from "lucide-react";
 import { AppState } from "@/lib/state";
 import { Locale, Translations } from "@/lib/i18n";
 import ResetButton from "@/components/ResetButton";
@@ -211,7 +211,6 @@ export default function CheckoutPage({ state, t, locale, onLocaleChange, onState
         {notHerePeople.length > 0 && (
           <section className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
-              <XCircle className="w-4 h-4 text-red-400" />
               <h2 className="text-sm font-semibold text-muted-foreground">
                 {t.checkout.notHereLabel}
               </h2>
