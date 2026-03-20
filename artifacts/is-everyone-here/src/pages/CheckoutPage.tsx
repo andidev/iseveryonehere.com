@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronLeft, CheckCircle2, LogOut, XCircle, RefreshCw } from "lucide-react";
+import { ArrowLeft, CheckCircle2, LogOut, XCircle, RefreshCw } from "lucide-react";
 import { AppState } from "@/lib/state";
 import { Locale, Translations } from "@/lib/i18n";
 import ResetButton from "@/components/ResetButton";
@@ -65,7 +65,7 @@ export default function CheckoutPage({ state, t, locale, onLocaleChange, onState
           onClick={backToCheckin}
           className="flex items-center gap-1 text-muted-foreground text-sm hover:text-foreground transition-colors"
         >
-          <ChevronLeft className="w-4 h-4" />
+          <ArrowLeft className="w-4 h-4" />
           <span className="hidden sm:inline">{t.checkout.backToCheckin}</span>
         </button>
         <span className="text-sm font-semibold text-foreground">{t.appName}</span>
