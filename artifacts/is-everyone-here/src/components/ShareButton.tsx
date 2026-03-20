@@ -55,7 +55,7 @@ export default function ShareButton({ t, state }: Props) {
           onClick={() => setOpen(false)}
         >
           <div
-            className="w-full max-w-sm mx-4 mb-4 sm:mb-0 bg-background rounded-2xl shadow-xl border border-border overflow-hidden"
+            className="w-full max-w-sm mx-4 mb-4 sm:mb-0 bg-card rounded-2xl shadow-xl border border-border overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Title bar */}

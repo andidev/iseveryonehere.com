@@ -54,7 +54,7 @@ export default function LanguageSwitcher({ currentLocale, onLocaleChange }: Prop
       <select
         value={currentLocale}
         onChange={(e) => onLocaleChange(e.target.value as Locale)}
-        className="appearance-none pl-7 pr-2 py-1.5 text-sm rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring cursor-pointer max-w-[7rem]"
+        className="appearance-none pl-7 pr-2 py-1.5 text-sm rounded-lg border border-border bg-card text-foreground focus:outline-none focus:ring-2 focus:ring-ring cursor-pointer max-w-[7rem]"
         aria-label="Select language"
       >
         {(Object.keys(LOCALE_NAMES) as Locale[])

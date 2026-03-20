@@ -52,7 +52,7 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
   const handledCount = people.filter((p) => p.status !== "pending").length;
 
   const statusIcon = (status: PersonStatus) => {
-    if (status === "here") return <CheckCircle2 className="w-4 h-4 text-green-600" />;
+    if (status === "here") return <CheckCircle2 className="w-4 h-4 text-primary" />;
     if (status === "not_here") return <XCircle className="w-4 h-4 text-red-500" />;
     return null;
   };
@@ -124,10 +124,10 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
         <div className="w-full max-w-sm flex gap-3">
           <button
             onClick={() => markCurrent("not_here")}
-            className={`flex-1 py-5 rounded-xl font-bold text-xl transition-all active:scale-95 flex flex-col items-center gap-1
+            className={`flex-1 py-5 rounded-xl font-bold text-xl transition-all active:scale-95 flex flex-col items-center gap-1 text-white
               ${current.status === "not_here"
-                ? "bg-red-500 text-white ring-4 ring-red-300"
-                : "bg-red-100 text-red-600 dark:bg-red-950 dark:text-red-400"
+                ? "bg-red-500 ring-4 ring-red-300"
+                : "bg-red-400/80 dark:bg-red-500/60"
               }`}
           >
             <XCircle className="w-7 h-7" />
@@ -135,10 +135,10 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
           </button>
           <button
             onClick={() => markCurrent("here")}
-            className={`flex-1 py-5 rounded-xl font-bold text-xl transition-all active:scale-95 flex flex-col items-center gap-1
+            className={`flex-1 py-5 rounded-xl font-bold text-xl transition-all active:scale-95 flex flex-col items-center gap-1 text-white
               ${current.status === "here"
-                ? "bg-green-500 text-white ring-4 ring-green-300"
-                : "bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-400"
+                ? "bg-primary ring-4 ring-primary/40"
+                : "bg-primary/70 dark:bg-primary/50"
               }`}
           >
             <CheckCircle2 className="w-7 h-7" />

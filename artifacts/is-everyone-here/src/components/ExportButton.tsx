@@ -108,14 +108,14 @@ export default function ExportButton({ people, t, appName }: Props) {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen((o) => !o)}
-        className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white dark:bg-zinc-800 border border-green-300 dark:border-green-700 text-green-700 dark:text-green-300 font-semibold text-sm hover:bg-green-50 dark:hover:bg-zinc-700 transition-colors active:opacity-80"
+        className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white dark:bg-zinc-800 border border-primary/50 dark:border-primary/40 text-primary dark:text-primary font-semibold text-sm hover:bg-primary/5 dark:hover:bg-zinc-700 transition-colors active:opacity-80"
       >
         {copied ? <Check className="w-4 h-4" /> : <Download className="w-4 h-4" />}
         {copied ? co.exportCopied : co.export}
       </button>
 
       {open && (
-        <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-52 rounded-xl border border-border bg-background shadow-lg overflow-hidden z-20">
+        <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-52 rounded-xl border border-border bg-card shadow-lg overflow-hidden z-20">
           <button
             onClick={handleClipboard}
             className="w-full flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-muted transition-colors text-left"
