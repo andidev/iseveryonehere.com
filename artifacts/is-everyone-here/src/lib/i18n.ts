@@ -167,7 +167,7 @@ const en: Translations = {
   },
   privacy: {
     title: "Privacy Policy", back: "Back",
-    effectiveDate: "Effective date: June 2025 · iseveryonehere.com",
+    effectiveDate: "Effective date: March 2026 · iseveryonehere.com",
     overviewHeading: "Overview",
     overviewBody: "Is Everyone Here is a client-side web application. It runs entirely in your browser and has no server backend. No data you enter is ever transmitted to, stored on, or processed by any server. Your data never leaves your device unless you explicitly choose to share the URL.",
     dataStorageHeading: "Data storage",
