@@ -115,7 +115,10 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
                     className="rounded-2xl bg-card border-2 border-border shadow-lg p-4 flex flex-col gap-3 cursor-pointer"
                     onClick={() => setSelectedId(null)}
                   >
-                    <p className="text-2xl font-bold text-foreground text-center leading-tight break-words">
+                    <p
+                      className={`text-2xl font-bold text-center leading-tight break-words ${person.status === "left" ? "line-through" : "text-foreground"}`}
+                      style={person.status === "left" ? { color: "#adafb4" } : undefined}
+                    >
                       {person.name}
                     </p>
                     <div className="flex gap-3">
