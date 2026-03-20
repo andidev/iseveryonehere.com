@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { MoreVertical, Settings } from "lucide-react";
+import { MoreVertical, Users } from "lucide-react";
 import { Locale } from "@/lib/i18n";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
@@ -40,7 +40,7 @@ export default function HeaderOverflowMenu({
             className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
             aria-label={backToSetupLabel}
           >
-            <Settings className="w-4 h-4" />
+            <Users className="w-4 h-4" />
           </button>
         )}
       </div>
@@ -71,7 +71,7 @@ export default function HeaderOverflowMenu({
                 onClick={() => { onBackToSetup(); setOpen(false); }}
                 className="w-full flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-muted transition-colors text-left"
               >
-                <Settings className="w-4 h-4 text-muted-foreground shrink-0" />
+                <Users className="w-4 h-4 text-muted-foreground shrink-0" />
                 {backToSetupLabel}
               </button>
             )}

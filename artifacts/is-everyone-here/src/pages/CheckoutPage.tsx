@@ -81,7 +81,7 @@ export default function CheckoutPage({ state, t, locale, onLocaleChange, onState
             currentLocale={locale}
             onLocaleChange={onLocaleChange}
             onBackToSetup={backToSetup}
-            backToSetupLabel={t.checkin.backToSetup}
+            backToSetupLabel={t.setup.peopleList}
           />
         </div>
       </header>
