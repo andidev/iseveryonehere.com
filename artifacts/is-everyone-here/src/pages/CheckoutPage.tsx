@@ -200,7 +200,6 @@ export default function CheckoutPage({ state, t, locale, onLocaleChange, onState
                     <span className="text-sm text-muted-foreground line-through">
                       {person.name}
                     </span>
-                    <CheckCircle2 className="w-4 h-4 text-green-500" />
                   </button>
                 </li>
               ))}
