@@ -112,13 +112,7 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
               >
                 {isSelected ? (
                   <div
-                    className={`rounded-2xl bg-card border-2 shadow-lg p-4 flex flex-col gap-3 cursor-pointer ${
-                      person.status === "here"
-                        ? "border-primary"
-                        : person.status === "not_here"
-                        ? "border-red-400"
-                        : "border-border"
-                    }`}
+                    className="rounded-2xl bg-card border-2 border-border shadow-lg p-4 flex flex-col gap-3 cursor-pointer"
                     onClick={() => setSelectedId(null)}
                   >
                     <p className="text-2xl font-bold text-foreground text-center leading-tight break-words">
