@@ -111,13 +111,16 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
                 ref={(el) => { itemRefs.current[person.id] = el; }}
               >
                 {isSelected ? (
-                  <div className="rounded-2xl bg-card border-2 border-primary shadow-lg p-4 flex flex-col gap-3">
+                  <div
+                    className="rounded-2xl bg-card border-2 border-primary shadow-lg p-4 flex flex-col gap-3 cursor-pointer"
+                    onClick={() => setSelectedId(null)}
+                  >
                     <p className="text-2xl font-bold text-foreground text-center leading-tight break-words">
                       {person.name}
                     </p>
                     <div className="flex gap-3">
                       <button
-                        onClick={() => mark(person.id, "not_here")}
+                        onClick={(e) => { e.stopPropagation(); mark(person.id, "not_here"); }}
                         className={`flex-1 py-4 rounded-xl font-bold text-lg transition-all active:scale-95 flex flex-col items-center gap-1 text-white
                           ${person.status === "not_here"
                             ? "bg-red-400 ring-2 ring-red-300/60"
@@ -128,7 +131,7 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
                         {t.checkin.notHereButton}
                       </button>
                       <button
-                        onClick={() => mark(person.id, "here")}
+                        onClick={(e) => { e.stopPropagation(); mark(person.id, "here"); }}
                         className={`flex-1 py-4 rounded-xl font-bold text-lg transition-all active:scale-95 flex flex-col items-center gap-1 text-white
                           ${person.status === "here"
                             ? "bg-primary ring-4 ring-primary/40"
