@@ -94,8 +94,8 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
         </span>
       </div>
 
-      <main className="flex-1 max-w-xl mx-auto w-full px-4 pb-[50vh]">
-        <ul className="flex flex-col gap-2 pt-1">
+      <main className="max-w-xl mx-auto w-full px-4 pt-[40vh] pb-[50vh]">
+        <ul className="flex flex-col gap-2">
           {people.map((person) => {
             const isSelected = person.id === selectedId;
 
