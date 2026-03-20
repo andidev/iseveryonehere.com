@@ -123,7 +123,7 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
                         onClick={(e) => { e.stopPropagation(); mark(person.id, "not_here"); }}
                         className={`flex-1 py-4 rounded-xl font-bold text-lg transition-all active:scale-95 flex flex-col items-center gap-1 text-white
                           ${person.status === "not_here"
-                            ? "bg-red-400 ring-2 ring-red-300/60"
+                            ? "bg-red-400 ring-4 ring-red-300/60"
                             : "bg-red-400/80 dark:bg-red-500/60"
                           }`}
                       >
