@@ -148,7 +148,7 @@ const en: Translations = {
     resetConfirm: "This will move everyone back to 'still here'. The left list will be cleared.",
     export: "Export",
     exportClipboard: "Copy to clipboard",
-    exportClipboardValues: "Copy statuses only",
+    exportClipboardValues: "Copy status column only",
     exportCopied: "Copied!",
     exportCSV: "Download CSV",
     exportJSON: "Download JSON",
