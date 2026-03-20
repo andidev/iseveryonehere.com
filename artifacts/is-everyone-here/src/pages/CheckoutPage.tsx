@@ -59,32 +59,40 @@ export default function CheckoutPage({ state, t, locale, onLocaleChange, onState
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      {/* Header */}
-      <header className="sticky top-0 z-10 bg-background border-b border-border px-4 py-3 flex items-center justify-between">
-        <button
-          onClick={backToCheckin}
-          className="flex items-center gap-1 text-muted-foreground text-sm hover:text-foreground transition-colors"
-        >
-          <ChevronLeft className="w-4 h-4" />
-          <span className="hidden sm:inline">{t.checkout.backToCheckin}</span>
-        </button>
-        <span className="text-sm font-semibold text-foreground">{t.appName}</span>
-        <div className="flex items-center gap-1">
-          <ShareButton t={t} state={state} />
-          <ResetButton
-            t={t}
-            confirmMessage={t.checkout.resetConfirm}
-            onConfirm={handleReset}
-            disabled={leftPeople.length === 0}
-          />
-          <HeaderOverflowMenu
-            currentLocale={locale}
-            onLocaleChange={onLocaleChange}
-            onBackToSetup={backToSetup}
-            backToSetupLabel={t.setup.peopleList}
+      {/* Header + progress bar */}
+      <div className="sticky top-0 z-10 bg-background border-b border-border">
+        <header className="px-4 py-3 flex items-center justify-between">
+          <button
+            onClick={backToCheckin}
+            className="flex items-center gap-1 text-muted-foreground text-sm hover:text-foreground transition-colors"
+          >
+            <ChevronLeft className="w-4 h-4" />
+            <span className="hidden sm:inline">{t.checkout.backToCheckin}</span>
+          </button>
+          <span className="text-sm font-semibold text-foreground">{t.appName}</span>
+          <div className="flex items-center gap-1">
+            <ShareButton t={t} state={state} />
+            <ResetButton
+              t={t}
+              confirmMessage={t.checkout.resetConfirm}
+              onConfirm={handleReset}
+              disabled={leftPeople.length === 0}
+            />
+            <HeaderOverflowMenu
+              currentLocale={locale}
+              onLocaleChange={onLocaleChange}
+              onBackToSetup={backToSetup}
+              backToSetupLabel={t.setup.peopleList}
+            />
+          </div>
+        </header>
+        <div className="w-full h-1 bg-muted">
+          <div
+            className="h-full bg-primary transition-all duration-300"
+            style={{ width: `${(herePeople.length + leftPeople.length) > 0 ? (leftPeople.length / (herePeople.length + leftPeople.length)) * 100 : 0}%` }}
           />
         </div>
-      </header>
+      </div>
 
       <main className="flex-1 max-w-xl mx-auto w-full px-4 py-6 flex flex-col gap-6">
         {/* All gone banner */}
