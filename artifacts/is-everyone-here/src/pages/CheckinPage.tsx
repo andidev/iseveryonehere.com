@@ -85,6 +85,7 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
               onLocaleChange={onLocaleChange}
               onBackToSetup={backToSetup}
               backToSetupLabel={t.setup.peopleList}
+              privacyLabel={t.privacy.title}
             />
           </div>
         </header>

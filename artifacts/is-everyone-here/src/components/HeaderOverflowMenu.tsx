@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { MoreVertical, Users } from "lucide-react";
+import { MoreVertical, Users, Lock } from "lucide-react";
 import { Locale } from "@/lib/i18n";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
@@ -8,6 +8,7 @@ interface Props {
   onLocaleChange: (locale: Locale) => void;
   onBackToSetup?: () => void;
   backToSetupLabel?: string;
+  privacyLabel: string;
 }
 
 export default function HeaderOverflowMenu({
@@ -15,6 +16,7 @@ export default function HeaderOverflowMenu({
   onLocaleChange,
   onBackToSetup,
   backToSetupLabel,
+  privacyLabel,
 }: Props) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -37,12 +39,20 @@ export default function HeaderOverflowMenu({
         {onBackToSetup && (
           <button
             onClick={onBackToSetup}
-            className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+            className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
             aria-label={backToSetupLabel}
           >
-            <Users className="w-4 h-4" />
+            <Users className="w-4 h-4 shrink-0" />
+            <span>{backToSetupLabel}</span>
           </button>
         )}
+        <a
+          href="#privacy"
+          className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+        >
+          <Lock className="w-4 h-4 shrink-0" />
+          <span>{privacyLabel}</span>
+        </a>
       </div>
 
       {/* Overflow menu on mobile */}
@@ -75,6 +85,16 @@ export default function HeaderOverflowMenu({
                 {backToSetupLabel}
               </button>
             )}
+
+            {/* Privacy Policy row */}
+            <a
+              href="#privacy"
+              onClick={() => setOpen(false)}
+              className="w-full flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-muted transition-colors border-t border-border"
+            >
+              <Lock className="w-4 h-4 text-muted-foreground shrink-0" />
+              {privacyLabel}
+            </a>
           </div>
         )}
       </div>

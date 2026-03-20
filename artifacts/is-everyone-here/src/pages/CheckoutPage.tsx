@@ -83,6 +83,7 @@ export default function CheckoutPage({ state, t, locale, onLocaleChange, onState
               onLocaleChange={onLocaleChange}
               onBackToSetup={backToSetup}
               backToSetupLabel={t.setup.peopleList}
+              privacyLabel={t.privacy.title}
             />
           </div>
         </header>

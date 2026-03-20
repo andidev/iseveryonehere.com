@@ -148,7 +148,7 @@ export default function SetupPage({ state, t, locale, onLocaleChange, onStateCha
             onConfirm={handleReset}
             disabled={state.people.length === 0}
           />
-          <HeaderOverflowMenu currentLocale={locale} onLocaleChange={onLocaleChange} />
+          <HeaderOverflowMenu currentLocale={locale} onLocaleChange={onLocaleChange} privacyLabel={t.privacy.title} />
         </div>
       </header>
 
