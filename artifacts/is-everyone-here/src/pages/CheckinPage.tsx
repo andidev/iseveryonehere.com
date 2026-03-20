@@ -124,11 +124,8 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
         <div className="w-full max-w-sm flex gap-3">
           <button
             onClick={() => markCurrent("not_here")}
-            className={`flex-1 py-5 rounded-xl font-bold text-xl transition-all active:scale-95 flex flex-col items-center gap-1 text-white
-              ${current.status === "not_here"
-                ? "bg-red-500 ring-4 ring-red-300"
-                : "bg-red-400/80 dark:bg-red-500/60"
-              }`}
+            className={`flex-1 py-5 rounded-xl font-bold text-xl transition-all active:scale-95 flex flex-col items-center gap-1 text-white bg-[#9EA4A4]
+              ${current.status === "not_here" ? "ring-4 ring-red-300" : ""}`}
           >
             <XCircle className="w-7 h-7" />
             {t.checkin.notHereButton}
