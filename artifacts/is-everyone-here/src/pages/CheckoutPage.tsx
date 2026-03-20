@@ -70,18 +70,18 @@ export default function CheckoutPage({ state, t, locale, onLocaleChange, onState
         </button>
         <span className="text-sm font-semibold text-foreground">{t.appName}</span>
         <div className="flex items-center gap-1">
-          <HeaderOverflowMenu
-            currentLocale={locale}
-            onLocaleChange={onLocaleChange}
-            onBackToSetup={backToSetup}
-            backToSetupLabel={t.checkin.backToSetup}
-          />
           <ShareButton t={t} state={state} />
           <ResetButton
             t={t}
             confirmMessage={t.checkout.resetConfirm}
             onConfirm={handleReset}
             disabled={leftPeople.length === 0}
+          />
+          <HeaderOverflowMenu
+            currentLocale={locale}
+            onLocaleChange={onLocaleChange}
+            onBackToSetup={backToSetup}
+            backToSetupLabel={t.checkin.backToSetup}
           />
         </div>
       </header>

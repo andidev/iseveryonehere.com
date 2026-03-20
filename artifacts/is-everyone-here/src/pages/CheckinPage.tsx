@@ -69,17 +69,17 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
           {handledCount} / {people.length}
         </span>
         <div className="flex items-center gap-1">
-          <HeaderOverflowMenu
-            currentLocale={locale}
-            onLocaleChange={onLocaleChange}
-            onBackToSetup={backToSetup}
-            backToSetupLabel={t.checkin.backToSetup}
-          />
           <ShareButton t={t} state={state} />
           <ResetButton
             t={t}
             confirmMessage={t.checkin.resetConfirm}
             onConfirm={handleReset}
+          />
+          <HeaderOverflowMenu
+            currentLocale={locale}
+            onLocaleChange={onLocaleChange}
+            onBackToSetup={backToSetup}
+            backToSetupLabel={t.checkin.backToSetup}
           />
         </div>
       </header>

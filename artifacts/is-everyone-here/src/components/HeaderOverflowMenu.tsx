@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { MoreHorizontal, Settings } from "lucide-react";
+import { MoreVertical, Settings } from "lucide-react";
 import { Locale } from "@/lib/i18n";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
@@ -52,7 +52,7 @@ export default function HeaderOverflowMenu({
           className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
           aria-label="More options"
         >
-          <MoreHorizontal className="w-4 h-4" />
+          <MoreVertical className="w-4 h-4" />
         </button>
 
         {open && (

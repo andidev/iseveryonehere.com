@@ -141,7 +141,6 @@ export default function SetupPage({ state, t, locale, onLocaleChange, onStateCha
           <h1 className="text-lg font-bold text-foreground">{t.appName}</h1>
         </div>
         <div className="flex items-center gap-1">
-          <HeaderOverflowMenu currentLocale={locale} onLocaleChange={onLocaleChange} />
           <ShareButton t={t} state={state} />
           <ResetButton
             t={t}
@@ -149,6 +148,7 @@ export default function SetupPage({ state, t, locale, onLocaleChange, onStateCha
             onConfirm={handleReset}
             disabled={state.people.length === 0}
           />
+          <HeaderOverflowMenu currentLocale={locale} onLocaleChange={onLocaleChange} />
         </div>
       </header>
 
