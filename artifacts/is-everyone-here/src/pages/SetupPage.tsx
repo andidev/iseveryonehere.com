@@ -77,9 +77,24 @@ export default function SetupPage({ state, t, locale, onLocaleChange, onStateCha
     onStateChange({ ...state, people: sorted });
   }
 
+  const checkedCount = state.people.filter((p) => p.status !== "pending").length;
+  const allChecked = state.people.length > 0 && checkedCount === state.people.length;
+  const someChecked = checkedCount > 0 && !allChecked;
+
+  const buttonLabel = allChecked
+    ? t.setup.continueCheckout
+    : someChecked
+    ? t.setup.continueCheckin
+    : t.setup.startCheckin;
+
   function startCheckin() {
     if (state.people.length === 0) return;
-    onStateChange({ ...state, phase: "checkin", currentIndex: 0 });
+    if (allChecked) {
+      onStateChange({ ...state, phase: "checkout" });
+    } else {
+      const firstPendingIndex = state.people.findIndex((p) => p.status === "pending");
+      onStateChange({ ...state, phase: "checkin", currentIndex: Math.max(0, firstPendingIndex) });
+    }
   }
 
   function handleReset() {
@@ -243,7 +258,7 @@ export default function SetupPage({ state, t, locale, onLocaleChange, onStateCha
           disabled={state.people.length === 0}
           className="w-full max-w-xl mx-auto flex items-center justify-center gap-2 py-4 rounded-xl bg-primary text-primary-foreground font-bold text-lg disabled:opacity-40 active:opacity-80 transition-opacity"
         >
-          {t.setup.startCheckin}
+          {buttonLabel}
           <ChevronRight className="w-5 h-5" />
         </button>
         <a
