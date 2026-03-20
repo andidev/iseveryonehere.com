@@ -148,7 +148,7 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
                     <span className="text-base font-medium text-foreground">
                       {person.name}
                     </span>
-                    {person.status === "here" && (
+                    {(person.status === "here" || person.status === "left") && (
                       <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
                     )}
                     {person.status === "not_here" && (
