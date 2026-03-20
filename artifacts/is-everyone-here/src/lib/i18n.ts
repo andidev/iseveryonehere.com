@@ -38,6 +38,7 @@ export interface Translations {
     allDoneHint: string;
     pending: string;
     resetConfirm: string;
+    checkedIn: string;
   };
   checkout: {
     title: string;
@@ -133,6 +134,7 @@ const en: Translations = {
     allDoneHint: "Everyone has been marked.",
     pending: "pending",
     resetConfirm: "This will reset all check-in statuses back to pending. Names will be kept.",
+    checkedIn: "checked in",
   },
   checkout: {
     title: "Check-Out",
@@ -211,6 +213,7 @@ const sv: Translations = {
     goToCheckout: "Gå till utcheckning", backToSetup: "Tillbaka till inställningar",
     allDone: "Alla klara!", allDoneHint: "Alla har markerats.", pending: "väntande",
     resetConfirm: "Detta återställer alla incheckningsstatus till väntande. Namnen behålls.",
+    checkedIn: "incheckade",
   },
   checkout: {
     title: "Utcheckning", hereLabel: "Fortfarande här", leftLabel: "Har lämnat",
@@ -284,6 +287,7 @@ const es: Translations = {
     goToCheckout: "Ir a salida", backToSetup: "Volver a configuración",
     allDone: "¡Todos listos!", allDoneHint: "Todos han sido marcados.", pending: "pendiente",
     resetConfirm: "Esto restablecerá todos los estados de registro a pendiente. Los nombres se conservarán.",
+    checkedIn: "registrados",
   },
   checkout: {
     title: "Salida", hereLabel: "Todavía aquí", leftLabel: "Se fue",
@@ -357,6 +361,7 @@ const fr: Translations = {
     goToCheckout: "Passer à la sortie", backToSetup: "Retour aux paramètres",
     allDone: "Tout le monde est marqué !", allDoneHint: "Tous les participants ont été enregistrés.", pending: "en attente",
     resetConfirm: "Cela réinitialisera tous les statuts à en attente. Les noms seront conservés.",
+    checkedIn: "enregistrés",
   },
   checkout: {
     title: "Sortie", hereLabel: "Encore là", leftLabel: "Parti",
@@ -430,6 +435,7 @@ const de: Translations = {
     goToCheckout: "Zur Abmeldung", backToSetup: "Zurück zur Einrichtung",
     allDone: "Alle markiert!", allDoneHint: "Alle Teilnehmer wurden erfasst.", pending: "ausstehend",
     resetConfirm: "Dadurch werden alle Anwesenheitsstatus zurückgesetzt. Die Namen bleiben erhalten.",
+    checkedIn: "eingecheckt",
   },
   checkout: {
     title: "Abmeldung", hereLabel: "Noch da", leftLabel: "Gegangen",
@@ -503,6 +509,7 @@ const it: Translations = {
     goToCheckout: "Procedi al check-out", backToSetup: "Torna alle impostazioni",
     allDone: "Tutti registrati!", allDoneHint: "Tutti i partecipanti sono stati marcati.", pending: "in attesa",
     resetConfirm: "Questo ripristinerà tutti gli stati a in attesa. I nomi verranno mantenuti.",
+    checkedIn: "registrati",
   },
   checkout: {
     title: "Uscita", hereLabel: "Ancora qui", leftLabel: "Partito",
@@ -576,6 +583,7 @@ const pt: Translations = {
     goToCheckout: "Ir para saída", backToSetup: "Voltar às configurações",
     allDone: "Todos marcados!", allDoneHint: "Todos os participantes foram registados.", pending: "pendente",
     resetConfirm: "Isso irá repor todos os estados para pendente. Os nomes serão mantidos.",
+    checkedIn: "registrados",
   },
   checkout: {
     title: "Saída", hereLabel: "Ainda aqui", leftLabel: "Saiu",
@@ -649,6 +657,7 @@ const nl: Translations = {
     goToCheckout: "Naar aftekenen", backToSetup: "Terug naar instellingen",
     allDone: "Iedereen gemarkeerd!", allDoneHint: "Alle deelnemers zijn geregistreerd.", pending: "in afwachting",
     resetConfirm: "Dit zet alle statussen terug naar in afwachting. De namen blijven bewaard.",
+    checkedIn: "ingecheckt",
   },
   checkout: {
     title: "Aftekenen", hereLabel: "Nog aanwezig", leftLabel: "Vertrokken",
@@ -722,6 +731,7 @@ const pl: Translations = {
     goToCheckout: "Przejdź do wymeldowania", backToSetup: "Wróć do ustawień",
     allDone: "Wszyscy oznaczeni!", allDoneHint: "Wszyscy uczestnicy zostali zarejestrowani.", pending: "oczekujący",
     resetConfirm: "To zresetuje wszystkie statusy do oczekujących. Imiona zostaną zachowane.",
+    checkedIn: "zameldowanych",
   },
   checkout: {
     title: "Wymeldowanie", hereLabel: "Jeszcze tu", leftLabel: "Wyszedł",
@@ -795,6 +805,7 @@ const cs: Translations = {
     goToCheckout: "Přejít k odchodu", backToSetup: "Zpět na nastavení",
     allDone: "Vše hotovo!", allDoneHint: "Všichni účastníci byli označeni.", pending: "čekající",
     resetConfirm: "Tím se obnoví všechny stavy na čekající. Jména zůstanou zachována.",
+    checkedIn: "přihlášených",
   },
   checkout: {
     title: "Odchod", hereLabel: "Stále zde", leftLabel: "Odešel",
@@ -868,6 +879,7 @@ const hu: Translations = {
     goToCheckout: "Tovább a távozáshoz", backToSetup: "Vissza a beállításokhoz",
     allDone: "Mindenki megjelölve!", allDoneHint: "Minden résztvevő rögzítve.", pending: "várakozó",
     resetConfirm: "Ez visszaállítja az összes állapotot várakozóra. A nevek megmaradnak.",
+    checkedIn: "bejelentkezve",
   },
   checkout: {
     title: "Távozás", hereLabel: "Még itt", leftLabel: "Elment",
@@ -941,6 +953,7 @@ const ro: Translations = {
     goToCheckout: "Continuă la ieșire", backToSetup: "Înapoi la setări",
     allDone: "Toți marcați!", allDoneHint: "Toți participanții au fost înregistrați.", pending: "în așteptare",
     resetConfirm: "Aceasta va reseta toate stările la în așteptare. Numele vor fi păstrate.",
+    checkedIn: "înregistrați",
   },
   checkout: {
     title: "Ieșire", hereLabel: "Încă aici", leftLabel: "Plecat",
@@ -1014,6 +1027,7 @@ const bg: Translations = {
     goToCheckout: "Към напускане", backToSetup: "Обратно към настройките",
     allDone: "Всички отбелязани!", allDoneHint: "Всички участници са регистрирани.", pending: "изчакващ",
     resetConfirm: "Това ще нулира всички статуси към изчакващ. Имената ще бъдат запазени.",
+    checkedIn: "регистрирани",
   },
   checkout: {
     title: "Напускане", hereLabel: "Все още тук", leftLabel: "Напуснал",
@@ -1087,6 +1101,7 @@ const hr: Translations = {
     goToCheckout: "Nastavi na odjavu", backToSetup: "Natrag na postavke",
     allDone: "Svi označeni!", allDoneHint: "Svi sudionici su evidentirani.", pending: "na čekanju",
     resetConfirm: "Ovo će poništiti sve statuse na na čekanju. Imena će biti sačuvana.",
+    checkedIn: "prijavljenih",
   },
   checkout: {
     title: "Odjava", hereLabel: "Još ovdje", leftLabel: "Otišao",
@@ -1160,6 +1175,7 @@ const el: Translations = {
     goToCheckout: "Συνέχεια στην αποχώρηση", backToSetup: "Πίσω στις ρυθμίσεις",
     allDone: "Όλοι σημειώθηκαν!", allDoneHint: "Όλοι οι συμμετέχοντες καταγράφηκαν.", pending: "εκκρεμής",
     resetConfirm: "Αυτό θα επαναφέρει όλες τις καταστάσεις σε εκκρεμής. Τα ονόματα θα διατηρηθούν.",
+    checkedIn: "παρόντες",
   },
   checkout: {
     title: "Αποχώρηση", hereLabel: "Ακόμα εδώ", leftLabel: "Έφυγε",
@@ -1233,6 +1249,7 @@ const fi: Translations = {
     goToCheckout: "Jatka poistumiseen", backToSetup: "Takaisin asetuksiin",
     allDone: "Kaikki merkitty!", allDoneHint: "Kaikki osallistujat on rekisteröity.", pending: "odottaa",
     resetConfirm: "Tämä palauttaa kaikki tilat odottaviksi. Nimet säilyvät.",
+    checkedIn: "kirjautuneita",
   },
   checkout: {
     title: "Poistuminen", hereLabel: "Vielä paikalla", leftLabel: "Lähtenyt",
@@ -1306,6 +1323,7 @@ const da: Translations = {
     goToCheckout: "Gå til afgang", backToSetup: "Tilbage til opsætning",
     allDone: "Alle markeret!", allDoneHint: "Alle deltagere er registreret.", pending: "afventer",
     resetConfirm: "Dette nulstiller alle statusser. Navne vil blive bevaret.",
+    checkedIn: "tjekket ind",
   },
   checkout: {
     title: "Afgang", hereLabel: "Stadig her", leftLabel: "Gået",
@@ -1379,6 +1397,7 @@ const no: Translations = {
     goToCheckout: "Gå til avgang", backToSetup: "Tilbake til innstillinger",
     allDone: "Alle markert!", allDoneHint: "Alle deltakere er registrert.", pending: "venter",
     resetConfirm: "Dette tilbakestiller alle statuser til ventende. Navnene bevares.",
+    checkedIn: "sjekket inn",
   },
   checkout: {
     title: "Avgang", hereLabel: "Fremdeles her", leftLabel: "Gått",
@@ -1452,6 +1471,7 @@ const uk: Translations = {
     goToCheckout: "Перейти до виходу", backToSetup: "Назад до налаштувань",
     allDone: "Всіх відмічено!", allDoneHint: "Усі учасники зареєстровані.", pending: "очікує",
     resetConfirm: "Це скине всі статуси на очікуючий. Імена будуть збережені.",
+    checkedIn: "зареєстровані",
   },
   checkout: {
     title: "Вихід", hereLabel: "Ще тут", leftLabel: "Пішов",
@@ -1525,6 +1545,7 @@ const ru: Translations = {
     goToCheckout: "Перейти к выходу", backToSetup: "Назад к настройкам",
     allDone: "Все отмечены!", allDoneHint: "Все участники зарегистрированы.", pending: "ожидает",
     resetConfirm: "Это сбросит все статусы на ожидающий. Имена будут сохранены.",
+    checkedIn: "зарегистрированы",
   },
   checkout: {
     title: "Выход", hereLabel: "Ещё здесь", leftLabel: "Ушёл",
@@ -1598,6 +1619,7 @@ const tr: Translations = {
     goToCheckout: "Çıkışa geç", backToSetup: "Ayarlara dön",
     allDone: "Hepsi işaretlendi!", allDoneHint: "Tüm katılımcılar kaydedildi.", pending: "bekliyor",
     resetConfirm: "Bu, tüm durumları bekliyor olarak sıfırlar. İsimler korunur.",
+    checkedIn: "giriş yaptı",
   },
   checkout: {
     title: "Çıkış", hereLabel: "Hâlâ burada", leftLabel: "Ayrıldı",
@@ -1665,6 +1687,7 @@ const sk: Translations = {
     goToCheckout: "Prejsť k odchodu", backToSetup: "Späť na nastavenia",
     allDone: "Všetci označení!", allDoneHint: "Všetci účastníci boli označení.", pending: "čakajúci",
     resetConfirm: "Tým sa obnovia všetky stavy na čakajúci. Mená zostanú zachované.",
+    checkedIn: "prihlásených",
   },
   checkout: {
     title: "Odchod", hereLabel: "Stále tu", leftLabel: "Odišiel",
@@ -1732,6 +1755,7 @@ const sl: Translations = {
     goToCheckout: "Nadaljuj na odhod", backToSetup: "Nazaj na nastavitve",
     allDone: "Vsi označeni!", allDoneHint: "Vsi udeleženci so evidentirani.", pending: "v čakanju",
     resetConfirm: "S tem se bodo vsi statusi ponastavili na v čakanju. Imena bodo ohranjena.",
+    checkedIn: "prijavljenih",
   },
   checkout: {
     title: "Odhod", hereLabel: "Še tu", leftLabel: "Odšel",
@@ -1799,6 +1823,7 @@ const lt: Translations = {
     goToCheckout: "Pereiti prie išregistravimo", backToSetup: "Grįžti į nustatymus",
     allDone: "Visi pažymėti!", allDoneHint: "Visi dalyviai užregistruoti.", pending: "laukiantis",
     resetConfirm: "Tai grąžins visas būsenas į laukiantis. Vardai bus išsaugoti.",
+    checkedIn: "užsiregistravusių",
   },
   checkout: {
     title: "Išregistravimas", hereLabel: "Dar čia", leftLabel: "Išėjo",
@@ -1866,6 +1891,7 @@ const lv: Translations = {
     goToCheckout: "Pāriet uz izrakstīšanos", backToSetup: "Atpakaļ uz iestatījumiem",
     allDone: "Visi atzīmēti!", allDoneHint: "Visi dalībnieki reģistrēti.", pending: "gaida",
     resetConfirm: "Tiks atiestatīti visi statusi uz gaida. Vārdi tiks saglabāti.",
+    checkedIn: "reģistrējušies",
   },
   checkout: {
     title: "Izrakstīšanās", hereLabel: "Vēl šeit", leftLabel: "Aizgājis",
@@ -1933,6 +1959,7 @@ const et: Translations = {
     goToCheckout: "Jätka lahkumisega", backToSetup: "Tagasi seadetesse",
     allDone: "Kõik märgitud!", allDoneHint: "Kõik osalejad on registreeritud.", pending: "ootab",
     resetConfirm: "See lähtestab kõik olekud ootavaks. Nimed jäävad alles.",
+    checkedIn: "registreerunud",
   },
   checkout: {
     title: "Lahkumine", hereLabel: "Veel kohal", leftLabel: "Lahkus",
@@ -2000,6 +2027,7 @@ const sr: Translations = {
     goToCheckout: "Nastavi na odjavu", backToSetup: "Nazad na podešavanja",
     allDone: "Svi označeni!", allDoneHint: "Svi učesnici su evidentirani.", pending: "na čekanju",
     resetConfirm: "Ovo će poništiti sve statuse na na čekanju. Imena će biti sačuvana.",
+    checkedIn: "prijavljenih",
   },
   checkout: {
     title: "Odjava", hereLabel: "Još ovde", leftLabel: "Otišao",
@@ -2067,6 +2095,7 @@ const zh: Translations = {
     goToCheckout: "前往签出", backToSetup: "返回设置",
     allDone: "全部完成！", allDoneHint: "所有参与者已标记。", pending: "待处理",
     resetConfirm: "这将把所有签到状态重置为待处理。姓名将保留。",
+    checkedIn: "已签到",
   },
   checkout: {
     title: "签出", hereLabel: "仍在场", leftLabel: "已离开",
@@ -2134,6 +2163,7 @@ const ja: Translations = {
     goToCheckout: "退場確認へ進む", backToSetup: "設定に戻る",
     allDone: "全員確認完了！", allDoneHint: "全員の出席が記録されました。", pending: "未確認",
     resetConfirm: "全員の出席ステータスを未確認にリセットします。名前は保持されます。",
+    checkedIn: "チェックイン済み",
   },
   checkout: {
     title: "退場確認", hereLabel: "まだいます", leftLabel: "退場済み",
@@ -2201,6 +2231,7 @@ const ko: Translations = {
     goToCheckout: "퇴장 확인으로 이동", backToSetup: "설정으로 돌아가기",
     allDone: "모두 완료!", allDoneHint: "모든 참가자가 기록되었습니다.", pending: "미확인",
     resetConfirm: "모든 출석 상태를 미확인으로 초기화합니다. 이름은 유지됩니다.",
+    checkedIn: "체크인 완료",
   },
   checkout: {
     title: "퇴장 확인", hereLabel: "아직 있음", leftLabel: "퇴장",
@@ -2268,6 +2299,7 @@ const hi: Translations = {
     goToCheckout: "निकासी की ओर जाएं", backToSetup: "सेटअप पर वापस जाएं",
     allDone: "सभी चिह्नित!", allDoneHint: "सभी प्रतिभागियों को दर्ज किया गया है।", pending: "प्रतीक्षित",
     resetConfirm: "यह सभी उपस्थिति स्थितियों को प्रतीक्षित पर वापस लाएगा। नाम बने रहेंगे।",
+    checkedIn: "उपस्थित",
   },
   checkout: {
     title: "निकासी", hereLabel: "अभी यहाँ है", leftLabel: "चला गया",
@@ -2335,6 +2367,7 @@ const ar: Translations = {
     goToCheckout: "المتابعة إلى المغادرة", backToSetup: "العودة إلى الإعداد",
     allDone: "تم تسجيل الجميع!", allDoneHint: "تم تسجيل جميع المشاركين.", pending: "معلق",
     resetConfirm: "سيؤدي هذا إلى إعادة تعيين جميع حالات الحضور إلى معلق. ستبقى الأسماء.",
+    checkedIn: "سجّلوا الحضور",
   },
   checkout: {
     title: "تسجيل المغادرة", hereLabel: "لا يزال هنا", leftLabel: "غادر",
@@ -2402,6 +2435,7 @@ const th: Translations = {
     goToCheckout: "ดำเนินการออก", backToSetup: "กลับไปตั้งค่า",
     allDone: "เช็คครบทุกคนแล้ว!", allDoneHint: "ผู้เข้าร่วมทุกคนได้รับการบันทึกแล้ว", pending: "รอดำเนินการ",
     resetConfirm: "การดำเนินการนี้จะรีเซ็ตสถานะทั้งหมดเป็นรอดำเนินการ ชื่อจะถูกเก็บไว้",
+    checkedIn: "เช็คอินแล้ว",
   },
   checkout: {
     title: "เช็คออก", hereLabel: "ยังอยู่", leftLabel: "ออกไปแล้ว",
@@ -2469,6 +2503,7 @@ const vi: Translations = {
     goToCheckout: "Chuyển sang điểm ra về", backToSetup: "Quay lại cài đặt",
     allDone: "Hoàn tất!", allDoneHint: "Tất cả người tham gia đã được ghi nhận.", pending: "chờ xử lý",
     resetConfirm: "Thao tác này sẽ đặt lại tất cả trạng thái về chờ xử lý. Tên sẽ được giữ lại.",
+    checkedIn: "đã điểm danh",
   },
   checkout: {
     title: "Điểm ra về", hereLabel: "Vẫn còn đây", leftLabel: "Đã ra về",
@@ -2536,6 +2571,7 @@ const id: Translations = {
     goToCheckout: "Lanjut ke keluar", backToSetup: "Kembali ke pengaturan",
     allDone: "Semua sudah ditandai!", allDoneHint: "Semua peserta telah dicatat.", pending: "menunggu",
     resetConfirm: "Ini akan mereset semua status ke menunggu. Nama tetap disimpan.",
+    checkedIn: "sudah hadir",
   },
   checkout: {
     title: "Keluar", hereLabel: "Masih di sini", leftLabel: "Sudah pergi",
@@ -2603,6 +2639,7 @@ const ms: Translations = {
     goToCheckout: "Teruskan ke keluar", backToSetup: "Kembali ke tetapan",
     allDone: "Semua sudah ditanda!", allDoneHint: "Semua peserta telah dicatatkan.", pending: "menunggu",
     resetConfirm: "Ini akan menetapkan semula semua status ke menunggu. Nama akan disimpan.",
+    checkedIn: "sudah hadir",
   },
   checkout: {
     title: "Keluar", hereLabel: "Masih di sini", leftLabel: "Sudah pergi",
@@ -2670,6 +2707,7 @@ const bn: Translations = {
     goToCheckout: "বের হওয়ায় যান", backToSetup: "সেটআপে ফিরুন",
     allDone: "সবাই চিহ্নিত!", allDoneHint: "সব অংশগ্রহণকারী নথিভুক্ত হয়েছেন।", pending: "অপেক্ষমাণ",
     resetConfirm: "এটি সব অবস্থা অপেক্ষমাণে ফিরিয়ে দেবে। নাম রেখে দেওয়া হবে।",
+    checkedIn: "চেকইন করেছেন",
   },
   checkout: {
     title: "বের হওয়া", hereLabel: "এখনো আছেন", leftLabel: "চলে গেছেন",
@@ -2737,6 +2775,7 @@ const tl: Translations = {
     goToCheckout: "Pumunta sa tsek-aout", backToSetup: "Bumalik sa setup",
     allDone: "Lahat naitala na!", allDoneHint: "Lahat ng kalahok ay naitala na.", pending: "naghihintay",
     resetConfirm: "Ire-reset ang lahat ng status sa naghihintay. Mananatili ang mga pangalan.",
+    checkedIn: "naka-check in",
   },
   checkout: {
     title: "Tsek-aout", hereLabel: "Nandito pa", leftLabel: "Umalis na",

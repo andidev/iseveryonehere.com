@@ -191,7 +191,7 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
           ) : (
             <div className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-muted text-muted-foreground font-semibold text-base">
               <span className="tabular-nums">{handledCount} / {people.length}</span>
-              <span>{t.checkin.title}</span>
+              <span>{t.checkin.checkedIn}</span>
             </div>
           )}
         </div>
