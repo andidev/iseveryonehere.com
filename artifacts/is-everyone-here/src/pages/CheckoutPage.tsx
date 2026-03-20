@@ -145,7 +145,7 @@ export default function CheckoutPage({ state, t, locale, onLocaleChange, onState
               <h2 className="text-base font-bold text-foreground">
                 {t.checkout.hereLabel}
               </h2>
-              <span className="text-xs bg-yellow-400/20 text-yellow-600 dark:text-yellow-400 rounded-full px-2 py-0.5 font-medium">
+              <span className="text-xs bg-muted text-muted-foreground rounded-full px-2 py-0.5 font-medium">
                 {herePeople.length}
               </span>
             </div>
