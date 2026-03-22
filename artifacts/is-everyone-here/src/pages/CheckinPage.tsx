@@ -103,10 +103,14 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
     <div className="min-h-screen bg-background flex flex-col">
       <div className="sticky top-0 z-10 bg-background border-b border-border">
         <header className="relative px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <button
+            onClick={backToSetup}
+            className="flex items-center gap-2 rounded-lg hover:bg-muted transition-colors px-1 -ml-1"
+            aria-label={t.setup.peopleList}
+          >
             <img src={`${import.meta.env.BASE_URL}favicon.svg`} alt="" className="w-6 h-6 rounded-md" />
             <h1 className="text-lg font-bold text-foreground">{t.appName}</h1>
-          </div>
+          </button>
           <span className="hidden sm:block absolute left-1/2 -translate-x-1/2 text-sm font-semibold text-foreground pointer-events-none">
             {t.checkin.title}
           </span>

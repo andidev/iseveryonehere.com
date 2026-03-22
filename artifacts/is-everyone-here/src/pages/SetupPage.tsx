@@ -136,10 +136,14 @@ export default function SetupPage({ state, t, locale, onLocaleChange, onStateCha
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
       <header className="sticky top-0 z-10 bg-background border-b border-border px-4 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-2">
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="flex items-center gap-2 rounded-lg hover:bg-muted transition-colors px-1 -ml-1"
+          aria-label={t.appName}
+        >
           <img src={`${import.meta.env.BASE_URL}favicon.svg`} alt="" className="w-6 h-6 rounded-md" />
           <h1 className="text-lg font-bold text-foreground">{t.appName}</h1>
-        </div>
+        </button>
         <div className="flex items-center gap-1">
           <ShareButton t={t} state={state} />
           <ResetButton
