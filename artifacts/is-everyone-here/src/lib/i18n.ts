@@ -78,6 +78,11 @@ export interface Translations {
     lastWeekday: string;
     shareWithStatusHint: string;
   };
+  headerMenu: {
+    github: string;
+    reportBug: string;
+    requestFeature: string;
+  };
   privacy: {
     title: string;
     back: string;
@@ -167,6 +172,11 @@ const en: Translations = {
     shareWithStatus: "Share with current statuses", shareWithStatusHint: "Full attendance state included",
     lastWeekday: "Last {day}",
   },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Report a Bug",
+    requestFeature: "Request a Feature",
+  },
   privacy: {
     title: "Privacy Policy", back: "Back",
     effectiveDate: "Effective date: March 2026 · iseveryonehere.com",
@@ -241,6 +251,11 @@ const sv: Translations = {
     shareListHint: "Endast namn, inga incheckningsstatusar",
     shareWithStatus: "Dela med aktuella statusar", shareWithStatusHint: "Fullständig närvaro inkluderas",
     lastWeekday: "Förra {day}",
+  },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Rapportera fel",
+    requestFeature: "Föreslå en funktion",
   },
   privacy: {
     title: "Integritetspolicy", back: "Tillbaka",
@@ -317,6 +332,11 @@ const es: Translations = {
     shareWithStatus: "Compartir con estados actuales", shareWithStatusHint: "Incluye el estado completo de asistencia",
     lastWeekday: "El {day} pasado",
   },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Informar de un error",
+    requestFeature: "Solicitar una función",
+  },
   privacy: {
     title: "Política de privacidad", back: "Volver",
     effectiveDate: "Fecha de vigencia: junio de 2025 · iseveryonehere.com",
@@ -391,6 +411,11 @@ const fr: Translations = {
     shareListHint: "Noms uniquement, sans statuts",
     shareWithStatus: "Partager avec les statuts actuels", shareWithStatusHint: "État complet de présence inclus",
     lastWeekday: "{day} dernier",
+  },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Signaler un bug",
+    requestFeature: "Demander une fonctionnalité",
   },
   privacy: {
     title: "Politique de confidentialité", back: "Retour",
@@ -467,6 +492,11 @@ const de: Translations = {
     shareWithStatus: "Mit aktuellem Status teilen", shareWithStatusHint: "Vollständiger Anwesenheitsstatus enthalten",
     lastWeekday: "Letzten {day}",
   },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Fehler melden",
+    requestFeature: "Funktion vorschlagen",
+  },
   privacy: {
     title: "Datenschutzerklärung", back: "Zurück",
     effectiveDate: "Gültig ab: Juni 2025 · iseveryonehere.com",
@@ -541,6 +571,11 @@ const it: Translations = {
     shareListHint: "Solo nomi, senza stati di registrazione",
     shareWithStatus: "Condividi con gli stati attuali", shareWithStatusHint: "Stato completo di presenze incluso",
     lastWeekday: "{day} scorso",
+  },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Segnala un bug",
+    requestFeature: "Richiedi una funzione",
   },
   privacy: {
     title: "Informativa sulla privacy", back: "Indietro",
@@ -617,6 +652,11 @@ const pt: Translations = {
     shareWithStatus: "Partilhar com estados atuais", shareWithStatusHint: "Estado completo de presença incluído",
     lastWeekday: "{day} passado",
   },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Reportar erro",
+    requestFeature: "Solicitar recurso",
+  },
   privacy: {
     title: "Política de privacidade", back: "Voltar",
     effectiveDate: "Data de vigência: junho de 2025 · iseveryonehere.com",
@@ -691,6 +731,11 @@ const nl: Translations = {
     shareListHint: "Alleen namen, geen statussen",
     shareWithStatus: "Deel met huidige statussen", shareWithStatusHint: "Volledige aanwezigheidsstatus inbegrepen",
     lastWeekday: "Vorige {day}",
+  },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Meld een bug",
+    requestFeature: "Vraag een functie aan",
   },
   privacy: {
     title: "Privacybeleid", back: "Terug",
@@ -767,6 +812,11 @@ const pl: Translations = {
     shareWithStatus: "Udostępnij z aktualnymi statusami", shareWithStatusHint: "Pełny stan obecności",
     lastWeekday: "Ostatni {day}",
   },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Zgłoś błąd",
+    requestFeature: "Zaproponuj funkcję",
+  },
   privacy: {
     title: "Polityka prywatności", back: "Wróć",
     effectiveDate: "Data wejścia w życie: czerwiec 2025 · iseveryonehere.com",
@@ -841,6 +891,11 @@ const cs: Translations = {
     shareListHint: "Pouze jména, bez stavů",
     shareWithStatus: "Sdílet s aktuálními stavy", shareWithStatusHint: "Zahrnut úplný stav docházky",
     lastWeekday: "Minulý {day}",
+  },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Nahlásit chybu",
+    requestFeature: "Požádat o funkci",
   },
   privacy: {
     title: "Zásady ochrany soukromí", back: "Zpět",
@@ -917,6 +972,11 @@ const hu: Translations = {
     shareWithStatus: "Megosztás aktuális állapotokkal", shareWithStatusHint: "Teljes jelenlét állapot mellékelve",
     lastWeekday: "Múlt {day}",
   },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Hiba jelentése",
+    requestFeature: "Funkció kérése",
+  },
   privacy: {
     title: "Adatvédelmi irányelvek", back: "Vissza",
     effectiveDate: "Hatályos: 2025. június · iseveryonehere.com",
@@ -991,6 +1051,11 @@ const ro: Translations = {
     shareListHint: "Doar nume, fără stări",
     shareWithStatus: "Distribuie cu stările actuale", shareWithStatusHint: "Starea completă de prezență inclusă",
     lastWeekday: "{day} trecut",
+  },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Raportează o eroare",
+    requestFeature: "Solicită o funcție",
   },
   privacy: {
     title: "Politica de confidențialitate", back: "Înapoi",
@@ -1067,6 +1132,11 @@ const bg: Translations = {
     shareWithStatus: "Споделете с текущите статуси", shareWithStatusHint: "Пълното присъствие е включено",
     lastWeekday: "Миналия {day}",
   },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Докладвайте за грешка",
+    requestFeature: "Поискайте функция",
+  },
   privacy: {
     title: "Политика за поверителност", back: "Назад",
     effectiveDate: "Дата на влизане в сила: юни 2025 · iseveryonehere.com",
@@ -1141,6 +1211,11 @@ const hr: Translations = {
     shareListHint: "Samo imena, bez statusa",
     shareWithStatus: "Dijeli s trenutnim statusima", shareWithStatusHint: "Uključeno je potpuno stanje nazočnosti",
     lastWeekday: "Prošli {day}",
+  },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Prijavi bug",
+    requestFeature: "Zatraži značajku",
   },
   privacy: {
     title: "Pravila o privatnosti", back: "Natrag",
@@ -1217,6 +1292,11 @@ const el: Translations = {
     shareWithStatus: "Κοινοποίηση με τρέχουσες καταστάσεις", shareWithStatusHint: "Πλήρης κατάσταση παρουσίας περιλαμβάνεται",
     lastWeekday: "Την περασμένη {day}",
   },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Αναφορά σφάλματος",
+    requestFeature: "Αίτηση λειτουργίας",
+  },
   privacy: {
     title: "Πολιτική απορρήτου", back: "Πίσω",
     effectiveDate: "Ημερομηνία ισχύος: Ιούνιος 2025 · iseveryonehere.com",
@@ -1291,6 +1371,11 @@ const fi: Translations = {
     shareListHint: "Vain nimet, ei tiloja",
     shareWithStatus: "Jaa nykyisillä tiloilla", shareWithStatusHint: "Täydellinen läsnäolotila mukana",
     lastWeekday: "Viime {day}",
+  },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Ilmoita virheestä",
+    requestFeature: "Ehdota ominaisuutta",
   },
   privacy: {
     title: "Tietosuojakäytäntö", back: "Takaisin",
@@ -1367,6 +1452,11 @@ const da: Translations = {
     shareWithStatus: "Del med aktuelle statuser", shareWithStatusHint: "Fuld fremmødestatus inkluderet",
     lastWeekday: "Forrige {day}",
   },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Rapportér en fejl",
+    requestFeature: "Anmod om en funktion",
+  },
   privacy: {
     title: "Privatlivspolitik", back: "Tilbage",
     effectiveDate: "Ikrafttrædelsesdato: juni 2025 · iseveryonehere.com",
@@ -1441,6 +1531,11 @@ const no: Translations = {
     shareListHint: "Kun navn, ingen statuser",
     shareWithStatus: "Del med gjeldende statuser", shareWithStatusHint: "Fullstendig oppmøtestatus inkludert",
     lastWeekday: "Forrige {day}",
+  },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Rapporter feil",
+    requestFeature: "Be om funksjon",
   },
   privacy: {
     title: "Personvernpolicy", back: "Tilbake",
@@ -1517,6 +1612,11 @@ const uk: Translations = {
     shareWithStatus: "Поділитися з поточними статусами", shareWithStatusHint: "Включено повний стан присутності",
     lastWeekday: "Минулого {day}",
   },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Повідомити про помилку",
+    requestFeature: "Запропонувати функцію",
+  },
   privacy: {
     title: "Політика конфіденційності", back: "Назад",
     effectiveDate: "Дата набрання чинності: червень 2025 · iseveryonehere.com",
@@ -1591,6 +1691,11 @@ const ru: Translations = {
     shareListHint: "Только имена, без статусов",
     shareWithStatus: "Поделиться с текущими статусами", shareWithStatusHint: "Включено полное состояние присутствия",
     lastWeekday: "Прошлый {day}",
+  },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Сообщить об ошибке",
+    requestFeature: "Предложить функцию",
   },
   privacy: {
     title: "Политика конфиденциальности", back: "Назад",
@@ -1667,6 +1772,11 @@ const tr: Translations = {
     shareWithStatus: "Mevcut durumlarla paylaş", shareWithStatusHint: "Tam katılım durumu dahil",
     lastWeekday: "Geçen {day}",
   },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Hata bildir",
+    requestFeature: "Özellik iste",
+  },
   privacy: {
     title: "Gizlilik Politikası", back: "Geri",
     effectiveDate: "Yürürlük tarihi: Haziran 2025 · iseveryonehere.com",
@@ -1735,6 +1845,11 @@ const sk: Translations = {
     shareListHint: "Len mená, bez stavov",
     shareWithStatus: "Zdieľať s aktuálnymi stavmi", shareWithStatusHint: "Zahrnutý úplný stav dochádzky",
     lastWeekday: "Minulý {day}",
+  },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Nahlásiť chybu",
+    requestFeature: "Požiadať o funkciu",
   },
   privacy: {
     title: "Zásady ochrany súkromia", back: "Späť",
@@ -1805,6 +1920,11 @@ const sl: Translations = {
     shareWithStatus: "Deli s trenutnimi statusi", shareWithStatusHint: "Vključeno celotno stanje prisotnosti",
     lastWeekday: "Pretekli {day}",
   },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Prijavi napako",
+    requestFeature: "Predlagaj funkcijo",
+  },
   privacy: {
     title: "Politika zasebnosti", back: "Nazaj",
     effectiveDate: "Datum veljavnosti: junij 2025 · iseveryonehere.com",
@@ -1873,6 +1993,11 @@ const lt: Translations = {
     shareListHint: "Tik vardai, be būsenų",
     shareWithStatus: "Bendrinti su dabartinėmis būsenomis", shareWithStatusHint: "Įtraukta visa lankomumo būsena",
     lastWeekday: "Praėjusį {day}",
+  },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Pranešti apie klaidą",
+    requestFeature: "Paprašyti funkcijos",
   },
   privacy: {
     title: "Privatumo politika", back: "Atgal",
@@ -1943,6 +2068,11 @@ const lv: Translations = {
     shareWithStatus: "Kopīgot ar pašreizējiem statusiem", shareWithStatusHint: "Iekļauts pilns apmeklējuma statuss",
     lastWeekday: "Pagājušo {day}",
   },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Ziņot par kļūdu",
+    requestFeature: "Pieprasīt funkciju",
+  },
   privacy: {
     title: "Privātuma politika", back: "Atpakaļ",
     effectiveDate: "Spēkā stāšanās datums: 2025. gada jūnijs · iseveryonehere.com",
@@ -2011,6 +2141,11 @@ const et: Translations = {
     shareListHint: "Ainult nimed, ilma olekuteta",
     shareWithStatus: "Jaga praeguste olekutega", shareWithStatusHint: "Kogu kohaloleku olek on kaasas",
     lastWeekday: "Eelmine {day}",
+  },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Teata veast",
+    requestFeature: "Taotle funktsiooni",
   },
   privacy: {
     title: "Privaatsuspoliitika", back: "Tagasi",
@@ -2081,6 +2216,11 @@ const sr: Translations = {
     shareWithStatus: "Podeli sa trenutnim statusima", shareWithStatusHint: "Uključeno je kompletno stanje prisustva",
     lastWeekday: "Prošli {day}",
   },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Prijavi grešku",
+    requestFeature: "Zatraži funkciju",
+  },
   privacy: {
     title: "Politika privatnosti", back: "Nazad",
     effectiveDate: "Datum stupanja na snagu: jun 2025. · iseveryonehere.com",
@@ -2149,6 +2289,11 @@ const zh: Translations = {
     shareListHint: "仅姓名，无签到状态",
     shareWithStatus: "分享当前状态", shareWithStatusHint: "包含完整出勤状态",
     lastWeekday: "上{day}",
+  },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "报告问题",
+    requestFeature: "功能建议",
   },
   privacy: {
     title: "隐私政策", back: "返回",
@@ -2219,6 +2364,11 @@ const ja: Translations = {
     shareWithStatus: "現在のステータスで共有", shareWithStatusHint: "完全な出席状態を含む",
     lastWeekday: "先週の{day}",
   },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "バグを報告",
+    requestFeature: "機能をリクエスト",
+  },
   privacy: {
     title: "プライバシーポリシー", back: "戻る",
     effectiveDate: "発効日：2025年6月 · iseveryonehere.com",
@@ -2287,6 +2437,11 @@ const ko: Translations = {
     shareListHint: "이름만, 출석 상태 없음",
     shareWithStatus: "현재 상태로 공유", shareWithStatusHint: "전체 출석 상태 포함",
     lastWeekday: "지난 {day}",
+  },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "버그 신고",
+    requestFeature: "기능 요청",
   },
   privacy: {
     title: "개인정보 처리방침", back: "뒤로",
@@ -2357,6 +2512,11 @@ const hi: Translations = {
     shareWithStatus: "वर्तमान स्थितियों के साथ साझा करें", shareWithStatusHint: "पूर्ण उपस्थिति स्थिति शामिल",
     lastWeekday: "पिछला {day}",
   },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "बग रिपोर्ट करें",
+    requestFeature: "सुविधा का अनुरोध करें",
+  },
   privacy: {
     title: "गोपनीयता नीति", back: "वापस",
     effectiveDate: "प्रभावी तिथि: जून 2025 · iseveryonehere.com",
@@ -2425,6 +2585,11 @@ const ar: Translations = {
     shareListHint: "الأسماء فقط، بدون حالات الحضور",
     shareWithStatus: "مشاركة مع الحالات الحالية", shareWithStatusHint: "يتضمن حالة الحضور الكاملة",
     lastWeekday: "{day} الماضي",
+  },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "الإبلاغ عن خطأ",
+    requestFeature: "طلب ميزة",
   },
   privacy: {
     title: "سياسة الخصوصية", back: "رجوع",
@@ -2495,6 +2660,11 @@ const th: Translations = {
     shareWithStatus: "แชร์พร้อมสถานะปัจจุบัน", shareWithStatusHint: "รวมสถานะการเข้าร่วมทั้งหมด",
     lastWeekday: "{day}ที่แล้ว",
   },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "รายงานข้อผิดพลาด",
+    requestFeature: "ขอฟีเจอร์",
+  },
   privacy: {
     title: "นโยบายความเป็นส่วนตัว", back: "กลับ",
     effectiveDate: "วันมีผลบังคับใช้: มิถุนายน 2025 · iseveryonehere.com",
@@ -2563,6 +2733,11 @@ const vi: Translations = {
     shareListHint: "Chỉ tên, không có trạng thái",
     shareWithStatus: "Chia sẻ với trạng thái hiện tại", shareWithStatusHint: "Bao gồm toàn bộ trạng thái",
     lastWeekday: "{day} tuần trước",
+  },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Báo lỗi",
+    requestFeature: "Yêu cầu tính năng",
   },
   privacy: {
     title: "Chính sách bảo mật", back: "Quay lại",
@@ -2633,6 +2808,11 @@ const id: Translations = {
     shareWithStatus: "Bagikan dengan status saat ini", shareWithStatusHint: "Status kehadiran lengkap disertakan",
     lastWeekday: "{day} lalu",
   },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Laporkan bug",
+    requestFeature: "Minta fitur",
+  },
   privacy: {
     title: "Kebijakan Privasi", back: "Kembali",
     effectiveDate: "Tanggal berlaku: Juni 2025 · iseveryonehere.com",
@@ -2701,6 +2881,11 @@ const ms: Translations = {
     shareListHint: "Nama sahaja, tiada status",
     shareWithStatus: "Kongsi dengan status semasa", shareWithStatusHint: "Status kehadiran penuh disertakan",
     lastWeekday: "{day} lepas",
+  },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Laporkan pepijat",
+    requestFeature: "Minta ciri",
   },
   privacy: {
     title: "Dasar Privasi", back: "Kembali",
@@ -2771,6 +2956,11 @@ const bn: Translations = {
     shareWithStatus: "বর্তমান অবস্থাসহ শেয়ার করুন", shareWithStatusHint: "সম্পূর্ণ উপস্থিতি অবস্থা অন্তর্ভুক্ত",
     lastWeekday: "গত {day}",
   },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "বাগ রিপোর্ট করুন",
+    requestFeature: "ফিচার অনুরোধ করুন",
+  },
   privacy: {
     title: "গোপনীয়তা নীতি", back: "ফিরুন",
     effectiveDate: "কার্যকর তারিখ: জুন ২০২৫ · iseveryonehere.com",
@@ -2839,6 +3029,11 @@ const tl: Translations = {
     shareListHint: "Mga pangalan lamang, walang status",
     shareWithStatus: "Ibahagi kasama ang mga kasalukuyang status", shareWithStatusHint: "Kasama ang buong katayuan ng presensya",
     lastWeekday: "Nakaraang {day}",
+  },
+  headerMenu: {
+    github: "GitHub",
+    reportBug: "Mag-ulat ng bug",
+    requestFeature: "Humiling ng feature",
   },
   privacy: {
     title: "Patakaran sa Privacy", back: "Bumalik",

@@ -152,7 +152,14 @@ export default function SetupPage({ state, t, locale, onLocaleChange, onStateCha
             onConfirm={handleReset}
             disabled={state.people.length === 0}
           />
-          <HeaderOverflowMenu currentLocale={locale} onLocaleChange={onLocaleChange} privacyLabel={t.privacy.title} />
+          <HeaderOverflowMenu
+            currentLocale={locale}
+            onLocaleChange={onLocaleChange}
+            privacyLabel={t.privacy.title}
+            githubLabel={t.headerMenu.github}
+            reportBugLabel={t.headerMenu.reportBug}
+            requestFeatureLabel={t.headerMenu.requestFeature}
+          />
         </div>
       </header>
 

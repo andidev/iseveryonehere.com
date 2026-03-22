@@ -127,6 +127,9 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
               onBackToSetup={backToSetup}
               backToSetupLabel={t.setup.peopleList}
               privacyLabel={t.privacy.title}
+              githubLabel={t.headerMenu.github}
+              reportBugLabel={t.headerMenu.reportBug}
+              requestFeatureLabel={t.headerMenu.requestFeature}
             />
           </div>
         </header>

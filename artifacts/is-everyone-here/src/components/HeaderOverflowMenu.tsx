@@ -21,6 +21,9 @@ interface Props {
   onBackToSetup?: () => void;
   backToSetupLabel?: string;
   privacyLabel: string;
+  githubLabel: string;
+  reportBugLabel: string;
+  requestFeatureLabel: string;
 }
 
 export default function HeaderOverflowMenu({
@@ -29,6 +32,9 @@ export default function HeaderOverflowMenu({
   onBackToSetup,
   backToSetupLabel,
   privacyLabel,
+  githubLabel,
+  reportBugLabel,
+  requestFeatureLabel,
 }: Props) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -101,7 +107,7 @@ export default function HeaderOverflowMenu({
               className="sm:hidden w-full flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-muted transition-colors border-t border-border"
             >
               <GitHubIcon className="w-4 h-4 text-muted-foreground shrink-0" />
-              GitHub
+              {githubLabel}
             </a>
 
             {/* Report a Bug row */}
@@ -113,7 +119,7 @@ export default function HeaderOverflowMenu({
               className="w-full flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-muted transition-colors border-t border-border"
             >
               <Bug className="w-4 h-4 text-muted-foreground shrink-0" />
-              Report a Bug
+              {reportBugLabel}
             </a>
 
             {/* Request a Feature row */}
@@ -125,7 +131,7 @@ export default function HeaderOverflowMenu({
               className="w-full flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-muted transition-colors border-t border-border"
             >
               <Lightbulb className="w-4 h-4 text-muted-foreground shrink-0" />
-              Request a Feature
+              {requestFeatureLabel}
             </a>
 
             {/* Privacy Policy row */}

@@ -103,6 +103,9 @@ export default function CheckoutPage({ state, t, locale, onLocaleChange, onState
               onBackToSetup={backToSetup}
               backToSetupLabel={t.setup.peopleList}
               privacyLabel={t.privacy.title}
+              githubLabel={t.headerMenu.github}
+              reportBugLabel={t.headerMenu.reportBug}
+              requestFeatureLabel={t.headerMenu.requestFeature}
             />
           </div>
         </header>
