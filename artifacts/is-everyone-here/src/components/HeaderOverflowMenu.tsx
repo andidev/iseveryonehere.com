@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { MoreVertical, Users, Lock } from "lucide-react";
+import { MoreVertical, Users, Lock, Github } from "lucide-react";
 import { Locale } from "@/lib/i18n";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+
+const GITHUB_URL = "https://github.com/andidev/iseveryonehere.com";
 
 interface Props {
   currentLocale: Locale;
@@ -38,6 +40,17 @@ export default function HeaderOverflowMenu({
         <LanguageSwitcher currentLocale={currentLocale} onLocaleChange={onLocaleChange} />
       </div>
 
+      {/* GitHub link — desktop only */}
+      <a
+        href={GITHUB_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="GitHub"
+        className="hidden sm:flex p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+      >
+        <Github className="w-4 h-4" />
+      </a>
+
       {/* Three-dot menu */}
       <div className="relative">
         <button
@@ -68,6 +81,18 @@ export default function HeaderOverflowMenu({
                 {backToSetupLabel}
               </button>
             )}
+
+            {/* GitHub row — mobile only */}
+            <a
+              href={GITHUB_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className="sm:hidden w-full flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-muted transition-colors border-t border-border"
+            >
+              <Github className="w-4 h-4 text-muted-foreground shrink-0" />
+              GitHub
+            </a>
 
             {/* Privacy Policy row */}
             <a
