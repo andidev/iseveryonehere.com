@@ -75,6 +75,7 @@ export interface Translations {
     shareList: string;
     shareListHint: string;
     shareWithStatus: string;
+    lastWeekday: string;
     shareWithStatusHint: string;
   };
   privacy: {
@@ -164,6 +165,7 @@ const en: Translations = {
     shareModalTitle: "What do you want to share?",
     shareList: "Share the list", shareListHint: "Names only, no check-in statuses",
     shareWithStatus: "Share with current statuses", shareWithStatusHint: "Full attendance state included",
+    lastWeekday: "Last {day}",
   },
   privacy: {
     title: "Privacy Policy", back: "Back",
@@ -238,6 +240,7 @@ const sv: Translations = {
     shareModalTitle: "Vad vill du dela?", shareList: "Dela listan",
     shareListHint: "Endast namn, inga incheckningsstatusar",
     shareWithStatus: "Dela med aktuella statusar", shareWithStatusHint: "Fullständig närvaro inkluderas",
+    lastWeekday: "Förra {day}",
   },
   privacy: {
     title: "Integritetspolicy", back: "Tillbaka",
@@ -312,6 +315,7 @@ const es: Translations = {
     shareModalTitle: "¿Qué quieres compartir?", shareList: "Compartir la lista",
     shareListHint: "Solo nombres, sin estados de registro",
     shareWithStatus: "Compartir con estados actuales", shareWithStatusHint: "Incluye el estado completo de asistencia",
+    lastWeekday: "El {day} pasado",
   },
   privacy: {
     title: "Política de privacidad", back: "Volver",
@@ -386,6 +390,7 @@ const fr: Translations = {
     shareModalTitle: "Que souhaitez-vous partager ?", shareList: "Partager la liste",
     shareListHint: "Noms uniquement, sans statuts",
     shareWithStatus: "Partager avec les statuts actuels", shareWithStatusHint: "État complet de présence inclus",
+    lastWeekday: "{day} dernier",
   },
   privacy: {
     title: "Politique de confidentialité", back: "Retour",
@@ -460,6 +465,7 @@ const de: Translations = {
     shareModalTitle: "Was möchtest du teilen?", shareList: "Liste teilen",
     shareListHint: "Nur Namen, ohne Status",
     shareWithStatus: "Mit aktuellem Status teilen", shareWithStatusHint: "Vollständiger Anwesenheitsstatus enthalten",
+    lastWeekday: "Letzten {day}",
   },
   privacy: {
     title: "Datenschutzerklärung", back: "Zurück",
@@ -534,6 +540,7 @@ const it: Translations = {
     shareModalTitle: "Cosa vuoi condividere?", shareList: "Condividi la lista",
     shareListHint: "Solo nomi, senza stati di registrazione",
     shareWithStatus: "Condividi con gli stati attuali", shareWithStatusHint: "Stato completo di presenze incluso",
+    lastWeekday: "{day} scorso",
   },
   privacy: {
     title: "Informativa sulla privacy", back: "Indietro",
@@ -608,6 +615,7 @@ const pt: Translations = {
     shareModalTitle: "O que pretende partilhar?", shareList: "Partilhar a lista",
     shareListHint: "Apenas nomes, sem estados de registo",
     shareWithStatus: "Partilhar com estados atuais", shareWithStatusHint: "Estado completo de presença incluído",
+    lastWeekday: "{day} passado",
   },
   privacy: {
     title: "Política de privacidade", back: "Voltar",
@@ -682,6 +690,7 @@ const nl: Translations = {
     shareModalTitle: "Wat wil je delen?", shareList: "Deel de lijst",
     shareListHint: "Alleen namen, geen statussen",
     shareWithStatus: "Deel met huidige statussen", shareWithStatusHint: "Volledige aanwezigheidsstatus inbegrepen",
+    lastWeekday: "Vorige {day}",
   },
   privacy: {
     title: "Privacybeleid", back: "Terug",
@@ -756,6 +765,7 @@ const pl: Translations = {
     shareModalTitle: "Co chcesz udostępnić?", shareList: "Udostępnij listę",
     shareListHint: "Tylko imiona, bez statusów",
     shareWithStatus: "Udostępnij z aktualnymi statusami", shareWithStatusHint: "Pełny stan obecności",
+    lastWeekday: "Ostatni {day}",
   },
   privacy: {
     title: "Polityka prywatności", back: "Wróć",
@@ -830,6 +840,7 @@ const cs: Translations = {
     shareModalTitle: "Co chcete sdílet?", shareList: "Sdílet seznam",
     shareListHint: "Pouze jména, bez stavů",
     shareWithStatus: "Sdílet s aktuálními stavy", shareWithStatusHint: "Zahrnut úplný stav docházky",
+    lastWeekday: "Minulý {day}",
   },
   privacy: {
     title: "Zásady ochrany soukromí", back: "Zpět",
@@ -904,6 +915,7 @@ const hu: Translations = {
     shareModalTitle: "Mit szeretne megosztani?", shareList: "Lista megosztása",
     shareListHint: "Csak nevek, állapotok nélkül",
     shareWithStatus: "Megosztás aktuális állapotokkal", shareWithStatusHint: "Teljes jelenlét állapot mellékelve",
+    lastWeekday: "Múlt {day}",
   },
   privacy: {
     title: "Adatvédelmi irányelvek", back: "Vissza",
@@ -978,6 +990,7 @@ const ro: Translations = {
     shareModalTitle: "Ce vrei să distribui?", shareList: "Distribuie lista",
     shareListHint: "Doar nume, fără stări",
     shareWithStatus: "Distribuie cu stările actuale", shareWithStatusHint: "Starea completă de prezență inclusă",
+    lastWeekday: "{day} trecut",
   },
   privacy: {
     title: "Politica de confidențialitate", back: "Înapoi",
@@ -1052,6 +1065,7 @@ const bg: Translations = {
     shareModalTitle: "Какво искате да споделите?", shareList: "Споделете списъка",
     shareListHint: "Само имена, без статуси",
     shareWithStatus: "Споделете с текущите статуси", shareWithStatusHint: "Пълното присъствие е включено",
+    lastWeekday: "Миналия {day}",
   },
   privacy: {
     title: "Политика за поверителност", back: "Назад",
@@ -1126,6 +1140,7 @@ const hr: Translations = {
     shareModalTitle: "Što želite dijeliti?", shareList: "Dijeli popis",
     shareListHint: "Samo imena, bez statusa",
     shareWithStatus: "Dijeli s trenutnim statusima", shareWithStatusHint: "Uključeno je potpuno stanje nazočnosti",
+    lastWeekday: "Prošli {day}",
   },
   privacy: {
     title: "Pravila o privatnosti", back: "Natrag",
@@ -1200,6 +1215,7 @@ const el: Translations = {
     shareModalTitle: "Τι θέλετε να κοινοποιήσετε;", shareList: "Κοινοποίηση λίστας",
     shareListHint: "Μόνο ονόματα, χωρίς καταστάσεις",
     shareWithStatus: "Κοινοποίηση με τρέχουσες καταστάσεις", shareWithStatusHint: "Πλήρης κατάσταση παρουσίας περιλαμβάνεται",
+    lastWeekday: "Την περασμένη {day}",
   },
   privacy: {
     title: "Πολιτική απορρήτου", back: "Πίσω",
@@ -1274,6 +1290,7 @@ const fi: Translations = {
     shareModalTitle: "Mitä haluat jakaa?", shareList: "Jaa lista",
     shareListHint: "Vain nimet, ei tiloja",
     shareWithStatus: "Jaa nykyisillä tiloilla", shareWithStatusHint: "Täydellinen läsnäolotila mukana",
+    lastWeekday: "Viime {day}",
   },
   privacy: {
     title: "Tietosuojakäytäntö", back: "Takaisin",
@@ -1348,6 +1365,7 @@ const da: Translations = {
     shareModalTitle: "Hvad vil du dele?", shareList: "Del listen",
     shareListHint: "Kun navne, ingen statuser",
     shareWithStatus: "Del med aktuelle statuser", shareWithStatusHint: "Fuld fremmødestatus inkluderet",
+    lastWeekday: "Forrige {day}",
   },
   privacy: {
     title: "Privatlivspolitik", back: "Tilbage",
@@ -1422,6 +1440,7 @@ const no: Translations = {
     shareModalTitle: "Hva vil du dele?", shareList: "Del listen",
     shareListHint: "Kun navn, ingen statuser",
     shareWithStatus: "Del med gjeldende statuser", shareWithStatusHint: "Fullstendig oppmøtestatus inkludert",
+    lastWeekday: "Forrige {day}",
   },
   privacy: {
     title: "Personvernpolicy", back: "Tilbake",
@@ -1496,6 +1515,7 @@ const uk: Translations = {
     shareModalTitle: "Чим хочете поділитися?", shareList: "Поділитися списком",
     shareListHint: "Лише імена, без статусів",
     shareWithStatus: "Поділитися з поточними статусами", shareWithStatusHint: "Включено повний стан присутності",
+    lastWeekday: "Минулого {day}",
   },
   privacy: {
     title: "Політика конфіденційності", back: "Назад",
@@ -1570,6 +1590,7 @@ const ru: Translations = {
     shareModalTitle: "Чем хотите поделиться?", shareList: "Поделиться списком",
     shareListHint: "Только имена, без статусов",
     shareWithStatus: "Поделиться с текущими статусами", shareWithStatusHint: "Включено полное состояние присутствия",
+    lastWeekday: "Прошлый {day}",
   },
   privacy: {
     title: "Политика конфиденциальности", back: "Назад",
@@ -1644,6 +1665,7 @@ const tr: Translations = {
     shareModalTitle: "Ne paylaşmak istiyorsunuz?", shareList: "Listeyi paylaş",
     shareListHint: "Yalnızca isimler, durum bilgisi yok",
     shareWithStatus: "Mevcut durumlarla paylaş", shareWithStatusHint: "Tam katılım durumu dahil",
+    lastWeekday: "Geçen {day}",
   },
   privacy: {
     title: "Gizlilik Politikası", back: "Geri",
@@ -1712,6 +1734,7 @@ const sk: Translations = {
     shareModalTitle: "Čo chcete zdieľať?", shareList: "Zdieľať zoznam",
     shareListHint: "Len mená, bez stavov",
     shareWithStatus: "Zdieľať s aktuálnymi stavmi", shareWithStatusHint: "Zahrnutý úplný stav dochádzky",
+    lastWeekday: "Minulý {day}",
   },
   privacy: {
     title: "Zásady ochrany súkromia", back: "Späť",
@@ -1780,6 +1803,7 @@ const sl: Translations = {
     shareModalTitle: "Kaj želite deliti?", shareList: "Deli seznam",
     shareListHint: "Samo imena, brez statusov",
     shareWithStatus: "Deli s trenutnimi statusi", shareWithStatusHint: "Vključeno celotno stanje prisotnosti",
+    lastWeekday: "Pretekli {day}",
   },
   privacy: {
     title: "Politika zasebnosti", back: "Nazaj",
@@ -1848,6 +1872,7 @@ const lt: Translations = {
     shareModalTitle: "Ką norite bendrinti?", shareList: "Bendrinti sąrašą",
     shareListHint: "Tik vardai, be būsenų",
     shareWithStatus: "Bendrinti su dabartinėmis būsenomis", shareWithStatusHint: "Įtraukta visa lankomumo būsena",
+    lastWeekday: "Praėjusį {day}",
   },
   privacy: {
     title: "Privatumo politika", back: "Atgal",
@@ -1916,6 +1941,7 @@ const lv: Translations = {
     shareModalTitle: "Ko vēlaties kopīgot?", shareList: "Kopīgot sarakstu",
     shareListHint: "Tikai vārdi, bez statusiem",
     shareWithStatus: "Kopīgot ar pašreizējiem statusiem", shareWithStatusHint: "Iekļauts pilns apmeklējuma statuss",
+    lastWeekday: "Pagājušo {day}",
   },
   privacy: {
     title: "Privātuma politika", back: "Atpakaļ",
@@ -1984,6 +2010,7 @@ const et: Translations = {
     shareModalTitle: "Mida soovid jagada?", shareList: "Jaga nimekirja",
     shareListHint: "Ainult nimed, ilma olekuteta",
     shareWithStatus: "Jaga praeguste olekutega", shareWithStatusHint: "Kogu kohaloleku olek on kaasas",
+    lastWeekday: "Eelmine {day}",
   },
   privacy: {
     title: "Privaatsuspoliitika", back: "Tagasi",
@@ -2052,6 +2079,7 @@ const sr: Translations = {
     shareModalTitle: "Šta želite da podelite?", shareList: "Podeli listu",
     shareListHint: "Samo imena, bez statusa",
     shareWithStatus: "Podeli sa trenutnim statusima", shareWithStatusHint: "Uključeno je kompletno stanje prisustva",
+    lastWeekday: "Prošli {day}",
   },
   privacy: {
     title: "Politika privatnosti", back: "Nazad",
@@ -2120,6 +2148,7 @@ const zh: Translations = {
     shareModalTitle: "您想分享什么？", shareList: "分享名单",
     shareListHint: "仅姓名，无签到状态",
     shareWithStatus: "分享当前状态", shareWithStatusHint: "包含完整出勤状态",
+    lastWeekday: "上{day}",
   },
   privacy: {
     title: "隐私政策", back: "返回",
@@ -2188,6 +2217,7 @@ const ja: Translations = {
     shareModalTitle: "何を共有しますか？", shareList: "リストを共有",
     shareListHint: "名前のみ、出席ステータスなし",
     shareWithStatus: "現在のステータスで共有", shareWithStatusHint: "完全な出席状態を含む",
+    lastWeekday: "先週の{day}",
   },
   privacy: {
     title: "プライバシーポリシー", back: "戻る",
@@ -2256,6 +2286,7 @@ const ko: Translations = {
     shareModalTitle: "무엇을 공유하시겠습니까?", shareList: "목록 공유",
     shareListHint: "이름만, 출석 상태 없음",
     shareWithStatus: "현재 상태로 공유", shareWithStatusHint: "전체 출석 상태 포함",
+    lastWeekday: "지난 {day}",
   },
   privacy: {
     title: "개인정보 처리방침", back: "뒤로",
@@ -2324,6 +2355,7 @@ const hi: Translations = {
     shareModalTitle: "आप क्या साझा करना चाहते हैं?", shareList: "सूची साझा करें",
     shareListHint: "केवल नाम, उपस्थिति स्थिति के बिना",
     shareWithStatus: "वर्तमान स्थितियों के साथ साझा करें", shareWithStatusHint: "पूर्ण उपस्थिति स्थिति शामिल",
+    lastWeekday: "पिछला {day}",
   },
   privacy: {
     title: "गोपनीयता नीति", back: "वापस",
@@ -2392,6 +2424,7 @@ const ar: Translations = {
     shareModalTitle: "ماذا تريد مشاركته؟", shareList: "مشاركة القائمة",
     shareListHint: "الأسماء فقط، بدون حالات الحضور",
     shareWithStatus: "مشاركة مع الحالات الحالية", shareWithStatusHint: "يتضمن حالة الحضور الكاملة",
+    lastWeekday: "{day} الماضي",
   },
   privacy: {
     title: "سياسة الخصوصية", back: "رجوع",
@@ -2460,6 +2493,7 @@ const th: Translations = {
     shareModalTitle: "คุณต้องการแชร์อะไร?", shareList: "แชร์รายชื่อ",
     shareListHint: "เฉพาะชื่อ ไม่มีสถานะ",
     shareWithStatus: "แชร์พร้อมสถานะปัจจุบัน", shareWithStatusHint: "รวมสถานะการเข้าร่วมทั้งหมด",
+    lastWeekday: "{day}ที่แล้ว",
   },
   privacy: {
     title: "นโยบายความเป็นส่วนตัว", back: "กลับ",
@@ -2528,6 +2562,7 @@ const vi: Translations = {
     shareModalTitle: "Bạn muốn chia sẻ gì?", shareList: "Chia sẻ danh sách",
     shareListHint: "Chỉ tên, không có trạng thái",
     shareWithStatus: "Chia sẻ với trạng thái hiện tại", shareWithStatusHint: "Bao gồm toàn bộ trạng thái",
+    lastWeekday: "{day} tuần trước",
   },
   privacy: {
     title: "Chính sách bảo mật", back: "Quay lại",
@@ -2596,6 +2631,7 @@ const id: Translations = {
     shareModalTitle: "Apa yang ingin Anda bagikan?", shareList: "Bagikan daftar",
     shareListHint: "Hanya nama, tanpa status",
     shareWithStatus: "Bagikan dengan status saat ini", shareWithStatusHint: "Status kehadiran lengkap disertakan",
+    lastWeekday: "{day} lalu",
   },
   privacy: {
     title: "Kebijakan Privasi", back: "Kembali",
@@ -2664,6 +2700,7 @@ const ms: Translations = {
     shareModalTitle: "Apa yang anda ingin kongsi?", shareList: "Kongsi senarai",
     shareListHint: "Nama sahaja, tiada status",
     shareWithStatus: "Kongsi dengan status semasa", shareWithStatusHint: "Status kehadiran penuh disertakan",
+    lastWeekday: "{day} lepas",
   },
   privacy: {
     title: "Dasar Privasi", back: "Kembali",
@@ -2732,6 +2769,7 @@ const bn: Translations = {
     shareModalTitle: "আপনি কী শেয়ার করতে চান?", shareList: "তালিকা শেয়ার করুন",
     shareListHint: "শুধু নাম, কোনো অবস্থা ছাড়া",
     shareWithStatus: "বর্তমান অবস্থাসহ শেয়ার করুন", shareWithStatusHint: "সম্পূর্ণ উপস্থিতি অবস্থা অন্তর্ভুক্ত",
+    lastWeekday: "গত {day}",
   },
   privacy: {
     title: "গোপনীয়তা নীতি", back: "ফিরুন",
@@ -2800,6 +2838,7 @@ const tl: Translations = {
     shareModalTitle: "Ano ang gusto mong ibahagi?", shareList: "Ibahagi ang listahan",
     shareListHint: "Mga pangalan lamang, walang status",
     shareWithStatus: "Ibahagi kasama ang mga kasalukuyang status", shareWithStatusHint: "Kasama ang buong katayuan ng presensya",
+    lastWeekday: "Nakaraang {day}",
   },
   privacy: {
     title: "Patakaran sa Privacy", back: "Bumalik",

@@ -14,6 +14,7 @@ export interface AppState {
   phase: AppPhase;
   people: Person[];
   currentIndex: number;
+  eventDate?: string; // ISO YYYY-MM-DD, set when first person is marked
 }
 
 function uint8ToBase64Url(bytes: Uint8Array): string {

@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { CheckCircle2, XCircle, ChevronRight, LogOut } from "lucide-react";
+import { CheckCircle2, XCircle, ChevronRight, LogOut, CalendarDays, Pencil } from "lucide-react";
 import { AppState, PersonStatus } from "@/lib/state";
 import { Locale, Translations } from "@/lib/i18n";
+import { todayISO, formatEventDate } from "@/lib/dateUtils";
 import ResetButton from "@/components/ResetButton";
 import ShareButton from "@/components/ShareButton";
 import HeaderOverflowMenu from "@/components/HeaderOverflowMenu";
@@ -18,10 +19,22 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
   const { people } = state;
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const itemRefs = useRef<Record<string, HTMLLIElement | null>>({});
+  const [liveDate, setLiveDate] = useState(todayISO);
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const dateInputRef = useRef<HTMLInputElement>(null);
 
   const handledCount = people.filter((p) => p.status !== "pending").length;
   const allDone = people.every((p) => p.status !== "pending");
   const checkoutStarted = people.some((p) => p.status === "left");
+
+  const displayISO = state.eventDate ?? liveDate;
+  const formattedDate = formatEventDate(displayISO, locale, t.common.lastWeekday);
+
+  // Update live date at midnight
+  useEffect(() => {
+    const id = setInterval(() => setLiveDate(todayISO()), 60_000);
+    return () => clearInterval(id);
+  }, []);
 
   useEffect(() => {
     const first = people.find((p) => p.status === "pending");
@@ -35,18 +48,33 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
     }
   }, [selectedId]);
 
+  // Auto-focus date input when shown
+  useEffect(() => {
+    if (showDatePicker && dateInputRef.current) {
+      dateInputRef.current.focus();
+      try { dateInputRef.current.showPicker(); } catch {}
+    }
+  }, [showDatePicker]);
+
   function mark(id: string, status: PersonStatus) {
     const current = people.find((p) => p.id === id);
     const newStatus: PersonStatus = current?.status === status ? "pending" : status;
     const updated = people.map((p) => (p.id === id ? { ...p, status: newStatus } : p));
+
+    // Auto-set eventDate when the first person is marked (if not already set)
+    const wasAllPending = people.every((p) => p.status === "pending");
+    const autoDate = !state.eventDate && newStatus !== "pending" && wasAllPending
+      ? liveDate
+      : state.eventDate;
+
     const nowAllDone = updated.every((p) => p.status !== "pending");
     if (nowAllDone) {
-      onStateChange({ ...state, people: updated });
+      onStateChange({ ...state, people: updated, eventDate: autoDate });
       setSelectedId(null);
       return;
     }
     const nextPending = updated.find((p) => p.status === "pending");
-    onStateChange({ ...state, people: updated });
+    onStateChange({ ...state, people: updated, eventDate: autoDate });
     if (newStatus === "pending") return;
     setSelectedId(nextPending?.id ?? null);
   }
@@ -61,8 +89,14 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
 
   function handleReset() {
     const reset = people.map((p) => ({ ...p, status: "pending" as const }));
-    onStateChange({ ...state, people: reset, currentIndex: 0 });
+    onStateChange({ ...state, people: reset, currentIndex: 0, eventDate: undefined });
     setSelectedId(reset[0]?.id ?? null);
+  }
+
+  function handleDateChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const val = e.target.value;
+    setShowDatePicker(false);
+    if (val) onStateChange({ ...state, eventDate: val });
   }
 
   return (
@@ -97,6 +131,29 @@ export default function CheckinPage({ state, t, locale, onLocaleChange, onStateC
             className="h-full bg-primary transition-all duration-300"
             style={{ width: `${(handledCount / people.length) * 100}%` }}
           />
+        </div>
+
+        {/* Date bar */}
+        <div className="flex items-center justify-center py-1.5 border-b border-border/50">
+          {showDatePicker ? (
+            <input
+              ref={dateInputRef}
+              type="date"
+              className="text-sm text-foreground bg-transparent border border-border rounded-lg px-2 py-0.5 focus:outline-none focus:ring-2 focus:ring-primary"
+              value={displayISO}
+              onChange={handleDateChange}
+              onBlur={() => setShowDatePicker(false)}
+            />
+          ) : (
+            <button
+              onClick={() => setShowDatePicker(true)}
+              className="flex items-center gap-1.5 px-2 py-0.5 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+            >
+              <CalendarDays className="w-3.5 h-3.5" />
+              <span className="capitalize">{formattedDate}</span>
+              <Pencil className="w-3 h-3 opacity-40" />
+            </button>
+          )}
         </div>
       </div>
 

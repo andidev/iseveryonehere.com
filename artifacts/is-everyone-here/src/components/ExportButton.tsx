@@ -2,11 +2,13 @@ import { useState, useRef, useEffect } from "react";
 import { Download, Clipboard, FileText, Braces, Check } from "lucide-react";
 import { Person } from "@/lib/state";
 import { Translations } from "@/lib/i18n";
+import { todayISO } from "@/lib/dateUtils";
 
 interface Props {
   people: Person[];
   t: Translations;
   appName: string;
+  eventDate?: string;
 }
 
 function buildRows(people: Person[]) {
@@ -17,14 +19,12 @@ function buildRows(people: Person[]) {
   }));
 }
 
-function buildFilename(appName: string, ext: string): string {
+function buildFilename(appName: string, isoDate: string, ext: string): string {
   const base = appName
     .replace(/^[¿¡]+/, "")
     .replace(/[?？!！]$/, "")
     .trim();
-  const now = new Date();
-  const iso = now.toISOString().slice(0, 10);
-  return `${base} ${iso}.${ext}`;
+  return `${base} ${isoDate}.${ext}`;
 }
 
 function downloadFile(content: string, filename: string, mimeType: string) {
@@ -37,12 +37,12 @@ function downloadFile(content: string, filename: string, mimeType: string) {
   URL.revokeObjectURL(url);
 }
 
-export default function ExportButton({ people, t, appName }: Props) {
+export default function ExportButton({ people, t, appName, eventDate }: Props) {
   const co = t.checkout;
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  const isoDate = new Date().toISOString().slice(0, 10);
+  const isoDate = eventDate ?? todayISO();
 
   useEffect(() => {
     function onClickOutside(e: MouseEvent) {
@@ -84,7 +84,7 @@ export default function ExportButton({ people, t, appName }: Props) {
       .join("\n");
     downloadFile(
       `${header}\n${body}`,
-      buildFilename(appName, "csv"),
+      buildFilename(appName, isoDate, "csv"),
       "text/csv;charset=utf-8;"
     );
     setOpen(false);
@@ -98,7 +98,7 @@ export default function ExportButton({ people, t, appName }: Props) {
     };
     downloadFile(
       JSON.stringify(data, null, 2),
-      buildFilename(appName, "json"),
+      buildFilename(appName, isoDate, "json"),
       "application/json"
     );
     setOpen(false);
