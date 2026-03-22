@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { MoreVertical, Users, Lock } from "lucide-react";
+import { MoreVertical, Users, Lock, Bug, Lightbulb } from "lucide-react";
 import { Locale } from "@/lib/i18n";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const GITHUB_URL = "https://github.com/andidev/iseveryonehere.com";
+const BUG_REPORT_URL = `${GITHUB_URL}/issues/new?template=bug_report.yml`;
+const FEATURE_REQUEST_URL = `${GITHUB_URL}/issues/new?template=feature_request.yml`;
 
 function GitHubIcon({ className }: { className?: string }) {
   return (
@@ -100,6 +102,30 @@ export default function HeaderOverflowMenu({
             >
               <GitHubIcon className="w-4 h-4 text-muted-foreground shrink-0" />
               GitHub
+            </a>
+
+            {/* Report a Bug row */}
+            <a
+              href={BUG_REPORT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className="w-full flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-muted transition-colors border-t border-border"
+            >
+              <Bug className="w-4 h-4 text-muted-foreground shrink-0" />
+              Report a Bug
+            </a>
+
+            {/* Request a Feature row */}
+            <a
+              href={FEATURE_REQUEST_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className="w-full flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-muted transition-colors border-t border-border"
+            >
+              <Lightbulb className="w-4 h-4 text-muted-foreground shrink-0" />
+              Request a Feature
             </a>
 
             {/* Privacy Policy row */}
